@@ -1,3 +1,5 @@
+package reservationApp;
+
 import java.util.*;
 
 public class menuItems {
@@ -12,10 +14,6 @@ public class menuItems {
 		return this.name;
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -24,10 +22,6 @@ public class menuItems {
 		return this.description;
 	}
 
-	/**
-	 * 
-	 * @param description
-	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -36,20 +30,10 @@ public class menuItems {
 		return this.price;
 	}
 
-	/**
-	 * 
-	 * @param price
-	 */
 	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	/**
-	 * 
-	 * @param name
-	 * @param description
-	 * @param price
-	 */
 	public menuItems(String name, String description, double price) {
 		// TODO - implement menuItems.menuItems
 		throw new UnsupportedOperationException();
