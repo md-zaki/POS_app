@@ -1,3 +1,5 @@
+package reservationApp;
+
 public enum menuItemType {
 	mainCourse,
 	drinks,
