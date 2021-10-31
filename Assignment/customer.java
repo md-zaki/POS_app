@@ -1,3 +1,5 @@
+package reservationApp;
+
 public class customer {
 
 	reservation reserv;
@@ -9,10 +11,6 @@ public class customer {
 		return this.name;
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -21,10 +19,6 @@ public class customer {
 		return this.contact;
 	}
 
-	/**
-	 * 
-	 * @param contact
-	 */
 	public void setContact(long contact) {
 		this.contact = contact;
 	}
@@ -33,10 +27,6 @@ public class customer {
 		return this.hasMember;
 	}
 
-	/**
-	 * 
-	 * @param hasMember
-	 */
 	public void setHasMember(boolean hasMember) {
 		this.hasMember = hasMember;
 	}
