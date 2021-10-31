@@ -1,3 +1,5 @@
+package reservationApp;
+
 public class staff {
 
 	private int employeeId;
@@ -9,10 +11,6 @@ public class staff {
 		return this.employeeId;
 	}
 
-	/**
-	 * 
-	 * @param employeeId
-	 */
 	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
 	}
@@ -21,10 +19,6 @@ public class staff {
 		return this.gender;
 	}
 
-	/**
-	 * 
-	 * @param gender
-	 */
 	public void setGender(char gender) {
 		this.gender = gender;
 	}
@@ -33,10 +27,6 @@ public class staff {
 		return this.name;
 	}
 
-	/**
-	 * 
-	 * @param name
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -45,10 +35,6 @@ public class staff {
 		return this.jobTitle;
 	}
 
-	/**
-	 * 
-	 * @param jobTitle
-	 */
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
