@@ -1,13 +1,34 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class mainMenu {
+
+public class mainMenu implements Serializable{
     private ArrayList<menuItems> menuList;
     private static int numOfItems=0;
     Scanner scan = new Scanner(System.in);
 
-    public mainMenu() {
+    public mainMenu() throws IOException, ClassNotFoundException {
         numOfItems = 0;
         menuList = new ArrayList<menuItems>();
+        
+        try
+        {
+        FileInputStream fileInputStream = new FileInputStream("testMenuSave.txt");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        menuList = (ArrayList<menuItems>) objectInputStream.readObject();
+        objectInputStream.close();
+        }
+        catch (Exception ex){
+        	ex.getStackTrace();
+        }
+       
+        
     }
     public ArrayList<menuItems> getMenuItems() {
         return this.menuList;
@@ -61,36 +82,88 @@ public class mainMenu {
         menuList.remove(index-1);
     }
 
-    public void updateMenuItem(ArrayList<menuItems> menuList)
+    public void updateMenuItem(ArrayList<menuItems> menuList) throws IOException
     {
         System.out.println("Enter index of menu item to update:");
         int index = scan.nextInt();
-        String dummy = scan.nextLine();
+        //String dummy = scan.nextLine();
         index = index -1;
         int i =1;
         if(menuList.get(index).getType()!= menuItems.menuItemType.set)
         {
-            System.out.println("Enter updated name of menu item:");
-            String name = scan.nextLine();
+        	System.out.println("Updating item " + menuList.get(index).getName());
+        	String name = menuList.get(index).getName();
+        	String desc = menuList.get(index).getDescription();
+        	double price = menuList.get(index).getPrice();
+        	menuItems.menuItemType typechoice = menuList.get(index).getType();
+    		System.out.println("Select operations");
+    		System.out.println("1. Update " + menuList.get(index).getName() + " Name");
+    		System.out.println("2. Update " + menuList.get(index).getName() + " description");
+    		System.out.println("3. Update " + menuList.get(index).getName() + " price");
+    		System.out.println("4. Update " + menuList.get(index).getName() + " item type");
+    		System.out.println("5. Exit");
+    		System.out.printf("Select choice: ");
+    		int choice = scan.nextInt();
+    		scan.nextLine();
+        	while (choice != 5)
+        	{
+        		if (choice == 1)
+        		{
+                    System.out.println("Enter updated name of menu item:");
+                    name = scan.nextLine();
+                    
+                    //String dummy = scan.nextLine();
+        		}
+        		else if (choice == 2)
+        		{
+                    System.out.println("Enter updated description of menu item:");
+                    desc = scan.nextLine();
+        		}
+        		else if (choice == 3)
+        		{
+                    System.out.println("Enter updated price of menu item:");
+                    price = scan.nextDouble();
+                    //dummy = scan.nextLine();
+        		}
+        		else if (choice == 4)
+        		{
+                    System.out.println("Enter updated type of menu item:");
+                    for(menuItems.menuItemType itemType : menuItems.menuItemType.values())
+                    {
+                        System.out.println(i + ": " + itemType);
+                        i++;
+                    }
+                    int typenum = scan.nextInt();
+                    typechoice = menuItems.menuItemType.values()[typenum-1];
+                    //menuItems.menuItemType typechoice = menuItems.menuItemType.values()[typenum-1];
+                    //dummy = scan.nextLine();
+        		}
+        		else
+        		{
+        			System.out.println("Please enter a valid choice");
+        		}
+        		
+                menuItems newAdd = new menuItems(name, desc, price, typechoice);
+                menuList.set(index, newAdd);
+                FileOutputStream fileOutputStream = new FileOutputStream("testMenuSave.txt");
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                objectOutputStream.writeObject(menuList);
+                objectOutputStream.flush();
+                objectOutputStream.close();
+                
+                //String dummy = scan.nextLine();
+        		
+        		System.out.println("Select operations");
+        		System.out.println("1. Update " + menuList.get(index).getName() + " Name");
+        		System.out.println("2. Update " + menuList.get(index).getName() + " description");
+        		System.out.println("3. Update " + menuList.get(index).getName() + " price");
+        		System.out.println("4. Update " + menuList.get(index).getName() + " item type");
+        		System.out.println("5. Exit");
+        		System.out.printf("Select choice: ");
+    			choice = scan.nextInt();
+    			scan.nextLine();
+        	}
 
-            System.out.println("Enter updated description of menu item:");
-            String desc = scan.nextLine();
-
-            System.out.println("Enter updated price of menu item:");
-            double price = scan.nextDouble();
-            dummy = scan.nextLine();
-
-            System.out.println("Enter updated type of menu item:");
-            for(menuItems.menuItemType itemType : menuItems.menuItemType.values())
-            {
-                System.out.println(i + ": " + itemType);
-                i++;
-            }
-            int typenum = scan.nextInt();
-            menuItems.menuItemType typechoice = menuItems.menuItemType.values()[typenum-1];
-            dummy = scan.nextLine();
-            menuItems newAdd = new menuItems(name, desc, price, typechoice);
-            menuList.set(index, newAdd);
         }
         else
         {
@@ -98,7 +171,7 @@ public class mainMenu {
             String name = scan.nextLine();
             System.out.println("Enter updated price of promo:");
             double price = scan.nextDouble();
-            dummy = scan.nextLine();
+            //dummy = scan.nextLine();
             promotionalPackage promo = new promotionalPackage(name, price, menuItems.menuItemType.set);
             promo.addItem(menuList);
             menuList.set(index,promo);
@@ -154,26 +227,34 @@ public class mainMenu {
         System.out.println("============== MENU ==================");
         int i;
         int index=1;
-        for(i=0;i<menuList.size();i++)
+        
+        if(menuList == null)
         {
-            if(menuList.get(i).getType() == menuItems.menuItemType.set)
-            {
-                
-                System.out.println("ITEM " + index + ":");
-                printitemPromo((promotionalPackage)menuList.get(i));
-            }
-            else{
-                
-                System.out.println("ITEM " + index + ":");
-                printitem(menuList.get(i));
-                System.out.println();
-            }
-            index++;
+        	System.out.println("Menu is empty\n");
         }
-        System.out.println("============== END OF MENU ==================");
+        else
+        {
+	        for(i=0;i<menuList.size();i++)
+	        {
+	            if(menuList.get(i).getType() == menuItems.menuItemType.set)
+	            {
+	                
+	                System.out.println("ITEM " + index + ":");
+	                printitemPromo((promotionalPackage)menuList.get(i));
+	            }
+	            else{
+	                
+	                System.out.println("ITEM " + index + ":");
+	                printitem(menuList.get(i));
+	                System.out.println();
+	            }
+	            index++;
+	        }
+	        System.out.println("============== END OF MENU ==================");
+        }
     }
 
-    public void editMenu()
+    public void editMenu() throws IOException, ClassNotFoundException
     {
         int choice;
         do{
@@ -206,7 +287,13 @@ public class mainMenu {
 	            case 6:
         	}
         } while (choice != 6);
+        
+        FileOutputStream fileOutputStream = new FileOutputStream("testMenuSave.txt");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(menuList);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+        
     }
-
     
 }
