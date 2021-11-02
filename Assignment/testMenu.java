@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class mainapp implements Serializable{
+public class testMenu implements Serializable{
     public static void main(String[] args) throws Exception{
         
         FileInputStream fileInputStream = new FileInputStream("testMenuSave.txt");
