@@ -1,5 +1,3 @@
-package reservationApp;
-
 public class Table {
 
 	private int tableSize;

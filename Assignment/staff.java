@@ -1,5 +1,3 @@
-package reservationApp;
-
 public class staff {
 
 	private int employeeId;

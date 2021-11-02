@@ -1,5 +1,3 @@
-package reservationApp;
-
 public class customer {
 
 	reservation reserv;
