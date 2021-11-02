@@ -4,7 +4,13 @@ public class staff {
 	private char gender;
 	private String name;
 	private String jobTitle;
-
+	public staff(int employeeId, char  gender, String name, String job)
+	{
+		this.employeeId = employeeId;
+		this.gender = gender;
+		this.name = name;
+		this.jobTitle = job;
+	}
 	public int getEmployeeId() {
 		return this.employeeId;
 	}
