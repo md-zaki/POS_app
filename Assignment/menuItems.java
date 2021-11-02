@@ -1,6 +1,9 @@
-public class menuItems {
-    public enum menuItemType{mainCourse,
+import java.io.Serializable;
+
+public class menuItems implements Serializable{
+    public enum menuItemType implements Serializable{mainCourse,
         drinks,
+        sides,
         dessert,
         set};
     private menuItemType type;

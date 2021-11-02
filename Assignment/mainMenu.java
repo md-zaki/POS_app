@@ -10,23 +10,12 @@ import java.util.Scanner;
 
 public class mainMenu implements Serializable{
     private ArrayList<menuItems> menuList;
-    private static int numOfItems=0;
-    Scanner scan = new Scanner(System.in);
+    //private static int numOfItems=0;
+    
 
     public mainMenu() throws IOException, ClassNotFoundException {
-        numOfItems = 0;
+        //numOfItems = 0;
         menuList = new ArrayList<menuItems>();
-        
-        try
-        {
-        FileInputStream fileInputStream = new FileInputStream("testMenuSave.txt");
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        menuList = (ArrayList<menuItems>) objectInputStream.readObject();
-        objectInputStream.close();
-        }
-        catch (Exception ex){
-        	ex.getStackTrace();
-        }
        
         
     }
@@ -37,15 +26,16 @@ public class mainMenu implements Serializable{
         this.menuList = menuItems;
     }
 
-    public int getNumOfItems() {
+   /* public int getNumOfItems() {
         return mainMenu.numOfItems;
-    }
+    }*/
 
-    public void setNumOfItems(int numOfItems) {
+    /*public void setNumOfItems(int numOfItems) {
         mainMenu.numOfItems = numOfItems;
-    }
+    }*/
 
     public void addMenuItem() {
+        Scanner scan = new Scanner(System.in);
         int i =1;
         System.out.println("Enter name of menu item:");
         String name = scan.nextLine();
@@ -70,11 +60,12 @@ public class mainMenu implements Serializable{
         menuItems newAdd = new menuItems(name, desc, price, typechoice);
         menuList.add(newAdd);
 
-        mainMenu.numOfItems++;
+        //mainMenu.numOfItems++;
 
     }
 
     public void removeMenuItem() {
+        Scanner scan = new Scanner(System.in);
         viewMenu();
         System.out.println("Enter index of menu item to delete:");
         int index = scan.nextInt();
@@ -84,6 +75,7 @@ public class mainMenu implements Serializable{
 
     public void updateMenuItem(ArrayList<menuItems> menuList) throws IOException
     {
+        Scanner scan = new Scanner(System.in);
         System.out.println("Enter index of menu item to update:");
         int index = scan.nextInt();
         //String dummy = scan.nextLine();
@@ -123,7 +115,7 @@ public class mainMenu implements Serializable{
         		{
                     System.out.println("Enter updated price of menu item:");
                     price = scan.nextDouble();
-                    //dummy = scan.nextLine();
+                    String dummy = scan.nextLine();
         		}
         		else if (choice == 4)
         		{
@@ -136,20 +128,20 @@ public class mainMenu implements Serializable{
                     int typenum = scan.nextInt();
                     typechoice = menuItems.menuItemType.values()[typenum-1];
                     //menuItems.menuItemType typechoice = menuItems.menuItemType.values()[typenum-1];
-                    //dummy = scan.nextLine();
+                    String dummy = scan.nextLine();
         		}
         		else
         		{
         			System.out.println("Please enter a valid choice");
         		}
         		
-                menuItems newAdd = new menuItems(name, desc, price, typechoice);
+                /*menuItems newAdd = new menuItems(name, desc, price, typechoice);
                 menuList.set(index, newAdd);
                 FileOutputStream fileOutputStream = new FileOutputStream("testMenuSave.txt");
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
                 objectOutputStream.writeObject(menuList);
                 objectOutputStream.flush();
-                objectOutputStream.close();
+                objectOutputStream.close();*/
                 
                 //String dummy = scan.nextLine();
         		
@@ -183,6 +175,7 @@ public class mainMenu implements Serializable{
 
     public void addPromo(ArrayList<menuItems> menuList)
     {
+        Scanner scan = new Scanner(System.in);
         int i =1;
         System.out.println("Enter name of promo:");
         String name = scan.nextLine();
@@ -256,6 +249,7 @@ public class mainMenu implements Serializable{
 
     public void editMenu() throws IOException, ClassNotFoundException
     {
+        Scanner scan = new Scanner(System.in);
         int choice;
         do{
         System.out.println("(1) Add new alacarte item to menu");
@@ -288,11 +282,7 @@ public class mainMenu implements Serializable{
         	}
         } while (choice != 6);
         
-        FileOutputStream fileOutputStream = new FileOutputStream("testMenuSave.txt");
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(menuList);
-        objectOutputStream.flush();
-        objectOutputStream.close();
+        
         
     }
     

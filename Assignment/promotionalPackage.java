@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class promotionalPackage extends menuItems {
-	Scanner scan = new Scanner(System.in);
+public class promotionalPackage extends menuItems implements Serializable{
+	
 	public promotionalPackage(String name,double price, menuItemType type) {
 		super(name, "", price,type);
 		numOfItems = 0;
@@ -32,6 +33,7 @@ public class promotionalPackage extends menuItems {
 
 	public void addItem(ArrayList<menuItems> menuList)
 	{
+		Scanner scan = new Scanner(System.in);
 		System.out.println("======= ADDING ITEMS INTO PROMOTION PACKAGE =======");
 		System.out.println("1. Add Items into Promo");
 		System.out.println("2. Stop adding items");
