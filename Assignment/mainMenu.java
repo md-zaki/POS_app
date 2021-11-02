@@ -135,8 +135,9 @@ public class mainMenu implements Serializable{
         			System.out.println("Please enter a valid choice");
         		}
         		
-                /*menuItems newAdd = new menuItems(name, desc, price, typechoice);
+                menuItems newAdd = new menuItems(name, desc, price, typechoice);
                 menuList.set(index, newAdd);
+                /*
                 FileOutputStream fileOutputStream = new FileOutputStream("testMenuSave.txt");
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
                 objectOutputStream.writeObject(menuList);
