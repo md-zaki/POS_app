@@ -149,48 +149,56 @@ public class manageStaff implements Serializable{
 		
 		do
 		{
-		System.out.println("Editing Staff " + staffList.get(index).getName() + " Information");
-		System.out.println("Please select your operations");
-		System.out.println("(1) Edit Staff ID");
-		System.out.println("(2) Edit Staff Name");
-		System.out.println("(3) Edit Staff Gender");
-		System.out.println("(4) Edit Staff Position");
-		System.out.println("(5) Exit");
-		System.out.printf("Enter a choice: ");
-		choice = scan.nextInt();
-		scan.nextLine();
-		switch(choice)
-		{
-		case 1:
-			System.out.printf("Enter updated ID for staff: ");
-			int updatedID = scan.nextInt();
+			staff updateStaff = new staff(staffList.get(index).getEmployeeId(), staffList.get(index).getName(), staffList.get(index).getGender(), staffList.get(index).getJobTitle());
+			System.out.println("Editing Staff " + staffList.get(index).getName() + " Information");
+			System.out.println("Please select your operations");
+			System.out.println("(1) Edit Staff ID");
+			System.out.println("(2) Edit Staff Name");
+			System.out.println("(3) Edit Staff Gender");
+			System.out.println("(4) Edit Staff Position");
+			System.out.println("(5) Exit");
+			System.out.printf("Enter a choice: ");
+			choice = scan.nextInt();
 			scan.nextLine();
-			for(int i = 0 ; i < staffList.size() ; i++)
+			switch(choice)
 			{
-				if (staffList.get(i).getEmployeeId() == updatedID)
+			case 1:
+				System.out.printf("Enter updated ID for staff: ");
+				int updatedID = scan.nextInt();
+				scan.nextLine();
+				for(int i = 0 ; i < staffList.size() ; i++)
 				{
-					System.out.println("Conflicting ID exist");
-					break;
+					if (staffList.get(i).getEmployeeId() == updatedID)
+					{
+						System.out.println("Conflicting ID exist");
+						break;
+					}
 				}
-			}
-			staff updateStaff = new staff(updatedID, staffList.get(index).getName(), staffList.get(index).getGender(), staffList.get(index).getJobTitle());
-			staffList.set(index, updateStaff);
-			System.out.println("Staff " + staffList.get(index).getName() + " successfully updated with new StaffID of " + staffList.get(index).getEmployeeId());
-			break;
-			
-		case 2:
-			break;
-			
-		case 3:
-			break;
-			
-		case 4:
-			break;		
-			
-		default:
-			System.out.println("Please enter a valid choice");
+				updateStaff = new staff(updatedID, staffList.get(index).getName(), staffList.get(index).getGender(), staffList.get(index).getJobTitle());
+				staffList.set(index, updateStaff);
+				System.out.println("Staff " + staffList.get(index).getName() + " successfully updated with new StaffID of " + staffList.get(index).getEmployeeId());
+				break;
 				
-		}
+			case 2:
+				System.out.printf("Enter updated name for staff: ");
+				String updatedName = scan.nextLine();
+				updateStaff = new staff(staffList.get(index).getEmployeeId(), updatedName, staffList.get(index).getGender(), staffList.get(index).getJobTitle());
+				staffList.set(index, updateStaff);
+				System.out.println("Staff name successfully updated to " + updatedName);
+				break;
+				
+			case 3:
+				break;
+				
+			case 4:
+				break;		
+			case 5:
+				break;
+			default:
+				System.out.println("Please enter a valid choice");
+				break;
+					
+			}
 		
 		} while (choice != 5);
 		
@@ -201,16 +209,18 @@ public class manageStaff implements Serializable{
 	public void start() throws IOException, ClassNotFoundException
 	{
         int choice;
-        do{
-        System.out.println("(1) View All Staffs");
-        System.out.println("(2) View Staff by ID");
-        System.out.println("(3) Add Staff");
-        System.out.println("(4) Update Staff Info");
-        System.out.println("(6) Exit");
-        System.out.println("Select a choice: ");
-        choice = scan.nextInt();
-        scan.nextLine();
-        	switch (choice) {
+        do
+        {
+	        System.out.println("(1) View All Staffs");
+	        System.out.println("(2) View Staff by ID");
+	        System.out.println("(3) Add Staff");
+	        System.out.println("(4) Update Staff Info");
+	        System.out.println("(6) Exit");
+	        System.out.printf("Select a choice: ");
+	        choice = scan.nextInt();
+	        scan.nextLine();
+	    	switch (choice) 
+	    	{
 	            case 1: 
 	            		viewStaffList();
 	                    break;
@@ -231,10 +241,8 @@ public class manageStaff implements Serializable{
 	            		break;
 	            default:
 	            	//System.out.println("Please enter a valid option");
-        	}
+	    	}
         } while (choice != 6);
-		
-
 		
 	}
 
