@@ -17,6 +17,7 @@ public class mainapp implements Serializable{
         	System.out.println("(1) Manage Staff");
         	System.out.println("(2) Manage Menu");
         	System.out.println("(6) Exit");
+            System.out.printf("Select a choice: ");
         	choice = scan.nextInt();
         	scan.nextLine();
         	
