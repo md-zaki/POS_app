@@ -7,8 +7,8 @@ public class staff {
 	public staff(int employeeId, char  gender, String name, String job)
 	{
 		this.employeeId = employeeId;
-		this.gender = gender;
 		this.name = name;
+		this.gender = gender;
 		this.jobTitle = job;
 	}
 	public int getEmployeeId() {
