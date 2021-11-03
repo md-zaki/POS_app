@@ -155,9 +155,42 @@ public class manageStaff implements Serializable{
 		System.out.println("(2) Edit Staff Name");
 		System.out.println("(3) Edit Staff Gender");
 		System.out.println("(4) Edit Staff Position");
+		System.out.println("(5) Exit");
 		System.out.printf("Enter a choice: ");
 		choice = scan.nextInt();
 		scan.nextLine();
+		switch(choice)
+		{
+		case 1:
+			System.out.printf("Enter updated ID for staff: ");
+			int updatedID = scan.nextInt();
+			scan.nextLine();
+			for(int i = 0 ; i < staffList.size() ; i++)
+			{
+				if (staffList.get(i).getEmployeeId() == updatedID)
+				{
+					System.out.println("Conflicting ID exist");
+					break;
+				}
+			}
+			staff updateStaff = new staff(updatedID, staffList.get(index).getName(), staffList.get(index).getGender(), staffList.get(index).getJobTitle());
+			staffList.set(index, updateStaff);
+			System.out.println("Staff " + staffList.get(index).getName() + " successfully updated with new StaffID of " + staffList.get(index).getEmployeeId());
+			break;
+			
+		case 2:
+			break;
+			
+		case 3:
+			break;
+			
+		case 4:
+			break;		
+			
+		default:
+			System.out.println("Please enter a valid choice");
+				
+		}
 		
 		} while (choice != 5);
 		
@@ -201,17 +234,7 @@ public class manageStaff implements Serializable{
         	}
         } while (choice != 6);
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 	}
 
