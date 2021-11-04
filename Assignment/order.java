@@ -75,7 +75,7 @@ public class order {
 
 	public void addOrderItem() throws Exception {
 		Scanner scan = new Scanner(System.in);
-		int i=1;
+		
 		mainMenu menu = new mainMenu();
 		menu = menu.readMenu();
 		ArrayList<menuItems> foodmenu = menu.getMenuItems();
@@ -87,6 +87,7 @@ public class order {
 		String dummy = scan.nextLine();
 		while(choice == 1)
 		{
+			int i=1;
 			System.out.println("Which item would you like to add to Order");
 			System.out.println("========");
 			for(menuItems item : foodmenu)
