@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class manageStaff implements Serializable{
 	private ArrayList<staff> staffList = new ArrayList<staff>();
 	//private static int numStaff=0;
-	Scanner scan = new Scanner(System.in);
 
 	public manageStaff() throws IOException, ClassNotFoundException
 	{
@@ -39,10 +38,19 @@ public class manageStaff implements Serializable{
     {
         FileOutputStream fileOutputStream = new FileOutputStream("testStaffSave.txt");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(staffList);
+        objectOutputStream.writeObject(this);
         objectOutputStream.flush();
         objectOutputStream.close();
     }
+
+	public manageStaff readStaff() throws ClassNotFoundException, IOException 
+	{
+		FileInputStream fileInputStream = new FileInputStream("testStaffSave.txt");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        manageStaff staffList = (manageStaff) objectInputStream.readObject();
+        objectInputStream.close();
+		return staffList;
+	}
 	
     /* getter and setter for numStaff likely not needed, use staffList.size() instead
 	public int getNumStaff()
@@ -71,6 +79,7 @@ public class manageStaff implements Serializable{
 	
 	public void addStaff() throws IOException
 	{
+		Scanner scan = new Scanner(System.in);
 		int conflictCheck;
 		System.out.printf("Enter Staff ID: ");
 		int staffId = scan.nextInt();
@@ -158,6 +167,7 @@ public class manageStaff implements Serializable{
 	
 	public void updateStaffInfo(int staffId) throws IOException
 	{
+		Scanner scan = new Scanner(System.in);
 		int choice;
 		int staffIndex = getStaffListIndexById(staffId);
 		int updatedID = staffList.get(staffIndex).getEmployeeId();
@@ -247,6 +257,7 @@ public class manageStaff implements Serializable{
 	
 	public void start() throws IOException, ClassNotFoundException
 	{
+		Scanner scan = new Scanner(System.in);
 		int choice;
 		do
 		{

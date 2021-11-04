@@ -76,23 +76,38 @@ public class order {
 	public void addOrderItem() throws Exception {
 		Scanner scan = new Scanner(System.in);
 		int i=1;
-		FileInputStream fileInputStream = new FileInputStream("testMenuSave.txt");
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        mainMenu menu = (mainMenu) objectInputStream.readObject();
-        objectInputStream.close();
+		mainMenu menu = new mainMenu();
+		menu = menu.readMenu();
 		ArrayList<menuItems> foodmenu = menu.getMenuItems();
 
-		
-		for(menuItems item : foodmenu)
-		{
-			System.out.println("(" + i + ") " + item.getName());
-			i++;
-		}
-		System.out.println("Select item to add into order:");
+		System.out.println("======= ADDING ITEMS INTO ORDER =======");
+		System.out.println("1. Add Items into Order");
+		System.out.println("2. Stop adding items");
 		int choice = scan.nextInt();
 		String dummy = scan.nextLine();
-		menuItems newAdd = foodmenu.get(choice-1);
-		this.orderItems.add(newAdd);
+		while(choice == 1)
+		{
+			System.out.println("Which item would you like to add to Order");
+			System.out.println("========");
+			for(menuItems item : foodmenu)
+			{
+				System.out.println("(" + i + ") " + item.getName());
+				i++;
+			}
+			System.out.println("Enter Choice: ");
+			int pick = scan.nextInt();
+			dummy = scan.nextLine();
+			System.out.println("========");
+
+			menuItems toAdd = (menuItems) foodmenu.get(pick-1);
+			this.orderItems.add(toAdd);
+			System.out.println("1. Add more Items into Order");
+			System.out.println("2. Stop");
+			System.out.println("Enter Choice: ");
+			choice = scan.nextInt();
+			dummy = scan.nextLine();
+			System.out.println("========");
+		}
 	}
 
 	public void removeOrderItem(){
@@ -101,11 +116,14 @@ public class order {
 
 	public void viewOrder()
     {
-		
+		System.out.println();
+		System.out.println("Order ID: " + this.getOrderId());
+		System.out.println("Date Ordered: " + this.getDate().getDayOfMonth() + this.getDate().getMonthValue() + this.getDate().getYear());
+		System.out.println("Time Ordered: " + this.getTime().getHour() + this.getTime().getMinute());
+		System.out.println("Prepared by: " + this.getStaff().getName());
     }
 
 	public void printOrderInvoice() {
-		// TODO - implement order.printOrderInvoice
 		throw new UnsupportedOperationException();
 	}
 

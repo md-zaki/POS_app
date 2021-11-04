@@ -286,5 +286,23 @@ public class mainMenu implements Serializable{
         
         
     }
+
+    public void saveMenu() throws ClassNotFoundException, IOException 
+	{
+		FileOutputStream fileOutputStream = new FileOutputStream("testMenuSave.txt");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(this);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+	}
+
+	public mainMenu readMenu() throws ClassNotFoundException, IOException 
+	{
+		FileInputStream fileInputStream = new FileInputStream("testMenuSave.txt");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        mainMenu menu = (mainMenu) objectInputStream.readObject();
+        objectInputStream.close();
+		return menu;
+	}
     
 }

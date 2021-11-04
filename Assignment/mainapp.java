@@ -1,14 +1,21 @@
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class mainapp implements Serializable{
     public static void main(String[] args) throws ClassNotFoundException, IOException {
-    	manageStaff testStaff = new manageStaff();
     	mainMenu testMenu = new mainMenu();
+		testMenu = testMenu.readMenu();
+
+		manageStaff testStaff = new manageStaff();
+		testStaff = testStaff.readStaff();
+
     	Scanner scan = new Scanner(System.in);
     	int choice;
     	do
@@ -25,9 +32,11 @@ public class mainapp implements Serializable{
         	{
         	case 1:
         		testStaff.start();
+				testStaff.saveStaffList();
         		break;
         	case 2:
         		testMenu.editMenu();
+				testMenu.saveMenu();
         		break;
         	default:
         			
@@ -37,4 +46,6 @@ public class mainapp implements Serializable{
     	
     	System.out.println("Program Terminating...");
     }
+
+	
 }
