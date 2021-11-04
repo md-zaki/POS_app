@@ -11,6 +11,6 @@ import java.util.Scanner;
 public class testMenu implements Serializable{
     public static void main(String[] args) throws Exception{
         manageOrder order = new manageOrder();
-        manageOrder.createOrder();
+        manageOrder.createNewOrder();
     }
 }

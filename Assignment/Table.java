@@ -4,8 +4,8 @@ public class Table {
 	private boolean isAvailable;
 
 	public Table(int tableSize) {
-		// TODO - implement Table.Table
-		throw new UnsupportedOperationException();
+		this.tableSize = tableSize;
+		isAvailable = true;
 	}
 
 	public int getTableSize() {

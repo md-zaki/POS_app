@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class mainapp implements Serializable{
-    public static void main(String[] args) throws ClassNotFoundException, IOException {
+    public static void main(String[] args) throws ClassNotFoundException, IOException, Exception {
     	mainMenu testMenu = new mainMenu();
 		testMenu = testMenu.readMenu();
 
@@ -23,6 +23,7 @@ public class mainapp implements Serializable{
         	System.out.println("Please select your operations.");
         	System.out.println("(1) Manage Staff");
         	System.out.println("(2) Manage Menu");
+			System.out.println("(3) Manage Orders");
         	System.out.println("(6) Exit");
             System.out.printf("Select a choice: ");
         	choice = scan.nextInt();
@@ -37,6 +38,9 @@ public class mainapp implements Serializable{
         	case 2:
         		testMenu.editMenu();
 				testMenu.saveMenu();
+        		break;
+			case 3:
+        		manageOrder.startOrder();
         		break;
         	default:
         			

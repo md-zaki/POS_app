@@ -18,14 +18,16 @@ public class order {
 	private LocalDate date;
 	private LocalTime time;
 	private staff prepBy;
-	private invoice invoice;
+	private Table table;
+
+
 	public order(int orderId, LocalDate date, LocalTime time,staff prepBy) {
 		this.orderId = orderId;
 		this.date = date;
 		this.time = time;
 		this.prepBy = prepBy;
 		orderItems = new ArrayList<menuItems>();
-		this.invoice = null;
+		this.table = null;
 	}
 	public int getOrderId() {
 		return this.orderId;
@@ -63,14 +65,14 @@ public class order {
         this.orderItems = orderItems;
     }
 
-	public invoice getinvoice()
+	public Table getTable()
 	{
-		return invoice;
+		return this.table;
 	}
 
-	public void setinvoice(invoice invoice)
+	public void setTable(Table table)
 	{
-		this.invoice = invoice;
+		this.table = table;
 	}
 
 	public void addOrderItem() throws Exception {
@@ -112,17 +114,32 @@ public class order {
 	}
 
 	public void removeOrderItem(){
-
+		Scanner scan = new Scanner(System.in);
+		this.viewOrder();
+		System.out.println("Enter Item to remove from order: ");
+		int pick = scan.nextInt();
+		String dummy = scan.nextLine();
+		menuItems toRemove = this.orderItems.get(pick-1);
+		this.orderItems.add(toRemove);
 	}
 
 	public void viewOrder()
     {
+		int i=1;
 		System.out.println();
 		System.out.println("Order ID: " + this.getOrderId());
-		System.out.println("Date Ordered: " + this.getDate().getDayOfMonth() + this.getDate().getMonthValue() + this.getDate().getYear());
-		System.out.println("Time Ordered: " + this.getTime().getHour() + this.getTime().getMinute());
+		System.out.println("Date Ordered: " + this.getDate().getDayOfMonth() +"/" + this.getDate().getMonthValue() + "/" + this.getDate().getYear());
+		System.out.println("Time Ordered: " + this.getTime().getHour() +":" + this.getTime().getMinute());
 		System.out.println("Prepared by: " + this.getStaff().getName());
+		System.out.println("Ordered Items: ");
+		for(menuItems item : this.orderItems)
+		{
+			System.out.println("	(" + i + ") " + item.getName());
+			i++;
+		}
     }
+
+	
 
 	public void printOrderInvoice() {
 		throw new UnsupportedOperationException();
