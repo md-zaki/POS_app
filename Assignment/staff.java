@@ -1,9 +1,11 @@
-public class staff {
+import java.io.Serializable;
 
+public class staff implements Serializable {
 	private int employeeId;
 	private char gender;
 	private String name;
 	private String jobTitle;
+	
 	public staff(int employeeId, String name, char  gender, String job)
 	{
 		this.employeeId = employeeId;
@@ -11,6 +13,7 @@ public class staff {
 		this.gender = gender;
 		this.jobTitle = job;
 	}
+	
 	public int getEmployeeId() {
 		return this.employeeId;
 	}
@@ -42,5 +45,4 @@ public class staff {
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
-
 }
