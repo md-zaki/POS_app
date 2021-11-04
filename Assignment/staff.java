@@ -4,7 +4,7 @@ public class staff {
 	private char gender;
 	private String name;
 	private String jobTitle;
-	public staff(int employeeId, char  gender, String name, String job)
+	public staff(int employeeId, String name, char  gender, String job)
 	{
 		this.employeeId = employeeId;
 		this.name = name;
