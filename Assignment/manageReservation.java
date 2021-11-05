@@ -5,12 +5,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class manageReservation {
+    private static ArrayList<reservation> reservations = new ArrayList<reservation>();
+    private static ArrayList<Table> tables = new ArrayList<Table>();
 
     public static void start() throws IOException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
@@ -50,6 +53,13 @@ public class manageReservation {
     }
 
     private static void createReservation() {
+        tables.add(new Table(1, 2));
+        tables.add(new Table(2, 2));
+        tables.add(new Table(3, 4));
+        tables.add(new Table(4, 4));
+        tables.add(new Table(5, 8));
+        tables.add(new Table(6, 6));
+
         Scanner scan = new Scanner(System.in);
         String name;
         LocalDate date;
@@ -124,10 +134,41 @@ public class manageReservation {
             }
         }
 
-        // Customer c = new Customer(long memberId, String name, long contact, tier
-        // memberTier);
+        if (member == true) {
+
+        }
+        customer c = new customer(name, contact);
+        Table t = null;
+        if (noOfPax % 2 == 0) {
+            for (int i = 0; i < tables.size(); i++) {
+                if (tables.get(i).getTableSize() == noOfPax) {
+                    t = tables.get(i);
+                    tables.get(i).setIsAvailable(false);
+                    break;
+                }
+            }
+        } else {
+            for (int i = 0; i < tables.size(); i++) {
+                if (tables.get(i).getTableSize() == noOfPax + 1) {
+                    t = tables.get(i);
+                    tables.get(i).setIsAvailable(false);
+                    break;
+                }
+            }
+        }
+        if (Objects.isNull(t)) {
+            System.out.println("No available tables");
+        } else {
+            reservations.add(new reservation(date, time, c, t, noOfPax));
+        }
         System.out.println(date);
-        System.out.print(time);
+        System.out.println(time);
+
+        System.out.println("table assigned is " + t.getTableNo() + " " + t.getTableSize() + " " + t.getIsAvailable());
+        for (int i = 0; i < tables.size(); i++) {
+            System.out.println(
+                    "" + tables.get(i).getTableNo() + tables.get(i).getTableSize() + tables.get(i).getIsAvailable());
+        }
     }
 
 }

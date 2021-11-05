@@ -1,13 +1,22 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class reservation {
 
+	Table table;
 	customer cust;
-	private String date;
-	private String time;
+	private LocalDate date;
+	private LocalTime time;
 	private int numOfpax;
 
-	public reservation(String date, int time, int String, int numOfPax) {
+	public reservation(LocalDate date, LocalTime time, customer cust, Table table, int numOfPax) {
+		this.date = date;
+		this.time = time;
+		this.cust = cust;
+		this.table = table;
+		this.numOfpax = numOfPax;
 		// TODO - implement reservation.reservation
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
 	}
 
 	public String getDate() {

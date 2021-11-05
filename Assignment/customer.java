@@ -3,14 +3,11 @@ public class customer {
 	private String name;
 	private long contact;
 
-	public customer(String name, long contact)
-	{
-		
+	public customer(String name, long contact) {
+
 		this.name = name;
 		this.contact = contact;
 	}
-
-	
 
 	public String getName() {
 		return this.name;
@@ -27,5 +24,5 @@ public class customer {
 	public void setContact(long contact) {
 		this.contact = contact;
 	}
-	
+
 }
