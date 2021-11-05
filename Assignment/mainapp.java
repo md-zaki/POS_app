@@ -25,6 +25,8 @@ public class mainapp implements Serializable {
 
 		}
 
+		manageReservation testReservation = new manageReservation();
+
 		Scanner scan = new Scanner(System.in);
 		int choice;
 		do {
@@ -32,6 +34,7 @@ public class mainapp implements Serializable {
 			System.out.println("(1) Manage Staff");
 			System.out.println("(2) Manage Menu");
 			System.out.println("(3) Manage Orders");
+			System.out.println("(4) Manage Reservation");
 			System.out.println("(6) Exit");
 			System.out.printf("Select a choice: ");
 			choice = scan.nextInt();
@@ -48,6 +51,9 @@ public class mainapp implements Serializable {
 				break;
 			case 3:
 				manageOrder.startOrder();
+				break;
+			case 4:
+				manageReservation.start();
 				break;
 			default:
 
