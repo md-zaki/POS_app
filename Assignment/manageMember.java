@@ -21,7 +21,16 @@ public class manageMember {
         return memberList;
     }
 
-    public void addMember()
+    public void saveMemberList() throws IOException
+    {
+        FileOutputStream fileOutputStream = new FileOutputStream("testMemberSave.txt");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(this);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+    }
+
+    public void addMember() throws IOException
     {
         int i=1;
         System.out.printf("Enter customer id: ");
@@ -61,6 +70,7 @@ public class manageMember {
         }while (tiernum !=1 && tiernum != 2 && tiernum != 3);
         member newMember = new member(name, contact, memberId, tier);
         memberList.add(newMember);
+        saveMemberList();
         
     }
 
@@ -111,7 +121,7 @@ public class manageMember {
         }
     }
 
-    public void start()
+    public void start() throws IOException
     {
         int choice;
         do
@@ -133,14 +143,20 @@ public class manageMember {
                     break;
                 case 2:
                     System.out.printf("Enter member id: ");
-                    long memberId = scan.nextLong();
+                    long viewMemberId = scan.nextLong();
                     scan.nextLine();
-                    viewIndividualMember(memberId);
+                    viewIndividualMember(viewMemberId);
                     break;
                 case 3:
                     addMember();
                     break;
                 case 4:
+                    System.out.printf("Enter member id to update: ");
+                    long memberUpdate = scan.nextLong();
+                    scan.nextLine();
+                    updateMember(memberUpdate);
+                    break;
+                case 5:
                     removeMember();
                     break;
             }
@@ -148,7 +164,7 @@ public class manageMember {
         } while (choice != 5);
     }
 
-    public void removeMember()
+    public void removeMember() throws IOException
     {
         int i=0;
         int check = 0;
@@ -163,13 +179,97 @@ public class manageMember {
         else
         {
             memberList.remove(check);
+            saveMemberList();
             i=1;
         }
         }while(i!=1);
     }
 
-    public void updateMember()
+    public void updateMember(long memberId) throws IOException
     {
-        
+        int choice;
+        int memberIndex = getMemberListIndexById(memberId);
+        if (memberIndex == -1)
+        {
+            System.out.println("Member does not exist");
+        }
+        else
+        {
+            do
+            {
+                member updateMember = new member(memberList.get(memberIndex).getName(), memberList.get(memberIndex).getContact(), memberList.get(memberIndex).getMemberId(), memberList.get(memberIndex).getTier());
+                System.out.println("Editing Member " + memberList.get(memberIndex).getName() + " Information");
+                System.out.println("Please select your operations");
+                System.out.println("(1) Edit Member ID");
+                System.out.println("(2) Edit Member Name");
+                System.out.println("(3) Edit Member Contact");
+                System.out.println("(4) Edit Member Tier");
+                System.out.println("(5) View Current Member Info");
+                System.out.println("(6) Exit");
+                System.out.printf("Enter a choice: ");
+                choice = scan.nextInt();
+                scan.nextLine();
+
+                switch (choice)
+                {
+                    case 1:
+                        break;
+                    case 2:
+                        System.out.printf("Enter updated member name: ");
+                        String updateName = scan.nextLine();
+                        updateMember = new member(updateName, memberList.get(memberIndex).getContact(), memberList.get(memberIndex).getMemberId(), memberList.get(memberIndex).getTier());
+                        memberList.set(memberIndex, updateMember);
+                        break;
+                    case 3:
+                        System.out.printf("Enter updated member contact: ");
+                        long updateContact = scan.nextLong();
+                        scan.nextLine();
+                        updateMember = new member(memberList.get(memberIndex).getName(), updateContact, memberList.get(memberIndex).getMemberId(), memberList.get(memberIndex).getTier());
+                        memberList.set(memberIndex, updateMember);
+                        break;
+                    case 4:
+                        int i=1;
+                        System.out.println("Enter updated member tier");
+                        for(member.tier tier : member.tier.values())
+                        {
+                            System.out.println(i + ": " + tier);
+                            i++;
+                        }
+                        int tiernum =0;
+                        member.tier tier = null;
+                        do
+                        {
+                        System.out.printf("Select a tier: ");
+                        tiernum = scan.nextInt();
+                        scan.nextLine();
+                        switch (tiernum) 
+                            {
+                                case 1: 
+                                    tier = member.tier.Gold;
+                                    break;
+                                case 2:
+                                    tier = member.tier.Silver;
+                                    break;
+                                case 3:
+                                    tier = member.tier.Bronze;
+                                    break;
+                                default:
+                                System.out.println("Please enter a valid option");
+                            }
+                        }while (tiernum !=1 && tiernum != 2 && tiernum != 3);
+                        updateMember = new member(memberList.get(memberIndex).getName(), memberList.get(memberIndex).getContact(), memberList.get(memberIndex).getMemberId(), tier);
+                        memberList.set(memberIndex, updateMember);
+                        break;
+                    case 5:
+                        printMember(memberIndex);
+                        break;
+                    case 6:
+                        break;
+                    default:
+                        System.out.println("Please enter a valid choice.");
+                }
+            } while (choice != 6);
+        }
+
     }
 }

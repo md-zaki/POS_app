@@ -14,6 +14,7 @@ public class mainapp implements Serializable {
 	public static void main(String[] args) throws ClassNotFoundException, IOException, Exception {
 		mainMenu testMenu = new mainMenu();
 		manageStaff testStaff = new manageStaff();
+		manageOrder testOrder = new manageOrder();
 		manageMember testMember = new manageMember();
 		try {
 			testMenu = testMenu.readMenu();
@@ -46,7 +47,7 @@ public class mainapp implements Serializable {
 				testMenu.saveMenu();
 				break;
 			case 3:
-				manageOrder.startOrder();
+				testOrder.startOrder();
 				break;
 			case 4:
 				testMember.start();

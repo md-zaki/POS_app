@@ -172,6 +172,7 @@ public class manageOrder {
         System.out.println("TOTAL: " + total);
     }
 
+    
     public static double discount(long memberId)
     {
         int check = manageMember.getMemberListIndexById(memberId);
