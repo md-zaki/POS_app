@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class manageMember {
     private static ArrayList<customer> memberList = new ArrayList<customer>();
+    Scanner scan = new Scanner(System.in);
+
     public manageMember()
     {
         memberList = new ArrayList<customer>();
@@ -17,7 +19,9 @@ public class manageMember {
     public void addMember()
     {
         int i=1;
-        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter customer id: ");
+        long memberId = scan.nextLong();
+        scan.nextLine();
         System.out.println("Enter name of customer: ");
         String name = scan.nextLine();
         System.out.println("Enter contact number: ");
@@ -29,6 +33,7 @@ public class manageMember {
             i++;
         }
         int tiernum = scan.nextInt();
+<<<<<<< Updated upstream
         customer.tier tier = null;
         do{
         switch (tiernum) 
@@ -47,8 +52,24 @@ public class manageMember {
 				System.out.println("Please enter a valid option");
 			}
         }while (tiernum !=4);
-        customer newMember = new customer(name, contact, tier);
+        customer newMember = new customer(memberId, name, contact, tier);
         memberList.add(newMember);
         
+=======
+    }
+
+    public void viewListOfMembers()
+    {
+        System.out.println("=============== MEMBER LIST ===============\n");
+        for (int i = 0 ; i < memberList.size(); i++)
+        {
+            System.out.println("Customer ID: " + memberList.get(i).getMemberId());
+            System.out.println("Customer Name: " + memberList.get(i).getName());
+            System.out.println("Customer contact: " + memberList.get(i).getContact());
+            System.out.println("Customer membership tier: " + memberList.get(i).getTier());
+            System.out.println();
+        }
+        System.out.println("=============== END OF LIST ===============\n");
+>>>>>>> Stashed changes
     }
 }
