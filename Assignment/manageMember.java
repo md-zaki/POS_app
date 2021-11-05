@@ -29,7 +29,26 @@ public class manageMember {
             i++;
         }
         int tiernum = scan.nextInt();
-
+        customer.tier tier = null;
+        do{
+        switch (tiernum) 
+			{
+			    case 1: 
+                    tier = customer.tier.Gold;
+				    break;
+			    case 2:
+                    tier = customer.tier.Silver;
+					break;
+			    case 3:
+                    tier = customer.tier.Bronze;
+				    break;
+                case 4:
+			    default:
+				System.out.println("Please enter a valid option");
+			}
+        }while (tiernum !=4);
+        customer newMember = new customer(name, contact, tier);
+        memberList.add(newMember);
         
     }
 }
