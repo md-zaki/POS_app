@@ -61,19 +61,25 @@ public class manageMember {
 
     public void viewListOfMembers()
     {
-        System.out.println("=============== MEMBER LIST ===============\n");
+        System.out.println("=============== MEMBER LIST ===============");
         for (int i = 0 ; i < memberList.size(); i++)
         {
-            System.out.println("Member ID: " + memberList.get(i).getMemberId());
-            System.out.println("Customer Name: " + memberList.get(i).getName());
-            System.out.println("Customer contact: " + memberList.get(i).getContact());
-            System.out.println("Customer membership tier: " + memberList.get(i).getTier());
-            System.out.println();
+            printMember(i);
         }
         System.out.println("=============== END OF LIST ===============\n");
     }
 
-    public long getMemberListIndexById(long memberId)
+    public void printMember(int i)
+    {
+        System.out.println();
+        System.out.println("Member ID: " + memberList.get(i).getMemberId());
+        System.out.println("Customer Name: " + memberList.get(i).getName());
+        System.out.println("Customer contact: " + memberList.get(i).getContact());
+        System.out.println("Customer membership tier: " + memberList.get(i).getTier());
+        System.out.println();
+    }
+
+    public int getMemberListIndexById(long memberId)
     {
         for(int i=0 ; i<memberList.size(); i++)
         {
@@ -85,6 +91,21 @@ public class manageMember {
         return -1;
     }
 
+    public void viewIndividualMember(long memberId)
+    {
+        int check = getMemberListIndexById(memberId);
+        if (check == -1)
+        {
+            System.out.println("Member ID does not exist");
+        }
+        else
+        {
+            System.out.println();
+            printMember(check);
+            System.out.println();
+        }
+    }
+
     public void start()
     {
         int choice;
@@ -93,10 +114,10 @@ public class manageMember {
             System.out.println("Select your operations");
             System.out.println("(1) View all members");
             System.out.println("(2) View member by ID");
-            System.out.println("(2) Add new member");
-            System.out.println("(3) Update member info");
-            System.out.println("(4) Remove member");
-            System.out.println("(5) Exit");
+            System.out.println("(3) Add new member");
+            System.out.println("(4) Update member info");
+            System.out.println("(5) Remove member");
+            System.out.println("(6) Exit");
             System.out.printf("Select a choice: ");
             choice = scan.nextInt();
             scan.nextLine();
@@ -106,6 +127,10 @@ public class manageMember {
                     viewListOfMembers();
                     break;
                 case 2:
+                    System.out.printf("Enter member id: ");
+                    long memberId = scan.nextLong();
+                    scan.nextLine();
+                    viewIndividualMember(memberId);
                     break;
                 case 3:
                     addMember();
@@ -121,7 +146,7 @@ public class manageMember {
     public void removeMember()
     {
         int i=0;
-        long check = 0;
+        int check = 0;
         do{
         System.out.println("Enter member ID to be deleted: ");
         long id = scan.nextLong();
@@ -132,7 +157,7 @@ public class manageMember {
         }
         else
         {
-            memberList.remove((int)check);
+            memberList.remove(check);
             i=1;
         }
         }while(i!=1);
