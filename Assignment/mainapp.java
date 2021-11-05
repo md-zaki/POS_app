@@ -15,6 +15,7 @@ public class mainapp implements Serializable{
 
 		manageStaff testStaff = new manageStaff();
 		testStaff = testStaff.readStaff();
+		 
 
     	Scanner scan = new Scanner(System.in);
     	int choice;

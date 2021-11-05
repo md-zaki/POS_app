@@ -120,7 +120,7 @@ public class order {
 		int pick = scan.nextInt();
 		String dummy = scan.nextLine();
 		menuItems toRemove = this.orderItems.get(pick-1);
-		this.orderItems.add(toRemove);
+		this.orderItems.remove(toRemove);
 	}
 
 	public void viewOrder()
