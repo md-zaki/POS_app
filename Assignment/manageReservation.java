@@ -23,13 +23,13 @@ public class manageReservation {
 
             switch (choice) {
             case 1:
-                createReservation();
+                //createReservation();
                 break;
             case 2:
-                checkRemoveReservation();
+                //checkRemoveReservation();
                 break;
             case 3:
-                checkTable();
+                //checkTable();
                 break;
             case 6:
                 break;
