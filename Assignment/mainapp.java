@@ -11,10 +11,22 @@ import java.util.Scanner;
 public class mainapp implements Serializable{
     public static void main(String[] args) throws ClassNotFoundException, IOException, Exception {
     	mainMenu testMenu = new mainMenu();
-		testMenu = testMenu.readMenu();
+		//testMenu = testMenu.readMenu();
 
 		manageStaff testStaff = new manageStaff();
-		testStaff = testStaff.readStaff();
+		//testStaff = testStaff.readStaff();
+
+		try {
+			testMenu = testMenu.readMenu();
+		  } catch (Exception e) {
+			// testMenu.saveMenu();
+		  }
+	  
+		  try {
+			testStaff = testStaff.readStaff();
+		  } catch (Exception e) {
+	  
+		  }
 		 
 
     	Scanner scan = new Scanner(System.in);
