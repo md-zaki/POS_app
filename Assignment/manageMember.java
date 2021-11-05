@@ -16,7 +16,16 @@ public class manageMember {
         memberList = new ArrayList<member>();
     }
 
-    public void addMember()
+    public void saveMemberList() throws IOException
+    {
+        FileOutputStream fileOutputStream = new FileOutputStream("testMemberSave.txt");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(this);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+    }
+
+    public void addMember() throws IOException
     {
         int i=1;
         System.out.printf("Enter customer id: ");
@@ -56,6 +65,7 @@ public class manageMember {
         }while (tiernum !=1 && tiernum != 2 && tiernum != 3);
         member newMember = new member(name, contact, memberId, tier);
         memberList.add(newMember);
+        saveMemberList();
         
     }
 
@@ -106,7 +116,7 @@ public class manageMember {
         }
     }
 
-    public void start()
+    public void start() throws IOException
     {
         int choice;
         do
@@ -149,7 +159,7 @@ public class manageMember {
         } while (choice != 5);
     }
 
-    public void removeMember()
+    public void removeMember() throws IOException
     {
         int i=0;
         int check = 0;
@@ -164,12 +174,13 @@ public class manageMember {
         else
         {
             memberList.remove(check);
+            saveMemberList();
             i=1;
         }
         }while(i!=1);
     }
 
-    public void updateMember(long memberId)
+    public void updateMember(long memberId) throws IOException
     {
         int choice;
         int memberIndex = getMemberListIndexById(memberId);
