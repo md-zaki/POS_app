@@ -8,61 +8,54 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class mainapp implements Serializable{
-    public static void main(String[] args) throws ClassNotFoundException, IOException, Exception {
-    	mainMenu testMenu = new mainMenu();
-		//testMenu = testMenu.readMenu();
+public class mainapp implements Serializable {
+	public static void main(String[] args) throws ClassNotFoundException, IOException, Exception {
 
-		manageStaff testStaff = new manageStaff();
-		//testStaff = testStaff.readStaff();
-
+		mainMenu testMenu = new mainMenu();
 		try {
 			testMenu = testMenu.readMenu();
-		  } catch (Exception e) {
+		} catch (Exception e) {
 			// testMenu.saveMenu();
-		  }
-	  
-		  try {
+		}
+
+		manageStaff testStaff = new manageStaff();
+		try {
 			testStaff = testStaff.readStaff();
-		  } catch (Exception e) {
-	  
-		  }
-		 
+		} catch (Exception e) {
 
-    	Scanner scan = new Scanner(System.in);
-    	int choice;
-    	do
-    	{
-        	System.out.println("\nPlease select your operations.");
-        	System.out.println("(1) Manage Staff");
-        	System.out.println("(2) Manage Menu");
+		}
+
+		Scanner scan = new Scanner(System.in);
+		int choice;
+		do {
+			System.out.println("\nPlease select your operations.");
+			System.out.println("(1) Manage Staff");
+			System.out.println("(2) Manage Menu");
 			System.out.println("(3) Manage Orders");
-        	System.out.println("(6) Exit");
-            System.out.printf("Select a choice: ");
-        	choice = scan.nextInt();
-        	scan.nextLine();
-        	
-        	switch(choice)
-        	{
-        	case 1:
-        		testStaff.start();
-				testStaff.saveStaffList();
-        		break;
-        	case 2:
-        		testMenu.editMenu();
-				testMenu.saveMenu();
-        		break;
-			case 3:
-        		manageOrder.startOrder();
-        		break;
-        	default:
-        			
-        	}
-        	
-    	} while (choice != 6);
-    	
-    	System.out.println("Program Terminating...");
-    }
+			System.out.println("(6) Exit");
+			System.out.printf("Select a choice: ");
+			choice = scan.nextInt();
+			scan.nextLine();
 
-	
+			switch (choice) {
+			case 1:
+				testStaff.start();
+				testStaff.saveStaffList();
+				break;
+			case 2:
+				testMenu.editMenu();
+				testMenu.saveMenu();
+				break;
+			case 3:
+				manageOrder.startOrder();
+				break;
+			default:
+
+			}
+
+		} while (choice != 6);
+
+		System.out.println("Program Terminating...");
+	}
+
 }
