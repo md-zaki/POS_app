@@ -1,9 +1,9 @@
 public class Table {
-
+	private int tableNo;
 	private int tableSize;
 	private boolean isAvailable;
 
-	public Table(int tableSize) {
+	public Table(int tableNo,int tableSize) {
 		this.tableSize = tableSize;
 		isAvailable = true;
 	}
@@ -22,6 +22,14 @@ public class Table {
 
 	public void setIsAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
+	}
+
+	public int getTableNo() {
+		return this.tableSize;
+	}
+
+	public void setTableNo(int tableNo) {
+		this.tableNo = tableNo;
 	}
 
 }

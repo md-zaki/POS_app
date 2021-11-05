@@ -8,12 +8,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class manageMember {
-    private static ArrayList<customer> memberList = new ArrayList<customer>();
+    private static ArrayList<member> memberList = new ArrayList<member>();
     Scanner scan = new Scanner(System.in);
 
     public manageMember()
     {
-        memberList = new ArrayList<customer>();
+        memberList = new ArrayList<member>();
     }
 
     public void addMember()
@@ -27,13 +27,13 @@ public class manageMember {
         System.out.printf("Enter contact number: ");
         long contact = scan.nextLong();
         System.out.println("Enter membership tier");
-        for(customer.tier tier : customer.tier.values())
+        for(member.tier tier : member.tier.values())
         {
             System.out.println(i + ": " + tier);
             i++;
         }
         int tiernum =0;
-        customer.tier tier = null;
+        member.tier tier = null;
         do
         {
         System.out.printf("Select a tier: ");
@@ -42,19 +42,19 @@ public class manageMember {
         switch (tiernum) 
 			{
 			    case 1: 
-                    tier = customer.tier.Gold;
+                    tier = member.tier.Gold;
 				    break;
 			    case 2:
-                    tier = customer.tier.Silver;
+                    tier = member.tier.Silver;
 					break;
 			    case 3:
-                    tier = customer.tier.Bronze;
+                    tier = member.tier.Bronze;
 				    break;
 			    default:
 				System.out.println("Please enter a valid option");
 			}
         }while (tiernum !=1 && tiernum != 2 && tiernum != 3);
-        customer newMember = new customer(memberId, name, contact, tier);
+        member newMember = new member(name, contact, memberId, tier);
         memberList.add(newMember);
         
     }
@@ -64,7 +64,7 @@ public class manageMember {
         System.out.println("=============== MEMBER LIST ===============\n");
         for (int i = 0 ; i < memberList.size(); i++)
         {
-            System.out.println("Customer ID: " + memberList.get(i).getMemberId());
+            System.out.println("Member ID: " + memberList.get(i).getMemberId());
             System.out.println("Customer Name: " + memberList.get(i).getName());
             System.out.println("Customer contact: " + memberList.get(i).getContact());
             System.out.println("Customer membership tier: " + memberList.get(i).getTier());
@@ -140,6 +140,6 @@ public class manageMember {
 
     public void updateMember()
     {
-
+        
     }
 }
