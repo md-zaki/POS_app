@@ -1,18 +1,21 @@
 public class Table {
+	public enum size{
 
-	private int tableSize;
+
+	}
+	private size tableSize;
 	private boolean isAvailable;
 
-	public Table(int tableSize) {
+	public Table(size tableSize) {
 		this.tableSize = tableSize;
 		isAvailable = true;
 	}
 
-	public int getTableSize() {
+	public size getTableSize() {
 		return this.tableSize;
 	}
 
-	public void setTableSize(int tableSize) {
+	public void setTableSize(size tableSize) {
 		this.tableSize = tableSize;
 	}
 
