@@ -94,7 +94,7 @@ public class manageOrder {
         }
     }
 
-    public static void startOrder() throws Exception
+    public void startOrder() throws Exception
     {
         Scanner scan = new Scanner(System.in);
 		int choice;
@@ -119,7 +119,7 @@ public class manageOrder {
                 viewAllOrders();
 				    break;
 			    case 4:
-                //
+                printInvoice();
 					break;
 			    case 5:
 				break;
@@ -127,5 +127,72 @@ public class manageOrder {
 				System.out.println("Please enter a valid option");
 			}
 		} while (choice != 5);
+    }
+
+    public static void printInvoice()
+    {
+        int i=1;
+        double total=0;
+        double discount=1;
+        Scanner scan = new Scanner(System.in);
+        viewAllOrders();
+        System.out.println("For which order would you like to print the invoice?: ");
+        int index = scan.nextInt();
+        order toPrint = allOrders.get(index-1);
+        System.out.println("Is the customer a member? (y/n): ");
+        char ans = scan.nextLine().charAt(0);
+        if(ans == 'y')
+        {
+            System.out.println("Key in customer's member ID: ");
+            long id = scan.nextLong();
+            discount = discount(id);
+        }
+        System.out.println("Order ID: " + toPrint.getOrderId());
+		System.out.println("Date Ordered: " + toPrint.getDate().getDayOfMonth() +"/" + toPrint.getDate().getMonthValue() + "/" + toPrint.getDate().getYear());
+		System.out.println("Time Ordered: " + toPrint.getTime().getHour() +":" + toPrint.getTime().getMinute());
+		System.out.println("Prepared by: " + toPrint.getStaff().getName());
+		System.out.println("Ordered Items: ");
+		for(menuItems item : toPrint.getOrderItems())
+		{
+			System.out.println("	(" + i + ") " + item.getName() + item.getPrice());
+            total = total + item.getPrice();
+			i++;
+		}
+        System.out.println("Subtotal: $ " + total);
+        if(discount!=1)
+        {
+            System.out.println("Applicable Discount: " + (1-discount)*100 + "%");
+            System.out.println("Discount: - $" + (total*(1-discount)));
+            total=total*discount;
+        }
+
+        System.out.println("Applicable GST: 7%");
+        System.out.println("Total after GST: + $" + (total*0.07));
+        total = total+(total*0.07);
+        System.out.println("TOTAL: " + total);
+    }
+
+    public static double discount(long memberId)
+    {
+        int check = manageMember.getMemberListIndexById(memberId);
+        if(check == -1)
+        {
+            System.out.println("Invalid member Id");
+        }
+        else
+        {
+            member.tier tier = manageMember.getMemberList().get(check).getTier();
+            switch(tier)
+            {
+                case Gold:
+                    return 0.85;
+                case Silver:
+                    return 0.9;
+                case Bronze:
+                    return 0.95;
+            }
+            
+        }
+        return 1;
     }
 }
