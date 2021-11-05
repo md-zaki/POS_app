@@ -92,6 +92,7 @@ public class manageMember {
         {
             System.out.println("Select your operations");
             System.out.println("(1) View all members");
+            System.out.println("(2) View member by ID");
             System.out.println("(2) Add new member");
             System.out.println("(3) Update member info");
             System.out.println("(4) Remove member");
@@ -105,10 +106,13 @@ public class manageMember {
                     viewListOfMembers();
                     break;
                 case 2:
+                    break;
+                case 3:
                     addMember();
                     break;
                 case 4:
                     removeMember();
+                    break;
             }
 
         } while (choice != 5);
