@@ -40,13 +40,13 @@ public class manageReservation {
         } while (choice != 6);
     }
 
-    private void checkTable() {
+    private static void checkTable() {
     }
 
-    private void checkRemoveReservation() {
+    private static void checkRemoveReservation() {
     }
 
-    private void createReservation() {
+    private static void createReservation() {
 
     }
 

@@ -25,7 +25,7 @@ public class mainapp implements Serializable {
 
 		}
 
-		manageReservation testReservation = new manageReservation();
+		// manageReservation testReservation = new manageReservation();
 
 		Scanner scan = new Scanner(System.in);
 		int choice;
