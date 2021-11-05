@@ -8,72 +8,60 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class mainapp implements Serializable{
-    public static void main(String[] args) throws ClassNotFoundException, IOException, Exception {
-    	mainMenu testMenu = new mainMenu();
+import javax.net.ssl.ManagerFactoryParameters;
+
+public class mainapp implements Serializable {
+	public static void main(String[] args) throws ClassNotFoundException, IOException, Exception {
+		mainMenu testMenu = new mainMenu();
 		manageStaff testStaff = new manageStaff();
-		//manageMember testMember = new manageMember();
-		try 
-		{
+		// manageMember testMember = new manageMember();
+		try {
 			testMenu = testMenu.readMenu();
 			testStaff = testStaff.readStaff();
-		}
-		catch (Exception ex)
-		{
+		} catch (Exception ex) {
 			ex.getStackTrace();
 		}
 
-		/*
-		try
-		{
-			testStaff = testStaff.readStaff();
-		}
-		catch (Exception ex)
-		{
-			ex.getStackTrace();
-		}
-		*/
-		 
-
-    	Scanner scan = new Scanner(System.in);
-    	int choice;
-    	do
-    	{
-        	System.out.println("\nPlease select your operations.");
-        	System.out.println("(1) Manage Staff");
-        	System.out.println("(2) Manage Menu");
+		Scanner scan = new Scanner(System.in);
+		int choice;
+		do {
+			System.out.println("\nPlease select your operations.");
+			System.out.println("(1) Manage Staff");
+			System.out.println("(2) Manage Menu");
 			System.out.println("(3) Manage Orders");
 			System.out.println("(4) Manage Customer Memberships");
-        	System.out.println("(6) Exit");
-            System.out.printf("Select a choice: ");
-        	choice = scan.nextInt();
-        	scan.nextLine();
-        	
-        	switch(choice)
-        	{
-        	case 1:
-        		testStaff.start();
+			System.out.println("(5) Manage Reservations");
+			System.out.println("(6) Exit");
+			System.out.printf("Select a choice: ");
+			choice = scan.nextInt();
+			scan.nextLine();
+
+			switch (choice) {
+			case 1:
+				testStaff.start();
 				testStaff.saveStaffList();
-        		break;
-        	case 2:
-        		testMenu.editMenu();
+				break;
+			case 2:
+				testMenu.editMenu();
 				testMenu.saveMenu();
-        		break;
+				break;
 			case 3:
-        		manageOrder.startOrder();
-        		break;
+				manageOrder.startOrder();
+				break;
 			case 4:
+
 				break;
 			case 5:
+				manageReservation.start();
 				break;
 			case 6:
 				break;
-        	default:
-        		System.out.println("Please enter a valid choice");
-        	}
-        	
-    	} while (choice != 6);
-    	
-    	System.out.println("Program Terminating...");
-    }
+			default:
+				System.out.println("Please enter a valid choice");
+			}
+
+		} while (choice != 6);
+
+		System.out.println("Program Terminating...");
+	}
 }
