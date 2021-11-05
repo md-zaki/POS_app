@@ -12,17 +12,27 @@ public class mainapp implements Serializable{
     public static void main(String[] args) throws ClassNotFoundException, IOException, Exception {
     	mainMenu testMenu = new mainMenu();
 		manageStaff testStaff = new manageStaff();
-		try {
+		//manageMember testMember = new manageMember();
+		try 
+		{
 			testMenu = testMenu.readMenu();
-		  } catch (Exception ex) {
-			  ex.getStackTrace();
-		  }
-	  
-		  try {
 			testStaff = testStaff.readStaff();
-		  } catch (Exception ex) {
-			  ex.getStackTrace();
-		  }
+		}
+		catch (Exception ex)
+		{
+			ex.getStackTrace();
+		}
+
+		/*
+		try
+		{
+			testStaff = testStaff.readStaff();
+		}
+		catch (Exception ex)
+		{
+			ex.getStackTrace();
+		}
+		*/
 		 
 
     	Scanner scan = new Scanner(System.in);
