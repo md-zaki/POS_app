@@ -3,8 +3,7 @@ public class member extends customer{
 	{
 		Gold,
 		Silver,
-		Bronze,
-		NIL
+		Bronze
 	}
 
     private long memberId;
