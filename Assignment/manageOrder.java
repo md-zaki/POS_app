@@ -21,7 +21,8 @@ public class manageOrder {
         newOrder.addOrderItem();
         newOrder.viewOrder();
         allOrders.add(newOrder);
-
+        System.out.println("Order successfully created");
+        System.out.println();
         
     }
 
@@ -29,6 +30,8 @@ public class manageOrder {
     {
         Scanner scan = new Scanner(System.in);
         viewAllOrders();
+        if(allOrders.size()!=0)
+        {
         System.out.println("Enter order id to edit: ");
 		int pick = scan.nextInt();
 		String dummy = scan.nextLine();
@@ -53,6 +56,7 @@ public class manageOrder {
 				System.out.println("Please enter a valid option");
 			}
         }while (pick !=3);
+        }
     }
 
     public static staff addStaff() throws Exception
@@ -80,7 +84,9 @@ public class manageOrder {
     {
         if(allOrders.size()==0) 
         {
+            System.out.println();
             System.out.println("NO ORDERS AVAILABLE");
+            System.out.println();
         }
         for(order order : allOrders)
         {
@@ -93,7 +99,7 @@ public class manageOrder {
         Scanner scan = new Scanner(System.in);
 		int choice;
         do{
-        System.out.println("(1) Create new order");
+        System.out.println("\n(1) Create new order");
 		System.out.println("(2) Edit Existing order");
 		System.out.println("(3) View all orders");
 		System.out.println("(4) Print invoice");

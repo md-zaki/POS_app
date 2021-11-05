@@ -20,7 +20,7 @@ public class mainapp implements Serializable{
     	int choice;
     	do
     	{
-        	System.out.println("Please select your operations.");
+        	System.out.println("\nPlease select your operations.");
         	System.out.println("(1) Manage Staff");
         	System.out.println("(2) Manage Menu");
 			System.out.println("(3) Manage Orders");
