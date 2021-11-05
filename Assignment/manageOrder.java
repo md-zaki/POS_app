@@ -140,7 +140,8 @@ public class manageOrder {
         int index = scan.nextInt();
         order toPrint = allOrders.get(index-1);
         System.out.println("Is the customer a member? (y/n): ");
-        char ans = scan.nextLine().charAt(0);
+        char ans = scan.next().charAt(0);
+        scan.nextLine();
         if(ans == 'y')
         {
             System.out.println("Key in customer's member ID: ");

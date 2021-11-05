@@ -7,9 +7,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class manageMember {
+public class manageMember implements Serializable{
     private static ArrayList<member> memberList = new ArrayList<member>();
-    Scanner scan = new Scanner(System.in);
 
     public manageMember()
     {
@@ -32,6 +31,7 @@ public class manageMember {
 
     public void addMember() throws IOException
     {
+        Scanner scan = new Scanner(System.in);
         int i=1;
         System.out.printf("Enter customer id: ");
         long memberId = scan.nextLong();
@@ -123,6 +123,7 @@ public class manageMember {
 
     public void start() throws IOException
     {
+        Scanner scan = new Scanner(System.in);
         int choice;
         do
         {
@@ -161,11 +162,12 @@ public class manageMember {
                     break;
             }
 
-        } while (choice != 5);
+        } while (choice != 6);
     }
 
     public void removeMember() throws IOException
     {
+        Scanner scan = new Scanner(System.in);
         int i=0;
         int check = 0;
         do{
@@ -187,6 +189,7 @@ public class manageMember {
 
     public void updateMember(long memberId) throws IOException
     {
+        Scanner scan = new Scanner(System.in);
         int choice;
         int memberIndex = getMemberListIndexById(memberId);
         if (memberIndex == -1)
