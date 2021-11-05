@@ -52,19 +52,6 @@ public class manageStaff implements Serializable{
 		return staffList;
 	}
 	
-    /* getter and setter for numStaff likely not needed, use staffList.size() instead
-	public int getNumStaff()
-	{
-		//return this.numStaff;
-		return staffList.size();
-	}
-	
-	public void setNumStaff(int numStaff)
-	{
-		//this.numStaff = staffList.size();;
-	}
-	*/
-	
 	public int getStaffListIndexById(int staffId)
 	{
 		for (int i = 0 ; i <staffList.size(); i++)

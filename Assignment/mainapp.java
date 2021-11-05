@@ -11,21 +11,17 @@ import java.util.Scanner;
 public class mainapp implements Serializable{
     public static void main(String[] args) throws ClassNotFoundException, IOException, Exception {
     	mainMenu testMenu = new mainMenu();
-		//testMenu = testMenu.readMenu();
-
 		manageStaff testStaff = new manageStaff();
-		//testStaff = testStaff.readStaff();
-
 		try {
 			testMenu = testMenu.readMenu();
-		  } catch (Exception e) {
-			// testMenu.saveMenu();
+		  } catch (Exception ex) {
+			  ex.getStackTrace();
 		  }
 	  
 		  try {
 			testStaff = testStaff.readStaff();
-		  } catch (Exception e) {
-	  
+		  } catch (Exception ex) {
+			  ex.getStackTrace();
 		  }
 		 
 
@@ -37,6 +33,7 @@ public class mainapp implements Serializable{
         	System.out.println("(1) Manage Staff");
         	System.out.println("(2) Manage Menu");
 			System.out.println("(3) Manage Orders");
+			System.out.println("(4) Manage Customer Memberships");
         	System.out.println("(6) Exit");
             System.out.printf("Select a choice: ");
         	choice = scan.nextInt();
@@ -55,14 +52,18 @@ public class mainapp implements Serializable{
 			case 3:
         		manageOrder.startOrder();
         		break;
+			case 4:
+				break;
+			case 5:
+				break;
+			case 6:
+				break;
         	default:
-        			
+        		System.out.println("Please enter a valid choice");
         	}
         	
     	} while (choice != 6);
     	
     	System.out.println("Program Terminating...");
     }
-
-	
 }

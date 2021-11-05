@@ -11,17 +11,16 @@ import java.util.Scanner;
 public class mainMenu implements Serializable{
     private ArrayList<menuItems> menuList;
     //private static int numOfItems=0;
-    
 
     public mainMenu() throws IOException, ClassNotFoundException {
         //numOfItems = 0;
         menuList = new ArrayList<menuItems>();
-       
-        
     }
+
     public ArrayList<menuItems> getMenuItems() {
         return this.menuList;
     }
+
     public void setMenuItems(ArrayList<menuItems> menuItems) {
         this.menuList = menuItems;
     }
