@@ -62,30 +62,70 @@ public class manageReservation {
         System.out.print("Enter your name: ");
         name = scan.nextLine();
 
-        System.out.print("Enter your contact: ");
-        contact = scan.nextInt();
-
-        System.out.print("Enter number of customers reserving table: ");
-        noOfPax = scan.nextInt();
-
-        System.out.print("Are you a member? (Y/N): ");
-        temp = scan.nextLine();
-        if (temp == "Y" || temp == "y") {
-            member = true;
-        } else if (temp == "N" || temp == "n") {
-            member = false;
+        while (true) {
+            try {
+                System.out.print("Enter your contact: ");
+                contact = scan.nextInt();
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid contact");
+            }
         }
 
-        System.out.print("Enter Date (dd. MMM. yyyy): ");
-        temp = scan.nextLine();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
-        date = LocalDate.parse(temp, dtf);
+        while (true) {
+            try {
+                System.out.print("Enter number of customers reserving table: ");
+                noOfPax = scan.nextInt();
+                scan.nextLine();
+                break;
+            } catch (Exception e) {
+                System.out.println("invalid input");
+            }
+        }
 
-        System.out.print("Enter Time(HH. mm): ");
-        temp = scan.nextLine();
-        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("HH.mm");
-        time = LocalTime.parse(temp, dtf1);
+        while (true) {
+            System.out.print("Are you a member? (Y/N): ");
+            temp = scan.nextLine();
+            if (temp.equals("Y") || temp.equals("y")) {
+                member = true;
+                break;
+            } else if (temp.equals("N") || temp.equals("n")) {
+                member = false;
+                break;
+            } else {
+                System.out.println("Please select only (Y/N)");
+            }
+        }
 
+        // System.out.print("Enter Date (dd.MMM.yyyy e.g 12.Dec.2021): ");
+        // temp = scan.nextLine();
+
+        while (true) {
+            try {
+                System.out.print("Enter Date (dd.MMM.yyyy e.g 12.Dec.2021): ");
+                temp = scan.nextLine();
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
+                date = LocalDate.parse(temp, dtf);
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid date!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.print("Enter Time(HH. mm): ");
+                temp = scan.nextLine();
+                DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("HH.mm");
+                time = LocalTime.parse(temp, dtf1);
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid date!");
+            }
+        }
+
+        // Customer c = new Customer(long memberId, String name, long contact, tier
+        // memberTier);
         System.out.println(date);
         System.out.print(time);
     }
