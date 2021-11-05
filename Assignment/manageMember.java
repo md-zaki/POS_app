@@ -19,23 +19,26 @@ public class manageMember {
     public void addMember()
     {
         int i=1;
-        System.out.println("Enter customer id: ");
+        System.out.printf("Enter customer id: ");
         long memberId = scan.nextLong();
         scan.nextLine();
-        System.out.println("Enter name of customer: ");
+        System.out.printf("Enter name of customer: ");
         String name = scan.nextLine();
-        System.out.println("Enter contact number: ");
+        System.out.printf("Enter contact number: ");
         long contact = scan.nextLong();
-        System.out.println("Enter type of menu item:");
+        System.out.println("Enter membership tier");
         for(customer.tier tier : customer.tier.values())
         {
             System.out.println(i + ": " + tier);
             i++;
         }
-        int tiernum = scan.nextInt();
-<<<<<<< Updated upstream
+        int tiernum =0;
         customer.tier tier = null;
-        do{
+        do
+        {
+        System.out.printf("Select a tier: ");
+        tiernum = scan.nextInt();
+        scan.nextLine();
         switch (tiernum) 
 			{
 			    case 1: 
@@ -47,15 +50,13 @@ public class manageMember {
 			    case 3:
                     tier = customer.tier.Bronze;
 				    break;
-                case 4:
 			    default:
 				System.out.println("Please enter a valid option");
 			}
-        }while (tiernum !=4);
+        }while (tiernum !=1 && tiernum != 2 && tiernum != 3);
         customer newMember = new customer(memberId, name, contact, tier);
         memberList.add(newMember);
         
-=======
     }
 
     public void viewListOfMembers()
@@ -70,6 +71,44 @@ public class manageMember {
             System.out.println();
         }
         System.out.println("=============== END OF LIST ===============\n");
->>>>>>> Stashed changes
+    }
+
+    public long getMemberListIndexById(long memberId)
+    {
+        for(int i=0 ; i<memberList.size(); i++)
+        {
+            if (memberList.get(i).getMemberId() == memberId)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void start()
+    {
+        int choice;
+        do
+        {
+            System.out.println("Select your operations");
+            System.out.println("(1) View all members");
+            System.out.println("(2) Add new member");
+            System.out.println("(3) Update member info");
+            System.out.println("(4) Remove member");
+            System.out.println("(5) Exit");
+            System.out.printf("Select a choice: ");
+            choice = scan.nextInt();
+            scan.nextLine();
+            switch (choice)
+            {
+                case 1:
+                    viewListOfMembers();
+                    break;
+                case 2:
+                    addMember();
+                    break;
+            }
+
+        } while (choice != 5);
     }
 }
