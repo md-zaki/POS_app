@@ -107,8 +107,35 @@ public class manageMember {
                 case 2:
                     addMember();
                     break;
+                case 4:
+                    removeMember();
             }
 
         } while (choice != 5);
+    }
+
+    public void removeMember()
+    {
+        int i=0;
+        long check = 0;
+        do{
+        System.out.println("Enter member ID to be deleted: ");
+        long id = scan.nextLong();
+        check = getMemberListIndexById(id);
+        if(check==-1)
+        {
+            System.out.println("Invalid member id");
+        }
+        else
+        {
+            memberList.remove((int)check);
+            i=1;
+        }
+        }while(i!=1);
+    }
+
+    public void updateMember()
+    {
+
     }
 }
