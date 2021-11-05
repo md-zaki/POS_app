@@ -13,6 +13,7 @@ public class manageStaff implements Serializable{
 
 	public manageStaff() throws IOException, ClassNotFoundException
 	{
+		/*
         try
         {
         FileInputStream fileInputStream = new FileInputStream("testStaffSave.txt");
@@ -23,6 +24,7 @@ public class manageStaff implements Serializable{
         catch (Exception ex){
         	ex.getStackTrace();
         }
+		*/
 	}
 	
 	public ArrayList<staff> getStaffList()
