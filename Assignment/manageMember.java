@@ -16,11 +16,6 @@ public class manageMember {
         memberList = new ArrayList<member>();
     }
 
-    public static ArrayList<member> getMemberList()
-    {
-        return memberList;
-    }
-
     public void addMember()
     {
         int i=1;
@@ -84,7 +79,7 @@ public class manageMember {
         System.out.println();
     }
 
-    public static int getMemberListIndexById(long memberId)
+    public int getMemberListIndexById(long memberId)
     {
         for(int i=0 ; i<memberList.size(); i++)
         {
