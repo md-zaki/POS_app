@@ -17,8 +17,12 @@ public class mainapp implements Serializable {
 		manageOrder testOrder = new manageOrder();
 		manageMember testMember = new manageMember();
 		manageReservation manageReserv = new manageReservation();
+		manageTable testTable = new manageTable();
 		try {
+			testMember = manageMember.readMemberList();
+			testTable = testTable.readTables();
 			manageReserv = manageReserv.readReservation();
+			manageReserv.setTables(testTable.getTableList());// manageTable.readTables().getTableList());
 			testMenu = testMenu.readMenu();
 			testStaff = testStaff.readStaff();
 		} catch (Exception ex) {
@@ -35,7 +39,8 @@ public class mainapp implements Serializable {
 			System.out.println("(3) Manage Orders");
 			System.out.println("(4) Manage Customer Memberships");
 			System.out.println("(5) Manage Reservations");
-			System.out.println("(6) Exit");
+			System.out.println("(6) Manage Tables");
+			System.out.println("(7) Exit");
 			System.out.printf("Select a choice: ");
 			choice = scan.nextInt();
 			scan.nextLine();
@@ -59,12 +64,15 @@ public class mainapp implements Serializable {
 				manageReserv.start();
 				break;
 			case 6:
+				testTable.start();
+				break;
+			case 7:
 				break;
 			default:
 				System.out.println("Please enter a valid choice");
 			}
 
-		} while (choice != 6);
+		} while (choice != 7);
 
 		System.out.println("Program Terminating...");
 	}

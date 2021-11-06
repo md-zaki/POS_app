@@ -13,14 +13,25 @@ import java.time.format.DateTimeFormatter;
 
 public class manageReservation implements Serializable {
     private ArrayList<reservation> reservations = new ArrayList<reservation>();
-    private static ArrayList<Table> tables = new ArrayList<Table>();
+    private ArrayList<Table> tables = new ArrayList<Table>();
     private static ArrayList<member> members = new ArrayList<member>();;
 
     public ArrayList<reservation> getReservations() {
         return this.reservations;
     }
 
+    public void setTables(ArrayList<Table> tables) {
+        this.tables = tables;
+    }
+
     public void start() throws IOException, ClassNotFoundException {
+        System.out.println("================ TABLES ====================");
+        for (int i = 0; i < tables.size(); i++) {
+            System.out.println("Table Number: " + tables.get(i).getTableNo());
+            System.out.println("Table Size: " + tables.get(i).getTableSize());
+            System.out.println("Table Availability: " + tables.get(i).getIsAvailable());
+            System.out.println("--------------------------");
+        }
         Scanner scan = new Scanner(System.in);
         int choice;
         do {
@@ -200,4 +211,5 @@ public class manageReservation implements Serializable {
             ex.printStackTrace();
         }
     }
+
 }
