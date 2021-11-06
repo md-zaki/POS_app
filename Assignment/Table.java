@@ -4,6 +4,7 @@ public class Table implements java.io.Serializable {
 	private boolean isAvailable;
 
 	public Table(int tableNo, int tableSize) {
+		this.tableNo = tableNo;
 		this.tableSize = tableSize;
 		isAvailable = true;
 	}
@@ -25,7 +26,7 @@ public class Table implements java.io.Serializable {
 	}
 
 	public int getTableNo() {
-		return this.tableSize;
+		return this.tableNo;
 	}
 
 	public void setTableNo(int tableNo) {
