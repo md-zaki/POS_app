@@ -16,7 +16,9 @@ public class mainapp implements Serializable {
 		manageStaff testStaff = new manageStaff();
 		manageOrder testOrder = new manageOrder();
 		manageMember testMember = new manageMember();
+		manageReservation manageReserv = new manageReservation();
 		try {
+			manageReserv = manageReserv.readReservation();
 			testMenu = testMenu.readMenu();
 			testStaff = testStaff.readStaff();
 		} catch (Exception ex) {
@@ -53,7 +55,7 @@ public class mainapp implements Serializable {
 				testMember.start();
 				break;
 			case 5:
-				manageReservation.start();
+				manageReserv.start();
 				break;
 			case 6:
 				break;

@@ -1,9 +1,9 @@
-public class Table {
+public class Table implements java.io.Serializable {
 	private int tableNo;
 	private int tableSize;
 	private boolean isAvailable;
 
-	public Table(int tableNo,int tableSize) {
+	public Table(int tableNo, int tableSize) {
 		this.tableSize = tableSize;
 		isAvailable = true;
 	}

@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class reservation {
+public class reservation implements java.io.Serializable {
 
 	Table table;
 	customer cust;
@@ -19,19 +19,19 @@ public class reservation {
 		// throw new UnsupportedOperationException();
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return this.date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
-	public String getTime() {
+	public LocalTime getTime() {
 		return this.time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 
@@ -41,6 +41,10 @@ public class reservation {
 
 	public void setNumOfpax(int numOfpax) {
 		this.numOfpax = numOfpax;
+	}
+
+	public customer getCust() {
+		return cust;
 	}
 
 	public void removeReservation(int reservation) {

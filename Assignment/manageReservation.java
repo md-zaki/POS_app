@@ -11,11 +11,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class manageReservation {
-    private static ArrayList<reservation> reservations = new ArrayList<reservation>();
+public class manageReservation implements Serializable {
+    private ArrayList<reservation> reservations = new ArrayList<reservation>();
     private static ArrayList<Table> tables = new ArrayList<Table>();
+    private static ArrayList<member> members = new ArrayList<member>();;
 
-    public static void start() throws IOException, ClassNotFoundException {
+    public ArrayList<reservation> getReservations() {
+        return this.reservations;
+    }
+
+    public void start() throws IOException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         int choice;
         do {
@@ -52,7 +57,7 @@ public class manageReservation {
     private void checkRemoveReservation() {
     }
 
-    private static void createReservation() {
+    private void createReservation() {
         tables.add(new Table(1, 2));
         tables.add(new Table(2, 2));
         tables.add(new Table(3, 4));
@@ -138,10 +143,11 @@ public class manageReservation {
 
         }
         customer c = new customer(name, contact);
+        // customer c = new member(name, contact, 23, 1);
         Table t = null;
         if (noOfPax % 2 == 0) {
             for (int i = 0; i < tables.size(); i++) {
-                if (tables.get(i).getTableSize() == noOfPax) {
+                if (tables.get(i).getTableSize() >= noOfPax) {
                     t = tables.get(i);
                     tables.get(i).setIsAvailable(false);
                     break;
@@ -149,7 +155,7 @@ public class manageReservation {
             }
         } else {
             for (int i = 0; i < tables.size(); i++) {
-                if (tables.get(i).getTableSize() == noOfPax + 1) {
+                if (tables.get(i).getTableSize() >= noOfPax + 1) {
                     t = tables.get(i);
                     tables.get(i).setIsAvailable(false);
                     break;
@@ -160,6 +166,7 @@ public class manageReservation {
             System.out.println("No available tables");
         } else {
             reservations.add(new reservation(date, time, c, t, noOfPax));
+            saveReservation();
         }
         System.out.println(date);
         System.out.println(time);
@@ -169,6 +176,28 @@ public class manageReservation {
             System.out.println(
                     "" + tables.get(i).getTableNo() + tables.get(i).getTableSize() + tables.get(i).getIsAvailable());
         }
+
     }
 
+    public manageReservation readReservation() throws ClassNotFoundException, IOException {
+
+        FileInputStream fileInputStream = new FileInputStream("reservations.txt");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        manageReservation reservations = (manageReservation) objectInputStream.readObject();
+        objectInputStream.close();
+        return reservations;
+
+    }
+
+    public void saveReservation() {
+        try {
+            FileOutputStream fos = new FileOutputStream("reservations.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this);
+            oos.flush();
+            oos.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }
