@@ -136,7 +136,8 @@ public class manageStaff implements Serializable{
 		
 		if (staffList.size() == 0)
 		{
-			System.out.println("Staff List is empty");
+			System.out.println("Staff does not exist.");
+			System.out.println("\n===============END OF DATA===============");
 		}
 		else
 		{
