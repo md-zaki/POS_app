@@ -13,6 +13,7 @@ public class manageStaff implements Serializable{
 
 	public manageStaff() throws IOException, ClassNotFoundException
 	{
+		/*
         try
         {
         FileInputStream fileInputStream = new FileInputStream("testStaffSave.txt");
@@ -23,6 +24,7 @@ public class manageStaff implements Serializable{
         catch (Exception ex){
         	ex.getStackTrace();
         }
+		*/
 	}
 	
 	public ArrayList<staff> getStaffList()
@@ -51,19 +53,6 @@ public class manageStaff implements Serializable{
         objectInputStream.close();
 		return staffList;
 	}
-	
-    /* getter and setter for numStaff likely not needed, use staffList.size() instead
-	public int getNumStaff()
-	{
-		//return this.numStaff;
-		return staffList.size();
-	}
-	
-	public void setNumStaff(int numStaff)
-	{
-		//this.numStaff = staffList.size();;
-	}
-	*/
 	
 	public int getStaffListIndexById(int staffId)
 	{

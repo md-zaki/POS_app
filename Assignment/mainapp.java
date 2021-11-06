@@ -8,25 +8,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.net.ssl.ManagerFactoryParameters;
+
 public class mainapp implements Serializable {
 	public static void main(String[] args) throws ClassNotFoundException, IOException, Exception {
-
 		mainMenu testMenu = new mainMenu();
+		manageStaff testStaff = new manageStaff();
+		manageOrder testOrder = new manageOrder();
+		manageMember testMember = new manageMember();
 		try {
 			testMenu = testMenu.readMenu();
-		} catch (Exception e) {
-			// testMenu.saveMenu();
-		}
-
-		manageStaff testStaff = new manageStaff();
-		try {
 			testStaff = testStaff.readStaff();
-		} catch (Exception e) {
-
+		} catch (Exception ex) {
+			ex.getStackTrace();
 		}
 
 		// manageReservation testReservation = new manageReservation();
-
 		Scanner scan = new Scanner(System.in);
 		int choice;
 		do {
@@ -34,7 +31,8 @@ public class mainapp implements Serializable {
 			System.out.println("(1) Manage Staff");
 			System.out.println("(2) Manage Menu");
 			System.out.println("(3) Manage Orders");
-			System.out.println("(4) Manage Reservation");
+			System.out.println("(4) Manage Customer Memberships");
+			System.out.println("(5) Manage Reservations");
 			System.out.println("(6) Exit");
 			System.out.printf("Select a choice: ");
 			choice = scan.nextInt();
@@ -50,18 +48,22 @@ public class mainapp implements Serializable {
 				testMenu.saveMenu();
 				break;
 			case 3:
-				manageOrder.startOrder();
+				testOrder.startOrder();
 				break;
 			case 4:
+				testMember.start();
+				break;
+			case 5:
 				manageReservation.start();
 				break;
+			case 6:
+				break;
 			default:
-
+				System.out.println("Please enter a valid choice");
 			}
 
 		} while (choice != 6);
 
 		System.out.println("Program Terminating...");
 	}
-
 }
