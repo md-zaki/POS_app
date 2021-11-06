@@ -17,10 +17,21 @@ public class mainapp implements Serializable {
 		manageOrder testOrder = new manageOrder();
 		manageMember testMember = new manageMember();
 		manageReservation manageReserv = new manageReservation();
+		testStaff = testStaff.readStaff();
 		try {
-			manageReserv = manageReserv.readReservation();
 			testMenu = testMenu.readMenu();
-			testStaff = testStaff.readStaff();
+		} catch (Exception ex) {
+			ex.getStackTrace();
+		}
+
+		try {
+			testStaff.readStaff();
+		} catch (Exception ex) {
+			ex.getStackTrace();
+		}
+
+		try {
+			manageReserv.readReservation();
 		} catch (Exception ex) {
 			ex.getStackTrace();
 		}
