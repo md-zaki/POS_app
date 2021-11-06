@@ -23,19 +23,24 @@ public class mainapp implements Serializable {
 			testTable = testTable.readTables();
 			manageReserv = manageReserv.readReservation();
 			manageReserv.setTables(testTable.getTableList());// manageTable.readTables().getTableList());
+		} catch (Exception ex) {
+			ex.getStackTrace();
+		}
+
+		try {
+			testStaff = testStaff.readStaff();
+		} catch (Exception ex) {
+			ex.getStackTrace();
+		}
+
+		try {
 			testMenu = testMenu.readMenu();
 		} catch (Exception ex) {
 			ex.getStackTrace();
 		}
 
 		try {
-			testStaff.readStaff();
-		} catch (Exception ex) {
-			ex.getStackTrace();
-		}
-
-		try {
-			manageReserv.readReservation();
+			manageReserv = manageReserv.readReservation();
 		} catch (Exception ex) {
 			ex.getStackTrace();
 		}
