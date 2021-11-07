@@ -46,6 +46,12 @@ public class manageOrder implements Serializable{
             int pick = scan.nextInt();
             String dummy = scan.nextLine();
             order toEdit = allOrders.get(pick - 1);
+            if(toEdit.getIsPaid()==true)
+            {
+                System.out.println("Unable to edit order. Order has already been fulfilled and paid for. ");
+            }
+            else
+            {
             do {
                 System.out.println("(1) Add items into order");
                 System.out.println("(2) Remove items into order");
@@ -65,6 +71,7 @@ public class manageOrder implements Serializable{
                     System.out.println("Please enter a valid option");
                 }
             } while (pick != 3);
+            }
         }
         try {
             saveOrders();
