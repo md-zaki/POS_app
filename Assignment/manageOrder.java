@@ -185,7 +185,7 @@ public class manageOrder implements Serializable{
         } while (choice != 5);
     }
 
-    public void printInvoice() {
+    public void printInvoice() throws Exception{
         int i = 1;
         double total = 0;
         double discount = 1;
@@ -250,7 +250,9 @@ public class manageOrder implements Serializable{
         
     }
 
-    public static double discount(long memberId) {
+    public static double discount(long memberId) throws Exception{
+        manageMember manageMember = new manageMember();
+        manageMember = manageMember.readMemberList();
         int check = manageMember.getMemberListIndexById(memberId);
         if (check == -1) {
             System.out.println("Invalid member Id");
