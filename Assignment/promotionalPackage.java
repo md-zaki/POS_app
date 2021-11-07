@@ -50,6 +50,7 @@ public class promotionalPackage extends menuItems implements Serializable{
 				if(item.getType()!= menuItems.menuItemType.set)
 				{
 					System.out.println(i + ": " + item.getName());
+					
 				}
 				i++;
 			}

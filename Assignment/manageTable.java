@@ -94,6 +94,16 @@ public class manageTable implements Serializable {
         }
     }
 
+    public void tableReserved(Table table)
+    {
+        table.setIsAvailable(false);
+    }
+
+    public void freeTable(Table table)
+    {
+        table.setIsAvailable(true);
+    }
+
     public void saveTables() throws ClassNotFoundException, IOException {
         FileOutputStream fileOutputStream = new FileOutputStream("tableSave.txt");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
