@@ -65,7 +65,7 @@ public class mainapp implements Serializable {
 				break;
 			case 4:
 				try {
-					testMember = manageMember.readMemberList();
+					testMember = testMember.readMemberList();
 				} catch (Exception ex) {
 					ex.getStackTrace();
 				}
@@ -74,7 +74,7 @@ public class mainapp implements Serializable {
 				break;
 			case 5:
 				try {
-					testMember = manageMember.readMemberList();
+					testMember = testMember.readMemberList();
 					testTable = testTable.readTables();
 					manageReserv = manageReserv.readReservation();
 				} catch (Exception ex) {

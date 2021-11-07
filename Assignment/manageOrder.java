@@ -185,7 +185,7 @@ public class manageOrder implements Serializable{
         } while (choice != 5);
     }
 
-    public void printInvoice() {
+    public void printInvoice() throws Exception{
         int i = 1;
         double total = 0;
         double discount = 1;
@@ -202,6 +202,7 @@ public class manageOrder implements Serializable{
             long id = scan.nextLong();
             discount = discount(id);
         }
+        System.out.println("============= INVOICE ================");
         System.out.println("Order ID: " + toPrint.getOrderId());
         System.out.println("Date Ordered: " + toPrint.getDate().getDayOfMonth() + "/"
                 + toPrint.getDate().getMonthValue() + "/" + toPrint.getDate().getYear());
@@ -210,21 +211,26 @@ public class manageOrder implements Serializable{
         System.out.println("Table No: " + toPrint.getTable().getTableNo());
         System.out.println("Ordered Items: ");
         for (menuItems item : toPrint.getOrderItems()) {
-            System.out.println("	(" + i + ") " + item.getName() + item.getPrice());
+            System.out.println("(" + i + ") " + item.getName() + " $" + item.getPrice());
             total = total + item.getPrice();
             i++;
         }
+        System.out.println();
         System.out.println("Subtotal: $ " + total);
+        System.out.println();
         if (discount != 1) {
-            System.out.println("Applicable Discount: " + (1 - discount) * 100 + "%");
-            System.out.println("Discount: - $" + (total * (1 - discount)));
+            System.out.println("Applicable Discount: " + String.format("%.2f", (1 - discount) * 100)  + "%");
+            System.out.println("Discount: - $" + String.format("%.2f",(total * (1 - discount))));
             total = total * discount;
         }
-
+        System.out.println();
         System.out.println("Applicable GST: 7%");
-        System.out.println("Total after GST: + $" + (total * 0.07));
+        System.out.println("Total after GST: + $" + String.format("%.2f",(total * 0.07)));
         total = total + (total * 0.07);
-        System.out.println("TOTAL: " + total);
+        System.out.println();
+        System.out.println("TOTAL: $" + String.format("%.2f",total));
+        System.out.println();
+        System.out.println("=========== END OF INVOICE ==============");
 
         toPrint.setIsPaid(true);//paid
 
@@ -250,11 +256,20 @@ public class manageOrder implements Serializable{
         
     }
 
-    public static double discount(long memberId) {
+    public static double discount(long memberId) throws Exception{
+        manageMember manageMember = new manageMember();
+        manageMember = manageMember.readMemberList();
         int check = manageMember.getMemberListIndexById(memberId);
         if (check == -1) {
+            System.out.println("\n======================================");
             System.out.println("Invalid member Id");
+            System.out.println("======================================\n");
         } else {
+            System.out.println("\n======================================");
+            System.out.println("Member Found!");
+            System.out.println("Name: " +  manageMember.getMemberList().get(check).getName());
+            System.out.println("Membership Tier: " +  manageMember.getMemberList().get(check).getTier());
+            System.out.println("======================================\n");
             member.tier tier = manageMember.getMemberList().get(check).getTier();
             switch (tier) {
             case Gold:
@@ -264,7 +279,6 @@ public class manageOrder implements Serializable{
             case Bronze:
                 return 0.95;
             }
-
         }
         return 1;
     }

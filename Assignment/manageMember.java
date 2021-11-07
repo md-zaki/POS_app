@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class manageMember implements Serializable {
-    private static ArrayList<member> memberList = new ArrayList<member>();
+    private ArrayList<member> memberList = new ArrayList<member>();
 
     public manageMember() {
         memberList = new ArrayList<member>();
     }
 
-    public static ArrayList<member> getMemberList() {
-        return memberList;
+    public ArrayList<member> getMemberList() {
+        return this.memberList;
     }
 
     public void saveMemberList() throws IOException {
@@ -27,7 +27,7 @@ public class manageMember implements Serializable {
         objectOutputStream.close();
     }
 
-    public static manageMember readMemberList() throws ClassNotFoundException, IOException {
+    public manageMember readMemberList() throws ClassNotFoundException, IOException {
 
         FileInputStream fileInputStream = new FileInputStream("testMemberSave.txt");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -95,7 +95,7 @@ public class manageMember implements Serializable {
         System.out.println();
     }
 
-    public static int getMemberListIndexById(long memberId) {
+    public int getMemberListIndexById(long memberId) {
         for (int i = 0; i < memberList.size(); i++) {
             if (memberList.get(i).getMemberId() == memberId) {
                 return i;
