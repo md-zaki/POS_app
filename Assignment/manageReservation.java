@@ -13,31 +13,19 @@ import java.time.format.DateTimeFormatter;
 
 public class manageReservation implements Serializable {
     private ArrayList<reservation> reservations = new ArrayList<reservation>();
-    private ArrayList<Table> tables = new ArrayList<Table>();
-    private static ArrayList<member> members = new ArrayList<member>();;
 
     public ArrayList<reservation> getReservations() {
         return this.reservations;
     }
 
-    public void setTables(ArrayList<Table> tables) {
-        this.tables = tables;
-    }
-
-    public void start() throws IOException, ClassNotFoundException {
-        System.out.println("================ TABLES ====================");
-        for (int i = 0; i < tables.size(); i++) {
-            System.out.println("Table Number: " + tables.get(i).getTableNo());
-            System.out.println("Table Size: " + tables.get(i).getTableSize());
-            System.out.println("Table Availability: " + tables.get(i).getIsAvailable());
-            System.out.println("--------------------------");
-        }
+    public void start(manageTable tbManager, manageMember memberManager) throws IOException, ClassNotFoundException {
         Scanner scan = new Scanner(System.in);
         int choice;
         do {
             System.out.println("(1) Create Reservation Booking ");
-            System.out.println("(2) Check/Remove Reservation Booking ");
-            System.out.println("(3) Check Table Availability");
+            System.out.println("(2) List all Reservation Booking ");
+            System.out.println("(3) Remove Reservation Booking ");
+            System.out.println("(4) Remove expired reservations ");
             System.out.println("(6) Exit");
             System.out.printf("Select a choice: ");
             choice = scan.nextInt();
@@ -45,13 +33,16 @@ public class manageReservation implements Serializable {
 
             switch (choice) {
             case 1:
-                createReservation();
+                createReservation(tbManager, memberManager);
                 break;
             case 2:
-                // checkRemoveReservation();
+                checkReservation();
                 break;
             case 3:
-                // checkTable();
+                removeReservation();
+                break;
+            case 4:
+                removeExpired();
                 break;
             case 6:
                 break;
@@ -62,19 +53,82 @@ public class manageReservation implements Serializable {
         } while (choice != 6);
     }
 
-    private static void checkTable() {
+    private void removeExpired() {
+        System.out.println("date: " + LocalDate.now() + " time : " + LocalTime.now());
+        for (reservation r : reservations) {
+            if (r.getDate().compareTo(LocalDate.now()) < 0) {
+                reservations.remove(r);
+                break;
+            } else if (r.getDate().compareTo(LocalDate.now()) == 0
+                    && r.getTime().plusMinutes(15).compareTo(LocalTime.now()) < 0) {
+                reservations.remove(r);
+                break;
+            }
+        }
+        saveReservation();
     }
 
-    private static void checkRemoveReservation() {
+    private void removeReservation() {
+        String name;
+        String temp;
+        LocalDate date;
+        LocalTime time;
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Enter name: ");
+        name = scan.nextLine();
+
+        while (true) {
+            try {
+                System.out.print("Enter Date (dd.MMM.yyyy e.g 12.Dec.2021): ");
+                temp = scan.nextLine();
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
+                date = LocalDate.parse(temp, dtf);
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid date!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.print("Enter Time(HH.mm): ");
+                temp = scan.nextLine();
+                DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("HH.mm");
+                time = LocalTime.parse(temp, dtf1);
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid date!");
+            }
+        }
+
+        for (reservation r : reservations) {
+            if (r.getCust().getName().equals(name) && r.getDate().compareTo(date) == 0
+                    && r.getTime().compareTo(time) == 0) {
+                reservations.remove(r);
+                break;
+            }
+        }
+        saveReservation();
     }
 
-    private void createReservation() {
-        tables.add(new Table(1, 2));
-        tables.add(new Table(2, 2));
-        tables.add(new Table(3, 4));
-        tables.add(new Table(4, 4));
-        tables.add(new Table(5, 8));
-        tables.add(new Table(6, 6));
+    private void checkReservation() {
+        System.out.println("================ RESERVATIONS ====================");
+        for (reservation r : reservations) {
+            System.out.println("Customer name: " + r.getCust().getName());
+            System.out.println("Customer contact: " + r.getCust().getContact());
+            System.out.println("Table number: " + r.getTable().getTableNo());
+            System.out.println("Table size: " + r.getTable().getTableSize());
+            System.out.println("Number of pax: " + r.getNumOfpax());
+            System.out.println("Date: " + r.getDate());
+            System.out.println("Time: " + r.getTime());
+            System.out.println("--------------------------");
+        }
+    }
+
+    private void createReservation(manageTable tbManager, manageMember memberManager) {
+        for (Table table : tbManager.getTableList()) {
+            table.setIsAvailable(true);
+        }
 
         Scanner scan = new Scanner(System.in);
         String name;
@@ -123,9 +177,6 @@ public class manageReservation implements Serializable {
             }
         }
 
-        // System.out.print("Enter Date (dd.MMM.yyyy e.g 12.Dec.2021): ");
-        // temp = scan.nextLine();
-
         while (true) {
             try {
                 System.out.print("Enter Date (dd.MMM.yyyy e.g 12.Dec.2021): ");
@@ -140,7 +191,7 @@ public class manageReservation implements Serializable {
 
         while (true) {
             try {
-                System.out.print("Enter Time(HH. mm): ");
+                System.out.print("Enter Time(HH.mm): ");
                 temp = scan.nextLine();
                 DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("HH.mm");
                 time = LocalTime.parse(temp, dtf1);
@@ -150,44 +201,59 @@ public class manageReservation implements Serializable {
             }
         }
 
+        customer c = null;
         if (member == true) {
-
-        }
-        customer c = new customer(name, contact);
-        // customer c = new member(name, contact, 23, 1);
-        Table t = null;
-        if (noOfPax % 2 == 0) {
-            for (int i = 0; i < tables.size(); i++) {
-                if (tables.get(i).getTableSize() >= noOfPax) {
-                    t = tables.get(i);
-                    tables.get(i).setIsAvailable(false);
+            for (member m : manageMember.getMemberList()) {
+                // System.out.println("" + m.getMemberId() + m.getName() + m.getContact() +
+                // m.getTier());
+                if (m.getName().equals(name) && m.getContact() == contact) {
+                    c = m;
                     break;
                 }
             }
         } else {
-            for (int i = 0; i < tables.size(); i++) {
-                if (tables.get(i).getTableSize() >= noOfPax + 1) {
-                    t = tables.get(i);
-                    tables.get(i).setIsAvailable(false);
+            c = new customer(name, contact);
+        }
+
+        Table t = null;
+        if (noOfPax % 2 == 0) {
+            for (Table table : tbManager.getTableList()) {
+                if (table.getTableSize() >= noOfPax && table.getIsAvailable() == true) {
+                    t = table;
+                    table.setIsAvailable(false);
+                    break;
+                }
+            }
+        } else {
+            for (Table table : tbManager.getTableList()) {
+                if (table.getTableSize() >= noOfPax + 1 && table.getIsAvailable() == true) {
+                    t = table;
+                    table.setIsAvailable(false);
                     break;
                 }
             }
         }
-        if (Objects.isNull(t)) {
-            System.out.println("No available tables");
+
+        if (Objects.isNull(t) || Objects.isNull(c)) {
+            System.out.println("Error, Reservation not added!");
         } else {
             reservations.add(new reservation(date, time, c, t, noOfPax));
             saveReservation();
+            try {
+                tbManager.saveTables();
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
         }
-        System.out.println(date);
-        System.out.println(time);
+        // System.out.println(date);
+        // System.out.println(time);
 
-        System.out.println("table assigned is " + t.getTableNo() + " " + t.getTableSize() + " " + t.getIsAvailable());
-        for (int i = 0; i < tables.size(); i++) {
-            System.out.println(
-                    "" + tables.get(i).getTableNo() + tables.get(i).getTableSize() + tables.get(i).getIsAvailable());
-        }
-
+        /*
+         * System.out.println("table assigned is " + t.getTableNo() + " " +
+         * t.getTableSize() + " " + t.getIsAvailable()); for (Table table :
+         * tbManager.getTableList()) { System.out.println("" + table.getTableNo() +
+         * table.getTableSize() + table.getIsAvailable()); }
+         */
     }
 
     public manageReservation readReservation() throws ClassNotFoundException, IOException {

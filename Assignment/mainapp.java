@@ -36,8 +36,8 @@ public class mainapp implements Serializable {
 			scan.nextLine();
 			switch (choice) {
 			case 1:
-			try {
-				testStaff = testStaff.readStaff();
+				try {
+					testStaff = testStaff.readStaff();
 				} catch (Exception ex) {
 					ex.getStackTrace();
 				}
@@ -46,47 +46,47 @@ public class mainapp implements Serializable {
 				break;
 			case 2:
 				try {
-				testMenu = testMenu.readMenu();
+					testMenu = testMenu.readMenu();
 				} catch (Exception ex) {
-				ex.getStackTrace();
+					ex.getStackTrace();
 				}
 				testMenu.editMenu();
 				testMenu.saveMenu();
 				break;
 			case 3:
-				
+
 				try {
-				testOrder = testOrder.readOrders();
+					testOrder = testOrder.readOrders();
 				} catch (Exception ex) {
-				ex.getStackTrace();
+					ex.getStackTrace();
 				}
 				testOrder.startOrder();
 				testOrder.saveOrders();
 				break;
 			case 4:
 				try {
-				testMember = manageMember.readMemberList();
+					testMember = manageMember.readMemberList();
 				} catch (Exception ex) {
-				ex.getStackTrace();
+					ex.getStackTrace();
 				}
 
 				testMember.start();
 				break;
 			case 5:
 				try {
-				manageReserv = manageReserv.readReservation();
-				manageReserv.setTables(testTable.getTableList());// manageTable.readTables().getTableList());
+					testMember = manageMember.readMemberList();
+					testTable = testTable.readTables();
+					manageReserv = manageReserv.readReservation();
 				} catch (Exception ex) {
-				ex.getStackTrace();
+					ex.getStackTrace();
 				}
-
-				manageReserv.start();
+				manageReserv.start(testTable, testMember);
 				break;
 			case 6:
-			try {
-				testTable = testTable.readTables();
+				try {
+					testTable = testTable.readTables();
 				} catch (Exception ex) {
-				ex.getStackTrace();
+					ex.getStackTrace();
 				}
 				testTable.start();
 				break;

@@ -47,9 +47,13 @@ public class reservation implements java.io.Serializable {
 		return cust;
 	}
 
-	public void removeReservation(int reservation) {
-		// TODO - implement reservation.removeReservation
-		throw new UnsupportedOperationException();
+	public Table getTable() {
+		return table;
 	}
+
+	// public void removeReservation(int reservation) {
+	// // TODO - implement reservation.removeReservation
+	// throw new UnsupportedOperationException();
+	// }
 
 }
