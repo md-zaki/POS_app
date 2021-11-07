@@ -95,6 +95,13 @@ public class manageOrder implements Serializable{
         int pick = scan.nextInt();
         String dummy = scan.nextLine();
         Table toChoose = (Table) tabledb.getTableList().get(pick-1);
+        while(toChoose.getIsAvailable()==false)
+        {
+            System.out.println("Table unavailable, choose another table: ");
+            pick = scan.nextInt();
+            dummy = scan.nextLine();
+            toChoose = (Table) tabledb.getTableList().get(pick-1);
+        }
 
         toChoose.setIsAvailable(false);//set table to be unavailable
         try {
@@ -113,6 +120,7 @@ public class manageOrder implements Serializable{
             System.out.println();
         }
         for (order order : allOrders) {
+            System.out.println("==== ALL ORDERS ====");
             order.viewOrder();
         }
     }
@@ -192,7 +200,27 @@ public class manageOrder implements Serializable{
         System.out.println("TOTAL: " + total);
 
         toPrint.setIsPaid(true);//paid
-        toPrint.getTable().setIsAvailable(true);//set table to available
+
+        manageTable tabledb = new manageTable();
+        try {
+			tabledb = tabledb.readTables();
+		} catch (Exception ex) {
+			ex.getStackTrace();
+		}
+        for(Table table : tabledb.getTableList())
+        {
+            if (table.getTableNo() == toPrint.getTable().getTableNo())
+            {
+                table.setIsAvailable(true);
+            }
+        }
+
+        try {
+			tabledb.saveTables();
+		} catch (Exception ex) {
+			ex.getStackTrace();
+		}
+        
     }
 
     public static double discount(long memberId) {

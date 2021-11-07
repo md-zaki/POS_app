@@ -77,9 +77,9 @@ public class order {
 		this.table = table;
 	}
 
-	public Table getIsPaid()
+	public boolean getIsPaid()
 	{
-		return this.table;
+		return this.isPaid;
 	}
 
 	public void setIsPaid(boolean isPaid)
@@ -140,9 +140,11 @@ public class order {
 		int i=1;
 		System.out.println();
 		System.out.println("Order ID: " + this.getOrderId());
+		System.out.println("Table No: " + this.getTable().getTableNo());
 		System.out.println("Date Ordered: " + this.getDate().getDayOfMonth() +"/" + this.getDate().getMonthValue() + "/" + this.getDate().getYear());
 		System.out.println("Time Ordered: " + this.getTime().getHour() +":" + this.getTime().getMinute());
 		System.out.println("Prepared by: " + this.getStaff().getName());
+		System.out.println("Paid? : " + this.getIsPaid());
 		System.out.println("Ordered Items: ");
 		for(menuItems item : this.orderItems)
 		{
