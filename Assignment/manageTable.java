@@ -47,15 +47,13 @@ public class manageTable implements Serializable {
     public void addTable() {
 
         Scanner scan = new Scanner(System.in);
-        // int tableNo = tableList.size() + 1;
-        System.out.println("Key in table no: ");
-        int tableNo = scan.nextInt();
-        scan.nextLine();
+        int tableNo = tableList.size() + 1;
         System.out.println("Key in table size: ");
         int tableSize = scan.nextInt();
         scan.nextLine();
         System.out.println("Table " + tableNo + " of size " + tableSize + " created");
         Table table = new Table(tableNo, tableSize);
+        //System.out.println("Table " + table.getTableNo() + " of size " + table.getTableSize() + " created");
         tableList.add(table);
         try {
             saveTables();

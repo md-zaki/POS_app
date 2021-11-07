@@ -18,11 +18,22 @@ public class mainapp implements Serializable {
 		manageMember testMember = new manageMember();
 		manageReservation manageReserv = new manageReservation();
 		manageTable testTable = new manageTable();
+
 		try {
-			testMember = manageMember.readMemberList();
 			testTable = testTable.readTables();
+		} catch (Exception ex) {
+			ex.getStackTrace();
+		}
+
+		try {
 			manageReserv = manageReserv.readReservation();
 			manageReserv.setTables(testTable.getTableList());// manageTable.readTables().getTableList());
+		} catch (Exception ex) {
+			ex.getStackTrace();
+		}
+
+		try {
+			testMember = manageMember.readMemberList();
 		} catch (Exception ex) {
 			ex.getStackTrace();
 		}
