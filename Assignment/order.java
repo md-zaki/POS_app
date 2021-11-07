@@ -19,15 +19,17 @@ public class order {
 	private LocalTime time;
 	private staff prepBy;
 	private Table table;
+	private boolean isPaid;
 
 
-	public order(int orderId, LocalDate date, LocalTime time,staff prepBy) {
+	public order(int orderId, LocalDate date, LocalTime time,staff prepBy, Table table) {
 		this.orderId = orderId;
 		this.date = date;
 		this.time = time;
 		this.prepBy = prepBy;
 		orderItems = new ArrayList<menuItems>();
-		this.table = null;
+		this.table = table;
+		this.isPaid = false;
 	}
 	public int getOrderId() {
 		return this.orderId;
@@ -73,6 +75,16 @@ public class order {
 	public void setTable(Table table)
 	{
 		this.table = table;
+	}
+
+	public Table getIsPaid()
+	{
+		return this.table;
+	}
+
+	public void setIsPaid(boolean isPaid)
+	{
+		this.isPaid = isPaid;
 	}
 
 	public void addOrderItem() throws Exception {

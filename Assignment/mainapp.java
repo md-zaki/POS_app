@@ -19,43 +19,6 @@ public class mainapp implements Serializable {
 		manageReservation manageReserv = new manageReservation();
 		manageTable testTable = new manageTable();
 
-		try {
-			testTable = testTable.readTables();
-		} catch (Exception ex) {
-			ex.getStackTrace();
-		}
-
-		try {
-			manageReserv = manageReserv.readReservation();
-			manageReserv.setTables(testTable.getTableList());// manageTable.readTables().getTableList());
-		} catch (Exception ex) {
-			ex.getStackTrace();
-		}
-
-		try {
-			testMember = manageMember.readMemberList();
-		} catch (Exception ex) {
-			ex.getStackTrace();
-		}
-
-		try {
-			testStaff = testStaff.readStaff();
-		} catch (Exception ex) {
-			ex.getStackTrace();
-		}
-
-		try {
-			testMenu = testMenu.readMenu();
-		} catch (Exception ex) {
-			ex.getStackTrace();
-		}
-
-		try {
-			manageReserv = manageReserv.readReservation();
-		} catch (Exception ex) {
-			ex.getStackTrace();
-		}
-
 		// manageReservation testReservation = new manageReservation();
 		Scanner scan = new Scanner(System.in);
 		int choice;
@@ -74,10 +37,20 @@ public class mainapp implements Serializable {
 
 			switch (choice) {
 			case 1:
+			try {
+				testStaff = testStaff.readStaff();
+				} catch (Exception ex) {
+					ex.getStackTrace();
+				}
 				testStaff.start();
 				testStaff.saveStaffList();
 				break;
 			case 2:
+				try {
+				testMenu = testMenu.readMenu();
+				} catch (Exception ex) {
+				ex.getStackTrace();
+				}
 				testMenu.editMenu();
 				testMenu.saveMenu();
 				break;
@@ -85,12 +58,30 @@ public class mainapp implements Serializable {
 				testOrder.startOrder();
 				break;
 			case 4:
+				try {
+				testMember = manageMember.readMemberList();
+				} catch (Exception ex) {
+				ex.getStackTrace();
+				}
+
 				testMember.start();
 				break;
 			case 5:
+				try {
+				manageReserv = manageReserv.readReservation();
+				manageReserv.setTables(testTable.getTableList());// manageTable.readTables().getTableList());
+				} catch (Exception ex) {
+				ex.getStackTrace();
+				}
+				
 				manageReserv.start();
 				break;
 			case 6:
+			try {
+				testTable = testTable.readTables();
+				} catch (Exception ex) {
+				ex.getStackTrace();
+				}
 				testTable.start();
 				break;
 			case 7:

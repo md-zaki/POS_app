@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class manageOrder {
+public class manageOrder implements Serializable{
     private static ArrayList<order> allOrders = new ArrayList<order>();
 
     public manageOrder() {
@@ -16,13 +17,13 @@ public class manageOrder {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
         staff prepby = addStaff();
-        order newOrder = new order(ordId, date, time, prepby);
+        Table table = chooseTable();
+        order newOrder = new order(ordId, date, time, prepby,table);
         newOrder.addOrderItem();
         newOrder.viewOrder();
         allOrders.add(newOrder);
         System.out.println("Order successfully created");
         System.out.println();
-
     }
 
     public static void editOrder() throws Exception {
@@ -72,6 +73,37 @@ public class manageOrder {
         System.out.println("========");
         staff prepby = (staff) staffList.get(pick - 1);
         return prepby;
+    }
+
+    public static Table chooseTable() throws Exception
+    {
+        Scanner scan = new Scanner(System.in);
+        int i=1;
+        manageTable tabledb = new manageTable();
+        
+        try {
+			tabledb = tabledb.readTables();
+		} catch (Exception ex) {
+			ex.getStackTrace();
+		}
+        tabledb.printTable();
+        for(Table table : tabledb.getTableList())
+        {
+            System.out.println("(" + i + ") Table No: " + table.getTableNo() + ", Table Size: " + table.getTableSize());
+        }
+        System.out.println("Enter Choice: ");
+        int pick = scan.nextInt();
+        String dummy = scan.nextLine();
+        Table toChoose = (Table) tabledb.getTableList().get(pick-1);
+
+        toChoose.setIsAvailable(false);//set table to be unavailable
+        try {
+           tabledb.saveTables();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return toChoose;
     }
 
     public static void viewAllOrders() {
@@ -140,6 +172,7 @@ public class manageOrder {
                 + toPrint.getDate().getMonthValue() + "/" + toPrint.getDate().getYear());
         System.out.println("Time Ordered: " + toPrint.getTime().getHour() + ":" + toPrint.getTime().getMinute());
         System.out.println("Prepared by: " + toPrint.getStaff().getName());
+        System.out.println("Table No: " + toPrint.getTable().getTableNo());
         System.out.println("Ordered Items: ");
         for (menuItems item : toPrint.getOrderItems()) {
             System.out.println("	(" + i + ") " + item.getName() + item.getPrice());
@@ -157,6 +190,9 @@ public class manageOrder {
         System.out.println("Total after GST: + $" + (total * 0.07));
         total = total + (total * 0.07);
         System.out.println("TOTAL: " + total);
+
+        toPrint.setIsPaid(true);//paid
+        toPrint.getTable().setIsAvailable(true);//set table to available
     }
 
     public static double discount(long memberId) {
