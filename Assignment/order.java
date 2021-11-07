@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class order {
+public class order implements Serializable{
 
 	private ArrayList<menuItems> orderItems;
 	private int orderId;

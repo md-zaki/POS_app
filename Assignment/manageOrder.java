@@ -3,15 +3,21 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 
 public class manageOrder implements Serializable{
-    private static ArrayList<order> allOrders = new ArrayList<order>();
+    private ArrayList<order> allOrders = new ArrayList<order>();
 
     public manageOrder() {
-        allOrders = new ArrayList<order>();
+        //allOrders = new ArrayList<order>();
     }
 
-    public static void createNewOrder() throws Exception {
+    public void createNewOrder() throws Exception {
         Scanner scan = new Scanner(System.in);
         int ordId = allOrders.size() + 1;
         LocalDate date = LocalDate.now();
@@ -22,11 +28,17 @@ public class manageOrder implements Serializable{
         newOrder.addOrderItem();
         newOrder.viewOrder();
         allOrders.add(newOrder);
+        try {
+            saveOrders();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         System.out.println("Order successfully created");
         System.out.println();
     }
 
-    public static void editOrder() throws Exception {
+    public void editOrder() throws Exception {
         Scanner scan = new Scanner(System.in);
         viewAllOrders();
         if (allOrders.size() != 0) {
@@ -53,6 +65,12 @@ public class manageOrder implements Serializable{
                     System.out.println("Please enter a valid option");
                 }
             } while (pick != 3);
+        }
+        try {
+            saveOrders();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
@@ -86,10 +104,11 @@ public class manageOrder implements Serializable{
 		} catch (Exception ex) {
 			ex.getStackTrace();
 		}
-        tabledb.printTable();
+        //tabledb.printTable();
         for(Table table : tabledb.getTableList())
         {
             System.out.println("(" + i + ") Table No: " + table.getTableNo() + ", Table Size: " + table.getTableSize());
+            i++;
         }
         System.out.println("Enter Choice: ");
         int pick = scan.nextInt();
@@ -113,16 +132,17 @@ public class manageOrder implements Serializable{
         return toChoose;
     }
 
-    public static void viewAllOrders() {
+    public void viewAllOrders() {
+        System.out.println("======= ALL ORDERS =======");
         if (allOrders.size() == 0) {
             System.out.println();
             System.out.println("NO ORDERS AVAILABLE");
             System.out.println();
         }
         for (order order : allOrders) {
-            System.out.println("==== ALL ORDERS ====");
             order.viewOrder();
         }
+        System.out.println("==========================");
     }
 
     public void startOrder() throws Exception {
@@ -158,7 +178,7 @@ public class manageOrder implements Serializable{
         } while (choice != 5);
     }
 
-    public static void printInvoice() {
+    public void printInvoice() {
         int i = 1;
         double total = 0;
         double discount = 1;
@@ -240,5 +260,21 @@ public class manageOrder implements Serializable{
 
         }
         return 1;
+    }
+
+    public void saveOrders() throws ClassNotFoundException, IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream("orderSave.txt");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(this);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+    }
+
+    public manageOrder readOrders() throws ClassNotFoundException, IOException {
+        FileInputStream fileInputStream = new FileInputStream("orderSave.txt");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        manageOrder Testorders = (manageOrder) objectInputStream.readObject();
+        objectInputStream.close();
+        return Testorders;
     }
 }

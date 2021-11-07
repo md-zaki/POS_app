@@ -34,7 +34,6 @@ public class mainapp implements Serializable {
 			System.out.printf("Select a choice: ");
 			choice = scan.nextInt();
 			scan.nextLine();
-
 			switch (choice) {
 			case 1:
 			try {
@@ -55,7 +54,14 @@ public class mainapp implements Serializable {
 				testMenu.saveMenu();
 				break;
 			case 3:
+				
+				try {
+				testOrder = testOrder.readOrders();
+				} catch (Exception ex) {
+				ex.getStackTrace();
+				}
 				testOrder.startOrder();
+				testOrder.saveOrders();
 				break;
 			case 4:
 				try {
@@ -73,7 +79,7 @@ public class mainapp implements Serializable {
 				} catch (Exception ex) {
 				ex.getStackTrace();
 				}
-				
+
 				manageReserv.start();
 				break;
 			case 6:
