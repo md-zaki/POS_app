@@ -126,9 +126,9 @@ public class manageReservation implements Serializable {
     }
 
     private void createReservation(manageTable tbManager, manageMember memberManager) {
-        for (Table table : tbManager.getTableList()) {
-            table.setIsAvailable(true);
-        }
+        // for (Table table : tbManager.getTableList()) {
+        // table.setIsAvailable(true);
+        // }
 
         Scanner scan = new Scanner(System.in);
         String name;
@@ -203,9 +203,7 @@ public class manageReservation implements Serializable {
 
         customer c = null;
         if (member == true) {
-            for (member m : manageMember.getMemberList()) {
-                // System.out.println("" + m.getMemberId() + m.getName() + m.getContact() +
-                // m.getTier());
+            for (member m : memberManager.getMemberList()) {
                 if (m.getName().equals(name) && m.getContact() == contact) {
                     c = m;
                     break;
@@ -245,15 +243,6 @@ public class manageReservation implements Serializable {
                 e.getStackTrace();
             }
         }
-        // System.out.println(date);
-        // System.out.println(time);
-
-        /*
-         * System.out.println("table assigned is " + t.getTableNo() + " " +
-         * t.getTableSize() + " " + t.getIsAvailable()); for (Table table :
-         * tbManager.getTableList()) { System.out.println("" + table.getTableNo() +
-         * table.getTableSize() + table.getIsAvailable()); }
-         */
     }
 
     public manageReservation readReservation() throws ClassNotFoundException, IOException {
