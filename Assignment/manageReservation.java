@@ -5,9 +5,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -54,15 +56,16 @@ public class manageReservation implements Serializable {
     }
 
     private void removeExpired() {
-        System.out.println("date: " + LocalDate.now() + " time : " + LocalTime.now());
-        for (reservation r : reservations) {
+        Iterator<reservation> iter = reservations.iterator();
+        while (iter.hasNext()) {
+            reservation r = iter.next();
             if (r.getDate().compareTo(LocalDate.now()) < 0) {
-                reservations.remove(r);
-                break;
+                iter.remove();
+
             } else if (r.getDate().compareTo(LocalDate.now()) == 0
                     && r.getTime().plusMinutes(15).compareTo(LocalTime.now()) < 0) {
-                reservations.remove(r);
-                break;
+                iter.remove();
+
             }
         }
         saveReservation();
@@ -213,20 +216,58 @@ public class manageReservation implements Serializable {
             c = new customer(name, contact);
         }
 
+        /*
+         * Table t = null; if (noOfPax % 2 == 0) { for (Table table :
+         * tbManager.getTableList()) { if (table.getTableSize() >= noOfPax &&
+         * table.getIsAvailable() == true) { t = table; table.setIsAvailable(false);
+         * break; } } } else { for (Table table : tbManager.getTableList()) { if
+         * (table.getTableSize() >= noOfPax + 1 && table.getIsAvailable() == true) { t =
+         * table; table.setIsAvailable(false); break; } } }
+         */
+
         Table t = null;
-        if (noOfPax % 2 == 0) {
-            for (Table table : tbManager.getTableList()) {
-                if (table.getTableSize() >= noOfPax && table.getIsAvailable() == true) {
-                    t = table;
-                    table.setIsAvailable(false);
+        Boolean isReserved = true;
+        int tempPax = noOfPax;
+        ArrayList<Integer> occupiedTables = new ArrayList<Integer>();
+        LocalDateTime reservDateTime1;
+        LocalDateTime reservDateTime2;
+        for (reservation r : reservations) {
+            if (LocalDate.now().compareTo(date) > 0
+                    || (LocalDate.now().compareTo(date) == 0 && LocalTime.now().compareTo(time) >= 0)) {
+                System.out.println("Please make reservations in advance!");
+                isReserved = false;
+                break;
+            } else if (r.getDate().compareTo(date) == 0) {
+                reservDateTime1 = LocalDateTime.of(r.getDate(), r.getTime());
+                reservDateTime2 = LocalDateTime.of(date, time);
+                if ((reservDateTime1.isBefore(reservDateTime2)
+                        && reservDateTime1.plusMinutes(120).isAfter(reservDateTime2.plusMinutes(120)))
+                        || (reservDateTime2.isBefore(reservDateTime1)
+                                && reservDateTime2.plusMinutes(120).isAfter(reservDateTime1.plusMinutes(120)))) {
+                    System.out.println("Timing not available!");
+                    isReserved = false;
                     break;
+                } else {
+                    occupiedTables.add(r.getTable().getTableNo());
                 }
+
+                /*
+                 * if ((r.getTime().isBefore(time) &&
+                 * r.getTime().plusMinutes(120).isAfter(time.plusMinutes(120))) ||
+                 * (time.isBefore(r.getTime()) &&
+                 * time.plusMinutes(120).isAfter(r.getTime().plusMinutes(120)))) {
+                 * System.out.println("Timing not available!"); isReserved = false; break; }
+                 * else { occupiedTables.add(r.getTable().getTableNo()); }
+                 */
             }
-        } else {
+        }
+        if (isReserved) {
+            if (noOfPax % 2 == 1) {
+                tempPax = noOfPax + 1;
+            }
             for (Table table : tbManager.getTableList()) {
-                if (table.getTableSize() >= noOfPax + 1 && table.getIsAvailable() == true) {
+                if (table.getTableSize() >= tempPax && !occupiedTables.contains(table.getTableNo())) {
                     t = table;
-                    table.setIsAvailable(false);
                     break;
                 }
             }
