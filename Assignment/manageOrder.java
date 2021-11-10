@@ -109,7 +109,7 @@ public class manageOrder implements Serializable{
         try {
 			tabledb = tabledb.readTables();
 		} catch (Exception ex) {
-			ex.getStackTrace();
+			ex.printStackTrace();
 		}
         //tabledb.printTable();
         for(Table table : tabledb.getTableList())
@@ -238,7 +238,7 @@ public class manageOrder implements Serializable{
         try {
 			tabledb = tabledb.readTables();
 		} catch (Exception ex) {
-			ex.getStackTrace();
+			ex.printStackTrace();
 		}
         for(Table table : tabledb.getTableList())
         {
