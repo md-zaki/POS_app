@@ -29,42 +29,6 @@ public class manageReservation implements Serializable {
         return this.reservations;
     }
 
-    public void start(manageTable tbManager, manageMember memberManager)
-    {
-        Scanner scan = new Scanner(System.in);
-        int choice;
-        do {
-            System.out.println("(1) Create Reservation Booking ");
-            System.out.println("(2) List all Reservation Booking ");
-            System.out.println("(3) Remove Reservation Booking ");
-            System.out.println("(4) Remove expired reservations ");
-            System.out.println("(6) Exit");
-            System.out.printf("Select a choice: ");
-            choice = scan.nextInt();
-            scan.nextLine();
-
-            switch (choice) {
-            case 1:
-                createReservation(tbManager, memberManager);
-                break;
-            case 2:
-                checkReservation();
-                break;
-            case 3:
-                removeReservation();
-                break;
-            case 4:
-                removeExpired();
-                break;
-            case 6:
-                break;
-            default:
-                System.out.println("Please enter a valid option");
-            }
-
-        } while (choice != 6);
-    }
-
     public void removeExpired() {
         Iterator<reservation> iter = reservations.iterator();
         LocalDateTime reservDT;
