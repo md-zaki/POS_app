@@ -50,7 +50,7 @@ public class manageMember implements Serializable {
         long memberId = scan.nextLong();
         scan.nextLine();
         System.out.printf("Enter name of customer: ");
-        String name = scan.nextLine();
+        String name = scan.nextLine().toUpperCase();
         System.out.printf("Enter contact number: ");
         long contact = scan.nextLong();
         System.out.println("Enter membership tier");
@@ -167,7 +167,7 @@ public class manageMember implements Serializable {
                         break;
                     case 2:
                         System.out.printf("Enter updated member name: ");
-                        String updateName = scan.nextLine();
+                        String updateName = scan.nextLine().toUpperCase();
                         updateMember = new member(updateName, memberList.get(memberIndex).getContact(),
                                 memberList.get(memberIndex).getMemberId(), memberList.get(memberIndex).getTier());
                         memberList.set(memberIndex, updateMember);
