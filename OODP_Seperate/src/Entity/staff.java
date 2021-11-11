@@ -5,6 +5,9 @@ import java.io.Serializable;
 /**
  * Staff object for the staff members of the restaurant
  * Every staff object has an id, gender, name and job title
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
  */
 public class staff implements Serializable {
     private int employeeId;
