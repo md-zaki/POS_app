@@ -40,22 +40,22 @@ public class manageReservation implements Serializable {
             scan.nextLine();
 
             switch (choice) {
-                case 1:
-                    createReservation(tbManager, memberManager);
-                    break;
-                case 2:
-                    checkReservation();
-                    break;
-                case 3:
-                    removeReservation();
-                    break;
-                case 4:
-                    removeExpired();
-                    break;
-                case 6:
-                    break;
-                default:
-                    System.out.println("Please enter a valid option");
+            case 1:
+                createReservation(tbManager, memberManager);
+                break;
+            case 2:
+                checkReservation();
+                break;
+            case 3:
+                removeReservation();
+                break;
+            case 4:
+                removeExpired();
+                break;
+            case 6:
+                break;
+            default:
+                System.out.println("Please enter a valid option");
             }
 
         } while (choice != 6);
@@ -132,10 +132,6 @@ public class manageReservation implements Serializable {
     }
 
     private void createReservation(manageTable tbManager, manageMember memberManager) {
-        // for (Table table : tbManager.getTableList()) {
-        // table.setIsAvailable(true);
-        // }
-
         Scanner scan = new Scanner(System.in);
         String name;
         LocalDate date;
@@ -155,6 +151,7 @@ public class manageReservation implements Serializable {
                 break;
             } catch (Exception e) {
                 System.out.println("Invalid contact");
+                scan.next();
             }
         }
 
@@ -163,9 +160,14 @@ public class manageReservation implements Serializable {
                 System.out.print("Enter number of customers reserving table: ");
                 noOfPax = scan.nextInt();
                 scan.nextLine();
+                if (noOfPax <= 0 || noOfPax > 10) {
+                    System.out.println("invalid noOfPax!");
+                    continue;
+                }
                 break;
             } catch (Exception e) {
                 System.out.println("invalid input");
+                scan.next();
             }
         }
 
@@ -234,7 +236,7 @@ public class manageReservation implements Serializable {
             reservDateTime2 = LocalDateTime.of(date, time);
             if ((reservDateTime1.isBefore(reservDateTime2) && reservDateTime1.plusMinutes(120).isAfter(reservDateTime2))
                     || (reservDateTime2.isBefore(reservDateTime1)
-                    && reservDateTime2.plusMinutes(120).isAfter(reservDateTime1))) {
+                            && reservDateTime2.plusMinutes(120).isAfter(reservDateTime1))) {
 
                 occupiedTables.add(r.getTable().getTableNo());
             }
@@ -245,8 +247,11 @@ public class manageReservation implements Serializable {
         }
         for (Table table : tbManager.getTableList()) {
             if (table.getTableSize() >= tempPax && !occupiedTables.contains(table.getTableNo())) {
-                t = table;
-                break;
+                if (Objects.isNull(t)) {
+                    t = table;
+                } else if (t.getTableSize() > table.getTableSize()) {
+                    t = table;
+                }
             }
         }
 
@@ -259,6 +264,7 @@ public class manageReservation implements Serializable {
         } else {
             reservations.add(new reservation(date, time, c, t, noOfPax));
             saveReservation();
+            System.out.println("Reservation added!");
         }
     }
 
