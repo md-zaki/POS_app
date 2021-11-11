@@ -1,11 +1,4 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Scanner;
 import Manager.*;
 import UI.mainMenuUI;
@@ -15,8 +8,12 @@ import UI.manageReservationUI;
 import UI.manageStaffUI;
 import UI.manageTableUI;
 
-import javax.net.ssl.ManagerFactoryParameters;
-
+/**
+ * This is the Main Class for the entire application
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class mainapp implements Serializable {
     public static void main(String[] args) throws Exception {
         mainMenu testMenu = new mainMenu();
