@@ -11,6 +11,9 @@ import java.util.Scanner;
 import Entity.staff;
 
 public class manageStaff implements Serializable{
+
+    private static final long serialVersionUID = 12345L;
+
     private ArrayList<staff> staffList = new ArrayList<staff>();
     //private static int numStaff=0;
 

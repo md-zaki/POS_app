@@ -20,6 +20,9 @@ import Entity.Table;
 import Entity.member;
 
 public class manageReservation implements Serializable {
+
+    private static final long serialVersionUID = 12345L;
+
     private ArrayList<reservation> reservations = new ArrayList<reservation>();
 
     public ArrayList<reservation> getReservations() {

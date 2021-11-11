@@ -12,6 +12,9 @@ import java.util.Scanner;
 import Entity.member;
 
 public class manageMember implements Serializable {
+
+    private static final long serialVersionUID = 12345L;
+
     private ArrayList<member> memberList = new ArrayList<member>();
 
     public manageMember() {

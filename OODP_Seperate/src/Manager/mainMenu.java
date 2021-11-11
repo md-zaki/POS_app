@@ -15,6 +15,9 @@ import java.util.Scanner;
 
 
 public class mainMenu implements Serializable{
+
+    private static final long serialVersionUID = 12345L;
+
     private ArrayList<menuItems> menuList;
     //private static int numOfItems=0;
 

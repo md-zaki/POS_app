@@ -12,6 +12,9 @@ import Entity.Table;
 
 
 public class manageTable implements Serializable {
+
+    private static final long serialVersionUID = 12345L;
+
     private ArrayList<Table> tableList = new ArrayList<Table>();
 
     public ArrayList<Table> getTableList() {
