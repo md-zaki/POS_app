@@ -10,18 +10,32 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import Entity.Table;
 
-
+/**
+ * Manager Class for Tables
+ * @author Ju Khang, Zaki, Timothy, Malcolm
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class manageTable implements Serializable {
 
     private static final long serialVersionUID = 12345L;
 
+    /**
+     * Array list of all tables in the restaurant
+     */
     private ArrayList<Table> tableList = new ArrayList<Table>();
 
+    /**
+     * Get the list of tables in the restaurant
+     * @return list of tables
+     */
     public ArrayList<Table> getTableList() {
         return tableList;
     }
 
-    
+    /**
+     * Add a table in the restaurant
+     */
     public void addTable() {
 
         Scanner scan = new Scanner(System.in);
@@ -66,6 +80,9 @@ public class manageTable implements Serializable {
         }
     }
 
+    /**
+     * Remove a table from the restaurant
+     */
     public void removeTable() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Key in table number to delete: ");
@@ -87,6 +104,9 @@ public class manageTable implements Serializable {
         }
     }
 
+    /**
+     * Print a list of all tables in the restaurant
+     */
     public void printTable() {
         System.out.println("================ TABLES ====================");
         for (int i = 0; i < tableList.size(); i++) {
@@ -97,14 +117,11 @@ public class manageTable implements Serializable {
         }
     }
 
-    public void tableReserved(Table table) {
-        table.setIsAvailable(false);
-    }
-
-    public void freeTable(Table table) {
-        table.setIsAvailable(true);
-    }
-
+    /**
+     * Function to save the list of tables to a txt file
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
     public void saveTables() throws ClassNotFoundException, IOException {
         FileOutputStream fileOutputStream = new FileOutputStream("tableSave.txt");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -113,6 +130,12 @@ public class manageTable implements Serializable {
         objectOutputStream.close();
     }
 
+    /**
+     * Function to populate the list of tables by reading the data from the saved txt file
+     * @return
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
     public manageTable readTables() throws ClassNotFoundException, IOException {
         FileInputStream fileInputStream = new FileInputStream("tableSave.txt");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
