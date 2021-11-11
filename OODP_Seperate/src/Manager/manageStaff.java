@@ -26,7 +26,8 @@ public class manageStaff implements Serializable{
     private static final long serialVersionUID = 12345L;
 
     /**
-     * List of Staff members in an array
+     * Initialize staffList array.
+     * This array stores a list of staff members in the restaurant, each index is an staff object
      */
     private ArrayList<staff> staffList = new ArrayList<staff>();
 
@@ -75,7 +76,7 @@ public class manageStaff implements Serializable{
     /**
      * Gets the index for which the staffId we are looking for in the array list
      * @param staffId employeeId
-     * @return integer array index that belongs to the staffId
+     * @return integer array index that belongs to the staffId, if not found return -1
      */
     public int getStaffListIndexById(int staffId)
     {

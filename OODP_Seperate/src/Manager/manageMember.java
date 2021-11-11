@@ -11,15 +11,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import Entity.member;
 
+/**
+ * Manager Class for Members.
+ * Members are customers that holds a membership of the restaurant.
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class manageMember implements Serializable {
 
+    /**
+     * UID for Serializable
+     */
     private static final long serialVersionUID = 12345L;
 
+    /**
+     * Initialize memberList array.
+     * This array stores a list of customers who are members of the restaurant, each index is an member object
+     */
     private ArrayList<member> memberList = new ArrayList<member>();
 
-    public manageMember() {
-        memberList = new ArrayList<member>();
-    }
+    //public manageMember() {
+    //    memberList = new ArrayList<member>();
+    //}
 
     public ArrayList<member> getMemberList() {
         return this.memberList;
