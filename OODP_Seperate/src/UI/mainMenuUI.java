@@ -1,9 +1,21 @@
 package UI;
 import java.util.Scanner;
-
 import Manager.mainMenu;
+
+/**
+ * This is a UI class used to display menu options
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class mainMenuUI {
 
+    /**
+     * Starts the UI for the user to select menu options.
+     * After selection of the desired operation, appropriate methods from mainMenu will be called.
+     * @param mainMenu mainMenu object which consist of all logic functions related to menu
+     * @throws Exception
+     */
     public static void start(mainMenu mainMenu) throws Exception
     {
         Scanner scan = new Scanner(System.in);

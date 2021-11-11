@@ -1,8 +1,20 @@
 package UI;
 import java.util.Scanner;
-
 import Manager.manageMember;
+
+/**
+ * This is a UI class used to display membership options.
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class manageMemberUI {
+    /**
+     * Starts the UI for the user to select the member operations.
+     * After selection of the desired operation, appropriate methods from the manageMember will be called. 
+     * @param manageMember manageMember object which consist of all logic functions related to member
+     * @throws Exception
+     */
     public static void start(manageMember manageMember) throws Exception
     {
         Scanner scan = new Scanner(System.in);

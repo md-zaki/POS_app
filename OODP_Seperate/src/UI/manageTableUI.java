@@ -1,8 +1,21 @@
 package UI;
 import java.util.Scanner;
-
 import Manager.manageTable;
+
+/**
+ * This is a UI class used to display Table options
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class manageTableUI {
+
+    /**
+     * Starts the UI for the user to select the Table operations.
+     * After selection of the desired operation, appropriate methods from the manageTable will be called.
+     * @param table Table object which consist of all logic functions related to Table
+     * @throws Exception
+     */
     public static void start(manageTable table)throws Exception
     {
         Scanner scan = new Scanner(System.in);
