@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class manageTable implements Serializable {
@@ -47,18 +49,43 @@ public class manageTable implements Serializable {
     public void addTable() {
 
         Scanner scan = new Scanner(System.in);
-        int tableNo = tableList.size() + 1;
-        System.out.println("Key in table size: ");
-        int tableSize = scan.nextInt();
-        scan.nextLine();
+        int tableNo;// = tableList.size() + 1;
+        int tableSize;
+
+        while (true) {
+            Boolean exist = false;
+            System.out.println("Key in table no: ");
+            tableNo = scan.nextInt();
+            for (Table t : tableList) {
+                if (t.getTableNo() == tableNo) {
+                    exist = true;
+                    System.out.println("Table Number already exist!");
+                    break;
+                }
+            }
+            if (!exist) {
+                break;
+            }
+        }
+
+        while (true) {
+            System.out.println("Key in table size: ");
+            tableSize = scan.nextInt();
+            scan.nextLine();
+            if (tableSize <= 0 || tableSize % 2 == 1 || tableSize > 10) {
+                System.out.println("Invalid table size!");
+            } else {
+                break;
+            }
+
+        }
+
         System.out.println("Table " + tableNo + " of size " + tableSize + " created");
         Table table = new Table(tableNo, tableSize);
-        //System.out.println("Table " + table.getTableNo() + " of size " + table.getTableSize() + " created");
         tableList.add(table);
         try {
             saveTables();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -94,13 +121,11 @@ public class manageTable implements Serializable {
         }
     }
 
-    public void tableReserved(Table table)
-    {
+    public void tableReserved(Table table) {
         table.setIsAvailable(false);
     }
 
-    public void freeTable(Table table)
-    {
+    public void freeTable(Table table) {
         table.setIsAvailable(true);
     }
 
