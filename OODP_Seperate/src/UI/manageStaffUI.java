@@ -1,8 +1,21 @@
 package UI;
 import java.util.Scanner;
-
 import Manager.manageStaff;
+
+/**
+ * This is a UI class used to display staff options
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class manageStaffUI {
+
+    /**
+     * Starts the UI for the user to select the staff operations.
+     * After selection of the desired operation, appropriate methods from the manageStaff will be called.
+     * @param staff staff object which consist of all logic functions related to staff
+     * @throws Exception
+     */
     public static void start(manageStaff staff)throws Exception
     {
         Scanner scan = new Scanner(System.in);

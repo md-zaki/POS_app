@@ -1,8 +1,20 @@
 package UI;
 import java.util.Scanner;
-
 import Manager.manageOrder;
+
+/**
+ * This is a UI class used to display order options
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class manageOrderUI {
+    /**
+     * Starts the UI for the user to select the menu order operations.
+     * After selection of the desired operation, appropriate methods from the manageOrder will be called.
+     * @param manageOrder manageOrder object which consist of all logic functions related to order
+     * @throws Exception
+     */
     public static void start(manageOrder manageOrder) throws Exception
     {
         Scanner scan = new Scanner(System.in);
