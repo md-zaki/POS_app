@@ -1,12 +1,29 @@
 package UI;
-import java.util.Scanner;
 
-import Manager.manageReservation;
-import Manager.manageTable;
+import java.util.Scanner;
 import Manager.*;
+
+/**
+ * This is a UI class used to display reservation options
+ * 
+ * @author Timothy, Malcom
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class manageReservationUI {
-    public static void start(manageTable tbManager, manageMember memberManager, manageReservation res)
-    {
+
+    /**
+     * Starts the UI for user to select reservation operations. After selection of
+     * reservation operation, appropriate methods from manageReservation is called.
+     * 
+     * @param tbManager     A manageTable object to perform management logic of
+     *                      tables.
+     * @param memberManager A manageMember object to perform management logic of
+     *                      members.
+     * @param res           A manageReservation object to perform management logic
+     *                      of reservations.
+     */
+    public static void start(manageTable tbManager, manageMember memberManager, manageReservation res) {
         Scanner scan = new Scanner(System.in);
         int choice;
         do {

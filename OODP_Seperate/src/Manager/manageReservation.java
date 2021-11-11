@@ -19,16 +19,34 @@ import Entity.customer;
 import Entity.Table;
 import Entity.member;
 
+/**
+ * A manager class used for performing management logic for reservations.
+ * 
+ * @author Timothy, Malcom
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class manageReservation implements Serializable {
 
     private static final long serialVersionUID = 12345L;
-
+    /**
+     * Array list of reservations to keep track of existing reservations.
+     */
     private ArrayList<reservation> reservations = new ArrayList<reservation>();
 
+    /**
+     * Gets the array of exisintg reservations
+     * 
+     * @return the array of existing reservations
+     */
     public ArrayList<reservation> getReservations() {
         return this.reservations;
     }
 
+    /**
+     * Removes reservations if current date-time is two hours more than the
+     * date-time of the reservation.
+     */
     public void removeExpired() {
         Iterator<reservation> iter = reservations.iterator();
         LocalDateTime reservDT;
@@ -42,6 +60,9 @@ public class manageReservation implements Serializable {
         saveReservation();
     }
 
+    /**
+     * Remove reservation based on the customer's name, date and time.
+     */
     public void removeReservation() {
         String name;
         String temp;
@@ -85,6 +106,9 @@ public class manageReservation implements Serializable {
         saveReservation();
     }
 
+    /**
+     * Prints all existing reservations.
+     */
     public void checkReservation() {
         System.out.println("================ RESERVATIONS ====================");
         for (reservation r : reservations) {
@@ -99,6 +123,15 @@ public class manageReservation implements Serializable {
         }
     }
 
+    /**
+     * Creates reservation based on user input which are name, date, time, contact,
+     * number of pax, member status.
+     * 
+     * @param tbManager     A manageTable object to perform management logic of
+     *                      tables.
+     * @param memberManager A manageMember object to perform management logic of
+     *                      members.
+     */
     public void createReservation(manageTable tbManager, manageMember memberManager) {
         Scanner scan = new Scanner(System.in);
         String name;
@@ -236,6 +269,15 @@ public class manageReservation implements Serializable {
         }
     }
 
+    /**
+     * Reads from "reservations.txt" text file and returns a manageReservation
+     * object.
+     * 
+     * @return a manageReservation object that contains the array list of all
+     *         existing reservations.
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
     public manageReservation readReservation() throws ClassNotFoundException, IOException {
 
         FileInputStream fileInputStream = new FileInputStream("reservations.txt");
@@ -246,6 +288,9 @@ public class manageReservation implements Serializable {
 
     }
 
+    /**
+     * Writes this manageReservation object into "reservations.txt" text file.
+     */
     public void saveReservation() {
         try {
             FileOutputStream fos = new FileOutputStream("reservations.txt");
