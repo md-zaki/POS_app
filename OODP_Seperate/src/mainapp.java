@@ -17,15 +17,50 @@ import UI.manageTableUI;
 import javax.net.ssl.ManagerFactoryParameters;
 
 public class mainapp implements Serializable {
-    public static void main(String[] args) throws ClassNotFoundException, IOException, Exception {
+    public static void main(String[] args) throws Exception {
         mainMenu testMenu = new mainMenu();
-        manageStaff testStaff = new manageStaff();
-        manageOrder testOrder = new manageOrder();
-        manageMember testMember = new manageMember();
-        manageReservation manageReserv = new manageReservation();
-        manageTable testTable = new manageTable();
+        try {
+            testMenu = testMenu.readMenu();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
-        // manageReservation testReservation = new manageReservation();
+        manageStaff testStaff = new manageStaff();
+        try {
+            testStaff = testStaff.readStaff();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        manageOrder testOrder = new manageOrder();
+        try {
+            testOrder = testOrder.readOrders();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        manageMember testMember = new manageMember();
+        try {
+            testMember = testMember.readMemberList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        manageReservation manageReserv = new manageReservation();
+        try {
+            manageReserv = manageReserv.readReservation();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        manageTable testTable = new manageTable();
+        try {
+            testTable = testTable.readTables();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
         Scanner scan = new Scanner(System.in);
         int choice;
         do {
@@ -42,58 +77,24 @@ public class mainapp implements Serializable {
             scan.nextLine();
             switch (choice) {
                 case 1:
-                    try {
-                        testStaff = testStaff.readStaff();
-                    } catch (Exception ex) {
-                        ex.getStackTrace();
-                    }
                     manageStaffUI.start(testStaff);
                     testStaff.saveStaffList();
                     break;
                 case 2:
-                    try {
-                        testMenu = testMenu.readMenu();
-                    } catch (Exception ex) {
-                        ex.getStackTrace();
-                    }
                     mainMenuUI.start(testMenu);
                     testMenu.saveMenu();
                     break;
                 case 3:
-
-                    try {
-                        testOrder = testOrder.readOrders();
-                    } catch (Exception ex) {
-                        ex.getStackTrace();
-                    }
                     manageOrderUI.start(testOrder);
                     testOrder.saveOrders();
                     break;
                 case 4:
-                    try {
-                        testMember = testMember.readMemberList();
-                    } catch (Exception ex) {
-                        ex.getStackTrace();
-                    }
-
                     manageMemberUI.start(testMember);
                     break;
                 case 5:
-                    try {
-                        testMember = testMember.readMemberList();
-                        testTable = testTable.readTables();
-                        manageReserv = manageReserv.readReservation();
-                    } catch (Exception ex) {
-                        ex.getStackTrace();
-                    }
                     manageReserv.start(testTable, testMember);
                     break;
                 case 6:
-                    try {
-                        testTable = testTable.readTables();
-                    } catch (Exception ex) {
-                        ex.getStackTrace();
-                    }
                     manageTableUI.start(testTable);
                     break;
                 case 7:

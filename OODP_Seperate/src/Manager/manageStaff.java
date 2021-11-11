@@ -10,29 +10,30 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import Entity.staff;
 
+
+/**
+ * Manager Class for Staff
+ * @author Ng Ju Khang
+ * @version 1.0
+ * @since 2021-11-11
+ */
+
 public class manageStaff implements Serializable{
 
+    /**
+     * UID for Serializable
+     */
     private static final long serialVersionUID = 12345L;
 
+    /**
+     * List of Staff members in an array
+     */
     private ArrayList<staff> staffList = new ArrayList<staff>();
-    //private static int numStaff=0;
 
-    public manageStaff() throws IOException, ClassNotFoundException
-    {
-		/*
-        try
-        {
-        FileInputStream fileInputStream = new FileInputStream("testStaffSave.txt");
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        staffList = (ArrayList<staff>) objectInputStream.readObject();
-        objectInputStream.close();
-        }
-        catch (Exception ex){
-        	ex.getStackTrace();
-        }
-		*/
-    }
-
+    /**
+     * Gets the list of staff in the array
+     * @return ArrayList of staff member
+     */
     public ArrayList<staff> getStaffList()
     {
         return this.staffList;
