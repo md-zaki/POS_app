@@ -284,6 +284,31 @@ public class manageStaff implements Serializable{
             }
 
         } while (choice != 6);
+    }
+
+    /**
+     * Function to remove the staff object.
+     * After a staff is deleted, the saveStaffList() function is called to save the updated staffList.
+     * @throws IOException
+     */
+    public void removeStaff() throws IOException
+    {
+        Scanner scan = new Scanner(System.in);
+        int choice;
+        System.out.printf("Enter Staff ID: ");
+        int staffIndex = getStaffListIndexById(scan.nextInt());
+        String staffName = staffList.get(staffIndex).getName();
+
+        if (staffIndex == -1)
+        {
+            System.out.println("Staff ID does not exist.");
+            return;
+        }
+
+        staffList.remove(staffIndex);
+        saveStaffList();
+        System.out.println("Staff Member " + staffName + " has been removed.");
+
 
     }
 }

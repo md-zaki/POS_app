@@ -26,6 +26,7 @@ public class manageStaffUI {
             System.out.println("(2) View Staff by ID");
             System.out.println("(3) Add Staff");
             System.out.println("(4) Update Staff Info");
+            System.out.println("(5) Remove Staff");
             System.out.println("(6) Exit");
             System.out.printf("Select a choice: ");
             choice = scan.nextInt();
@@ -49,6 +50,9 @@ public class manageStaffUI {
                     staffId = scan.nextInt();
                     scan.nextLine();
                     staff.updateStaffInfo(staffId);
+                    break;
+                case 5:
+                    staff.removeStaff();
                     break;
                 case 6:
                     break;
