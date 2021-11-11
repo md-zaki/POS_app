@@ -13,35 +13,49 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Manager Class for menu and menu items
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class mainMenu implements Serializable{
 
     private static final long serialVersionUID = 12345L;
 
+    /**
+     * List of menu items and promotional packages in the restaurant menu
+     */
     private ArrayList<menuItems> menuList;
-    //private static int numOfItems=0;
 
+    /**
+     * Constructor for mainMenu, creates new list of menu items
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public mainMenu() throws IOException, ClassNotFoundException {
-        //numOfItems = 0;
         menuList = new ArrayList<menuItems>();
     }
 
+    /**
+     * Get list of items in menu including promo packages
+     * @return menu list
+     */
     public ArrayList<menuItems> getMenuItems() {
         return this.menuList;
     }
 
+    /**
+     * set menu items list
+     * @param menuItems menu items list
+     */
     public void setMenuItems(ArrayList<menuItems> menuItems) {
         this.menuList = menuItems;
     }
 
-   /* public int getNumOfItems() {
-        return mainMenu.numOfItems;
-    }*/
-
-    /*public void setNumOfItems(int numOfItems) {
-        mainMenu.numOfItems = numOfItems;
-    }*/
-
+    /**
+     * Add new ala carte items into Menu
+     */
     public void addMenuItem() {
         Scanner scan = new Scanner(System.in);
         int i =1;
@@ -72,6 +86,9 @@ public class mainMenu implements Serializable{
 
     }
 
+    /**
+     * Remove any items in menu including promo package
+     */
     public void removeMenuItem() {
         Scanner scan = new Scanner(System.in);
         viewMenu();
@@ -81,6 +98,11 @@ public class mainMenu implements Serializable{
         menuList.remove(index-1);
     }
 
+    /**
+     * Edit any items in menu including promo package
+     * @param menuList list of items in menu
+     * @throws IOException
+     */
     public void updateMenuItem(ArrayList<menuItems> menuList) throws IOException
     {
         Scanner scan = new Scanner(System.in);
@@ -182,6 +204,10 @@ public class mainMenu implements Serializable{
 
     }
 
+    /**
+     * Add a new promo package into menu
+     * @param menuList
+     */
     public void addPromo(ArrayList<menuItems> menuList)
     {
         Scanner scan = new Scanner(System.in);
@@ -224,6 +250,10 @@ public class mainMenu implements Serializable{
         }
     }
 
+    /**
+     * Function to view the contents of the entire menu,
+     * including promo package
+     */
     public void viewMenu()
     {
         System.out.println("============== MENU ==================");
@@ -258,6 +288,10 @@ public class mainMenu implements Serializable{
 
 
 
+    /**
+     * Function to save the menu contents to a txt file
+     * @throws IOException for when the txt file does not exist
+     */
     public void saveMenu() throws ClassNotFoundException, IOException
     {
         FileOutputStream fileOutputStream = new FileOutputStream("testMenuSave.txt");
@@ -267,6 +301,12 @@ public class mainMenu implements Serializable{
         objectOutputStream.close();
     }
 
+    /**
+     * Function to populate the menu by reading the data from the saved txt file
+     * @return array list of menu items
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
     public mainMenu readMenu() throws ClassNotFoundException, IOException
     {
         FileInputStream fileInputStream = new FileInputStream("testMenuSave.txt");

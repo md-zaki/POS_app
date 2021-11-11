@@ -16,15 +16,30 @@ import Entity.staff;
 import Entity.member;
 import Entity.menuItems;
 
+/**
+ * Manager Class for Orders
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class manageOrder implements Serializable{
     private static final long serialVersionUID = 12345L;
 
+    /**
+     * array list of all the orders the restaurant has taken
+     */
     private ArrayList<order> allOrders = new ArrayList<order>();
 
+    /**
+     * Constructor for manageOrder
+     */
     public manageOrder() {
-        //allOrders = new ArrayList<order>();
     }
 
+    /**
+     * Function to create new order and add into array list of orders
+     * @throws Exception
+     */
     public void createNewOrder() throws Exception {
         Scanner scan = new Scanner(System.in);
         int ordId = allOrders.size() + 1;
@@ -46,6 +61,10 @@ public class manageOrder implements Serializable{
         System.out.println();
     }
 
+    /**
+     * Function to edit any order in the order list
+     * @throws Exception
+     */
     public void editOrder() throws Exception {
         Scanner scan = new Scanner(System.in);
         viewAllOrders();
@@ -89,6 +108,11 @@ public class manageOrder implements Serializable{
         }
     }
 
+    /**
+     * Function to choose which staff prepared the order
+     * @return staff that prepared the order
+     * @throws Exception
+     */
     public static staff addStaff() throws Exception {
         int i = 1;
         Scanner scan = new Scanner(System.in);
@@ -108,6 +132,11 @@ public class manageOrder implements Serializable{
         return prepby;
     }
 
+    /**
+     * Function to choose the table the order was taken from
+     * @return table the order was taken from
+     * @throws Exception
+     */
     public static Table chooseTable() throws Exception
     {
         Scanner scan = new Scanner(System.in);
@@ -147,6 +176,9 @@ public class manageOrder implements Serializable{
         return toChoose;
     }
 
+    /**
+     * View all orders taken in the restaurant's lifetime
+     */
     public void viewAllOrders() {
         System.out.println("======= ALL ORDERS =======");
         if (allOrders.size() == 0) {
@@ -161,7 +193,11 @@ public class manageOrder implements Serializable{
     }
 
 
-
+    /**
+     * Prints out a specific order's invoice
+     * Vacate the table when order invoice is printed out
+     * @throws Exception
+     */
     public void printInvoice() throws Exception{
         int i = 1;
         double total = 0;
@@ -233,6 +269,12 @@ public class manageOrder implements Serializable{
 
     }
 
+    /**
+     * Calculate the discount applicable for invoice calculation
+     * @param memberId member ID of member
+     * @return discount received
+     * @throws Exception
+     */
     public static double discount(long memberId) throws Exception{
         manageMember manageMember = new manageMember();
         manageMember = manageMember.readMemberList();
@@ -260,6 +302,11 @@ public class manageOrder implements Serializable{
         return 1;
     }
 
+    /**
+     * Function to save the list of orders to a txt file
+     * @throws ClassNotFoundException
+     * @throws IOException
+     */
     public void saveOrders() throws ClassNotFoundException, IOException {
         FileOutputStream fileOutputStream = new FileOutputStream("orderSave.txt");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -268,6 +315,9 @@ public class manageOrder implements Serializable{
         objectOutputStream.close();
     }
 
+    /**
+     * Function to populate the order list by reading the data from the saved txt file
+     */
     public manageOrder readOrders() throws ClassNotFoundException, IOException {
         FileInputStream fileInputStream = new FileInputStream("orderSave.txt");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
