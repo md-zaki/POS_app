@@ -110,25 +110,20 @@ public class manageStaff implements Serializable{
         }
 
         System.out.printf("Enter Staff Name: ");
-        String staffName = scan.nextLine();
-        staffName.toUpperCase();
+        String staffName = scan.nextLine().toUpperCase();
 
         System.out.printf("Enter Staff Gender (M/F): ");
         char staffGender = scan.next().charAt(0);
-        Character.toUpperCase(staffGender);
         scan.nextLine();
+        Character.toUpperCase(staffGender);
 
         System.out.printf("Enter Staff Job Title: ");
-        String staffPos = scan.nextLine();
-        staffPos.toUpperCase();
+        String staffPos = scan.nextLine().toUpperCase();
 
         staff newStaff = new staff(staffId, staffName, staffGender, staffPos);
-
         staffList.add(newStaff);
-
         System.out.println("New Staff Added.");
         saveStaffList();
-
     }
 
     /**
@@ -198,7 +193,7 @@ public class manageStaff implements Serializable{
 
     /**
      * Updates the information of a staff object given the staffId
-     * Able to choose which attributes out of all existing attributes to edit
+     * Able to choose which attributes out of all existing attributes of staff to edit
      * After editing any information, the save function will be triggered to save the staffList array into the txt file
      * @param staffId employeeId
      * @throws IOException
@@ -261,8 +256,7 @@ public class manageStaff implements Serializable{
 
                 case 3:
                     System.out.printf("Enter updated gender for staff: ");
-                    char updatedGender = scan.next().charAt(0);
-                    Character.toUpperCase(updatedGender);
+                    char updatedGender = Character.toUpperCase(scan.next().charAt(0));
                     scan.nextLine();
                     updateStaff = new staff(staffList.get(staffIndex).getEmployeeId(), staffList.get(staffIndex).getName(), updatedGender, staffList.get(staffIndex).getJobTitle());
                     staffList.set(staffIndex, updateStaff);
