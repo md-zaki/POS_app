@@ -31,14 +31,23 @@ public class manageMember implements Serializable {
      */
     private ArrayList<member> memberList = new ArrayList<member>();
 
+    // Constructor class not needed?
     //public manageMember() {
     //    memberList = new ArrayList<member>();
     //}
 
+    /**
+     * Gets the membership list, customers who holds a membership of the restaurant
+     * @return memberList, array list of member
+     */
     public ArrayList<member> getMemberList() {
         return this.memberList;
     }
 
+    /**
+     * Function to save the memberList to a txt file
+     * @throws IOException for when the txt file does not exist
+     */
     public void saveMemberList() throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream("testMemberSave.txt");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -47,6 +56,12 @@ public class manageMember implements Serializable {
         objectOutputStream.close();
     }
 
+    /**
+     * Function to populate the memberList by reading the data from the saved txt file
+     * @return array list of members
+     * @throws ClassNotFoundException
+     * @throws IOException for when the txt file does not exist
+     */
     public manageMember readMemberList() throws ClassNotFoundException, IOException {
 
         FileInputStream fileInputStream = new FileInputStream("testMemberSave.txt");
@@ -57,6 +72,10 @@ public class manageMember implements Serializable {
 
     }
 
+    /**
+     * Adds a customer to the membership list, then calls saveMemberList() to save the updated list.
+     * @throws IOException
+     */
     public void addMember() throws IOException {
         Scanner scan = new Scanner(System.in);
         int i = 1;
@@ -95,9 +114,11 @@ public class manageMember implements Serializable {
         member newMember = new member(name, contact, memberId, tier);
         memberList.add(newMember);
         saveMemberList();
-
     }
 
+    /**
+     * Print function to display all members
+     */
     public void viewListOfMembers() {
         System.out.println("=============== MEMBER LIST ===============");
         for (int i = 0; i < memberList.size(); i++) {
@@ -106,6 +127,10 @@ public class manageMember implements Serializable {
         System.out.println("=============== END OF LIST ===============\n");
     }
 
+    /**
+     * Print function to print out the details of a single member object
+     * @param i index of the member in the memberList array
+     */
     public void printMember(int i) {
         System.out.println();
         System.out.println("Member ID: " + memberList.get(i).getMemberId());
@@ -115,6 +140,11 @@ public class manageMember implements Serializable {
         System.out.println();
     }
 
+    /**
+     * Function to retrieve the index of a desired member object given the memberId
+     * @param memberId attribute memberId, unique identifier of the member object
+     * @return integer index of the member object if found, else return -1
+     */
     public int getMemberListIndexById(long memberId) {
         for (int i = 0; i < memberList.size(); i++) {
             if (memberList.get(i).getMemberId() == memberId) {
@@ -124,6 +154,10 @@ public class manageMember implements Serializable {
         return -1;
     }
 
+    /**
+     * Display the information of an individual member given the memberId
+     * @param memberId attribute memberId, unique identifier of the member object
+     */
     public void viewIndividualMember(long memberId) {
         int check = getMemberListIndexById(memberId);
         if (check == -1) {
@@ -135,6 +169,11 @@ public class manageMember implements Serializable {
         }
     }
 
+    /**
+     * Remove a member from the memberList, they no longer holds a membership of the restaurant.
+     * Updates the member txt file after deletion.
+     * @throws IOException
+     */
     public void removeMember() throws IOException {
         Scanner scan = new Scanner(System.in);
         int i = 0;
@@ -153,6 +192,13 @@ public class manageMember implements Serializable {
         } while (i != 1);
     }
 
+    /**
+     * Updates the information of a member given the memberId.
+     * Able to choose which attributes out of all existing attributes of member to edit
+     * After editing any information, the saveMemberList() function will be triggered to save the memberList array into the txt file
+     * @param memberId attribute memberId
+     * @throws IOException
+     */
     public void updateMember(long memberId) throws IOException {
         Scanner scan = new Scanner(System.in);
         int choice;
