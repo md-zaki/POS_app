@@ -26,7 +26,8 @@ public class manageReservation implements Serializable {
         return this.reservations;
     }
 
-    public void start(manageTable tbManager, manageMember memberManager) throws IOException, ClassNotFoundException {
+    public void start(manageTable tbManager, manageMember memberManager)
+    {
         Scanner scan = new Scanner(System.in);
         int choice;
         do {
@@ -61,7 +62,7 @@ public class manageReservation implements Serializable {
         } while (choice != 6);
     }
 
-    private void removeExpired() {
+    public void removeExpired() {
         Iterator<reservation> iter = reservations.iterator();
         LocalDateTime reservDT;
         while (iter.hasNext()) {
@@ -74,7 +75,7 @@ public class manageReservation implements Serializable {
         saveReservation();
     }
 
-    private void removeReservation() {
+    public void removeReservation() {
         String name;
         String temp;
         LocalDate date;
@@ -117,7 +118,7 @@ public class manageReservation implements Serializable {
         saveReservation();
     }
 
-    private void checkReservation() {
+    public void checkReservation() {
         System.out.println("================ RESERVATIONS ====================");
         for (reservation r : reservations) {
             System.out.println("Customer name: " + r.getCust().getName());
@@ -131,7 +132,7 @@ public class manageReservation implements Serializable {
         }
     }
 
-    private void createReservation(manageTable tbManager, manageMember memberManager) {
+    public void createReservation(manageTable tbManager, manageMember memberManager) {
         Scanner scan = new Scanner(System.in);
         String name;
         LocalDate date;

@@ -8,6 +8,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 import Manager.*;
+import UI.mainMenuUI;
+import UI.manageMemberUI;
+import UI.manageOrderUI;
+import UI.manageStaffUI;
+import UI.manageTableUI;
+
 import javax.net.ssl.ManagerFactoryParameters;
 
 public class mainapp implements Serializable {
@@ -41,7 +47,7 @@ public class mainapp implements Serializable {
                     } catch (Exception ex) {
                         ex.getStackTrace();
                     }
-                    testStaff.start();
+                    manageStaffUI.start(testStaff);
                     testStaff.saveStaffList();
                     break;
                 case 2:
@@ -50,7 +56,7 @@ public class mainapp implements Serializable {
                     } catch (Exception ex) {
                         ex.getStackTrace();
                     }
-                    testMenu.editMenu();
+                    mainMenuUI.start(testMenu);
                     testMenu.saveMenu();
                     break;
                 case 3:
@@ -60,7 +66,7 @@ public class mainapp implements Serializable {
                     } catch (Exception ex) {
                         ex.getStackTrace();
                     }
-                    testOrder.startOrder();
+                    manageOrderUI.start(testOrder);
                     testOrder.saveOrders();
                     break;
                 case 4:
@@ -70,7 +76,7 @@ public class mainapp implements Serializable {
                         ex.getStackTrace();
                     }
 
-                    testMember.start();
+                    manageMemberUI.start(testMember);
                     break;
                 case 5:
                     try {
@@ -88,7 +94,7 @@ public class mainapp implements Serializable {
                     } catch (Exception ex) {
                         ex.getStackTrace();
                     }
-                    testTable.start();
+                    manageTableUI.start(testTable);
                     break;
                 case 7:
                     break;
