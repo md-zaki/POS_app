@@ -1,5 +1,10 @@
 package Entity;
-
+/**
+ * Entity Class for Customer
+ * @author Ju Khang
+ * @version 1.0
+ * @since 2021-11-11
+ */
 import java.io.Serializable;
 
 /**

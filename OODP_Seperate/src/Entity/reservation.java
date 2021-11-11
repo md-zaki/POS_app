@@ -2,9 +2,14 @@ package Entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+/**
+ * Entity Class for Reservations
+ * @author Timothy, Malcolm
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class reservation implements java.io.Serializable {
-
+    
     Table table;
     customer cust;
     private LocalDate date;

@@ -13,17 +13,58 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 import Manager.mainMenu;
+
+/**
+ * Entity Class for Order
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
+ */
 public class order implements Serializable{
 
+    /**
+	 * Contains individual menu items ordered in an order
+	 */
     private ArrayList<menuItems> orderItems;
+
+    /**
+	 * Unique order ID of order
+	 */
     private int orderId;
+
+    /**
+	 * Date order was taken
+	 */
     private LocalDate date;
+
+    /**
+	 * Time order was taken
+	 */
     private LocalTime time;
+
+    /**
+	 * The staff that prepared the order
+	 */
     private staff prepBy;
+
+    /**
+	 * The table the order was taken from
+	 */
     private Table table;
+
+    /**
+	 * Indicates whether order was already paid
+	 */
     private boolean isPaid;
 
-
+    /**
+	 * Creates a new order. paid will be set to false. Set to true when invoice is printed
+	 * @param orderId       Unique order ID of order
+     * @param date          Date order was taken
+     * @param time          Time order was taken
+     * @param prepBy        The staff that prepared the order
+     * @param table         The table the order was taken from
+	 */
     public order(int orderId, LocalDate date, LocalTime time,staff prepBy, Table table) {
         this.orderId = orderId;
         this.date = date;
@@ -33,62 +74,127 @@ public class order implements Serializable{
         this.table = table;
         this.isPaid = false;
     }
+
+    /**
+	 * Get unique order id
+     * @return order id
+	 */
     public int getOrderId() {
         return this.orderId;
     }
-
+    
+    /**
+	 * set the order id
+	 * @param orderId order id of order
+	 */
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
+
+    /**
+	 * Get order date
+     * @return order date
+	 */
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+	 * set the order date
+	 * @param date order date
+	 */
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
+
+    /**
+	 * Get staff who prepared order
+     * @return staff
+	 */
     public staff getStaff()
     {
         return prepBy;
     }
 
+
+    /**
+	 * Get time of order
+     * @return order time
+	 */
     public LocalTime getTime() {
         return this.time;
     }
 
+
+     /**
+	 * set the order time
+	 * @param time order time
+	 */
     public void setTime(LocalTime time) {
         this.time = time;
     }
 
+    /**
+	 * Get the list of items in the order
+     * @return array list of menu items
+	 */
     public ArrayList<menuItems> getOrderItems() {
         return this.orderItems;
     }
+
+    /**
+	 * set the list menu items
+	 * @param orderItems list of menu items
+	 */
     public void setMenuItems(ArrayList<menuItems> orderItems) {
         this.orderItems = orderItems;
     }
 
+     /**
+	 * Get the table of order
+     * @return table of order
+	 */
     public Table getTable()
     {
         return this.table;
     }
 
+
+    /**
+	 * set the table of order
+	 * @param table table of order
+	 */
     public void setTable(Table table)
     {
         this.table = table;
     }
 
+
+    /**
+	 * Get whether order has been paid or not
+     * @return true if paid, false if not paid
+	 */
     public boolean getIsPaid()
     {
         return this.isPaid;
     }
 
+    /**
+	 * set the paid status of order
+	 * @param isPaid paid status
+	 */
     public void setIsPaid(boolean isPaid)
     {
         this.isPaid = isPaid;
     }
 
+    /**
+     * Add items from menu into order list of this order
+     * User will be asked to picked from a list of menu items from menu
+     * @throws Exception
+     */
     public void addOrderItem() throws Exception {
         Scanner scan = new Scanner(System.in);
 
@@ -127,6 +233,10 @@ public class order implements Serializable{
         }
     }
 
+    /**
+     * Remove any menu items from this order
+     * User will be asked which item to remove
+     */
     public void removeOrderItem(){
         Scanner scan = new Scanner(System.in);
         this.viewOrder();
@@ -137,6 +247,9 @@ public class order implements Serializable{
         this.orderItems.remove(toRemove);
     }
 
+    /**
+     * Prints out all details about this order
+     */
     public void viewOrder()
     {
         int i=1;
@@ -154,13 +267,4 @@ public class order implements Serializable{
             i++;
         }
     }
-
-
-
-    public void printOrderInvoice() {
-        throw new UnsupportedOperationException();
-    }
-
-
-
 }

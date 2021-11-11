@@ -3,36 +3,51 @@ package Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class promotionalPackage extends menuItems implements Serializable{
 
+/**
+ * Entity Class for Promotional Package, inherits from menuItems
+ * @author Ju Khang, Zaki
+ * @version 1.0
+ * @since 2021-11-11
+ */
+public class promotionalPackage extends menuItems implements Serializable{
+    /**
+     * list of individual menu items in promo package
+     */
+    private ArrayList<menuItems> itemList;
+
+    /**
+	 * Creates a new promo package
+     * Create new itemList in constructor
+	 * @param name      name of promo package
+	 * @param price     price of promo package
+     * @param type      set type as set
+	 */
     public promotionalPackage(String name,double price, menuItemType type) {
-        super(name, "", price,type);
-        numOfItems = 0;
+        super(name, null, price,menuItems.menuItemType.set);
         itemList = new ArrayList<menuItems>();
     }
 
-    private ArrayList<menuItems> itemList;
-    private int numOfItems;
-
-
-
+    /**
+     * get array list of menu items in promo package
+     * @return array list of menu items
+     */
     public ArrayList<menuItems> getItemList() {
         return this.itemList;
     }
 
-
+     /**
+     * set array list of menu items in promo package
+     * @param itemList array list of menu items
+     */
     public void setItemList(ArrayList<menuItems> itemList) {
         this.itemList = itemList;
     }
 
-    public int getNumOfItems() {
-        return this.numOfItems;
-    }
-
-    public void setNumOfItems(int numOfItems) {
-        this.numOfItems = numOfItems;
-    }
-
+    /**
+     * Adds individual menu items into promo package
+     * @param menuList array list of items in promo package
+     */
     public void addItem(ArrayList<menuItems> menuList)
     {
         Scanner scan = new Scanner(System.in);
