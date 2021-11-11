@@ -118,47 +118,6 @@ public class manageMember implements Serializable {
         }
     }
 
-    public void start() throws IOException {
-        Scanner scan = new Scanner(System.in);
-        int choice;
-        do {
-            System.out.println("Select your operations");
-            System.out.println("(1) View all members");
-            System.out.println("(2) View member by ID");
-            System.out.println("(3) Add new member");
-            System.out.println("(4) Update member info");
-            System.out.println("(5) Remove member");
-            System.out.println("(6) Exit");
-            System.out.printf("Select a choice: ");
-            choice = scan.nextInt();
-            scan.nextLine();
-            switch (choice) {
-                case 1:
-                    viewListOfMembers();
-                    break;
-                case 2:
-                    System.out.printf("Enter member id: ");
-                    long viewMemberId = scan.nextLong();
-                    scan.nextLine();
-                    viewIndividualMember(viewMemberId);
-                    break;
-                case 3:
-                    addMember();
-                    break;
-                case 4:
-                    System.out.printf("Enter member id to update: ");
-                    long memberUpdate = scan.nextLong();
-                    scan.nextLine();
-                    updateMember(memberUpdate);
-                    break;
-                case 5:
-                    removeMember();
-                    break;
-            }
-
-        } while (choice != 6);
-    }
-
     public void removeMember() throws IOException {
         Scanner scan = new Scanner(System.in);
         int i = 0;

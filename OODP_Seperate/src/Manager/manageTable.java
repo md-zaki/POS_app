@@ -18,36 +18,7 @@ public class manageTable implements Serializable {
         return tableList;
     }
 
-    public void start() {
-        Scanner scan = new Scanner(System.in);
-        int choice;
-        do {
-            System.out.println("(1) Create Table");
-            System.out.println("(2) Remove Table");
-            System.out.println("(3) Display all Tables");
-            System.out.println("(6) Exit");
-            System.out.printf("Select a choice: ");
-            choice = scan.nextInt();
-            scan.nextLine();
-
-            switch (choice) {
-            case 1:
-                addTable();
-                break;
-            case 2:
-                removeTable();
-                break;
-            case 3:
-                printTable();
-            case 6:
-                break;
-            default:
-                System.out.println("Please enter a valid option");
-            }
-
-        } while (choice != 6);
-    }
-
+    
     public void addTable() {
 
         Scanner scan = new Scanner(System.in);
