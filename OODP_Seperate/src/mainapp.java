@@ -11,6 +11,7 @@ import Manager.*;
 import UI.mainMenuUI;
 import UI.manageMemberUI;
 import UI.manageOrderUI;
+import UI.manageReservationUI;
 import UI.manageStaffUI;
 import UI.manageTableUI;
 
@@ -45,7 +46,7 @@ public class mainapp implements Serializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
         manageReservation manageReserv = new manageReservation();
         try {
             manageReserv = manageReserv.readReservation();
@@ -59,7 +60,6 @@ public class mainapp implements Serializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
 
         Scanner scan = new Scanner(System.in);
         int choice;
@@ -76,31 +76,31 @@ public class mainapp implements Serializable {
             choice = scan.nextInt();
             scan.nextLine();
             switch (choice) {
-                case 1:
-                    manageStaffUI.start(testStaff);
-                    testStaff.saveStaffList();
-                    break;
-                case 2:
-                    mainMenuUI.start(testMenu);
-                    testMenu.saveMenu();
-                    break;
-                case 3:
-                    manageOrderUI.start(testOrder);
-                    testOrder.saveOrders();
-                    break;
-                case 4:
-                    manageMemberUI.start(testMember);
-                    break;
-                case 5:
-                    manageReserv.start(testTable, testMember);
-                    break;
-                case 6:
-                    manageTableUI.start(testTable);
-                    break;
-                case 7:
-                    break;
-                default:
-                    System.out.println("Please enter a valid choice");
+            case 1:
+                manageStaffUI.start(testStaff);
+                testStaff.saveStaffList();
+                break;
+            case 2:
+                mainMenuUI.start(testMenu);
+                testMenu.saveMenu();
+                break;
+            case 3:
+                manageOrderUI.start(testOrder);
+                testOrder.saveOrders();
+                break;
+            case 4:
+                manageMemberUI.start(testMember);
+                break;
+            case 5:
+                manageReservationUI.start(testTable, testMember, manageReserv);
+                break;
+            case 6:
+                manageTableUI.start(testTable);
+                break;
+            case 7:
+                break;
+            default:
+                System.out.println("Please enter a valid choice");
             }
 
         } while (choice != 7);
