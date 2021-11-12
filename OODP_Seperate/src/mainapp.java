@@ -25,18 +25,18 @@ public class mainapp implements Serializable {
         manageMember testMember = new manageMember();
         manageReservation manageReserv = new manageReservation();
         manageTable testTable = new manageTable();
-        List<Object> testObj = init(testMenu, testStaff, testOrder, testMember, manageReserv, testTable);
-
-        testMenu = (mainMenu) testObj.get(0);
-        testStaff = (manageStaff) testObj.get(1);
-        testOrder = (manageOrder) testObj.get(2);
-        testMember = (manageMember) testObj.get(3);
-        manageReserv = (manageReservation) testObj.get(4);
-        testTable = (manageTable) testObj.get(5);
 
         Scanner scan = new Scanner(System.in);
         int choice;
         do {
+            List<Object> testObj = init(testMenu, testStaff, testOrder, testMember, manageReserv, testTable);
+            testMenu = (mainMenu) testObj.get(0);
+            testStaff = (manageStaff) testObj.get(1);
+            testOrder = (manageOrder) testObj.get(2);
+            testMember = (manageMember) testObj.get(3);
+            manageReserv = (manageReservation) testObj.get(4);
+            testTable = (manageTable) testObj.get(5);
+            
             mainAppMenu();
             choice = scan.nextInt();
             scan.nextLine();
