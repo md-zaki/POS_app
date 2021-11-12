@@ -28,15 +28,13 @@ public class mainapp implements Serializable {
 
         Scanner scan = new Scanner(System.in);
         int choice;
-        do {
-            List<Object> testObj = init(testMenu, testStaff, testOrder, testMember, manageReserv, testTable);
-            testMenu = (mainMenu) testObj.get(0);
-            testStaff = (manageStaff) testObj.get(1);
-            testOrder = (manageOrder) testObj.get(2);
-            testMember = (manageMember) testObj.get(3);
-            manageReserv = (manageReservation) testObj.get(4);
-            testTable = (manageTable) testObj.get(5);
-            
+        do {            
+            testMenu = init(testMenu);
+            testStaff = init(testStaff);
+            testOrder = init(testOrder);
+            testMember = init(testMember);
+            manageReserv = init(manageReserv);
+            testTable = init(testTable);
             mainAppMenu();
 
             while (!scan.hasNextInt())
@@ -100,55 +98,63 @@ public class mainapp implements Serializable {
         System.out.printf("Select a choice: ");
     }
 
-    /**
-     * This function takes in all existing objects of the system and initialize them by reading the existing saved data text file
-     * @param testMenu mainMenu object to be initialized
-     * @param testStaff manageStaff object to be initialized
-     * @param testOrder manageOrder object to be initialized
-     * @param testMember manageMember object to be initialized
-     * @param manageReserv manageReservation object to be initialized
-     * @param testTable manageTable object to be initialized
-     * @return List of Objects to be return
-     */
-    public static List<Object> init(mainMenu testMenu, manageStaff testStaff, manageOrder testOrder, manageMember testMember, manageReservation manageReserv, manageTable testTable)
-    { 
-        List<Object> objList = new ArrayList<>();
+    public static mainMenu init(mainMenu testMenu)
+    {
         try {
-            objList.add(testMenu.readMenu());
+            testMenu = testMenu.readMenu();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
+        return testMenu;
+    }
 
+    public static manageStaff init(manageStaff testStaff)
+    {
         try {
-            objList.add(testStaff.readStaff());
+            testStaff = testStaff.readStaff();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
+        return testStaff;
+    }
 
+    public static manageOrder init(manageOrder testOrder)
+    {
         try {
-            objList.add(testOrder.readOrders());
+            testOrder = testOrder.readOrders();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
+        return testOrder;
+    }
 
+    public static manageMember init(manageMember testMember)
+    {
         try {
-            objList.add(testMember.readMemberList());
+            testMember = testMember.readMemberList();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
+        return testMember;
+    }
 
+    public static manageReservation init(manageReservation manageReserv)
+    {
         try {
-            objList.add(manageReserv.readReservation());
+            manageReserv = manageReserv.readReservation();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
+        return manageReserv;
+    }
 
+    public static manageTable init(manageTable testTable)
+    {
         try {
-            objList.add(testTable.readTables());
+            testTable = testTable.readTables();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
-
-        return objList;
+        return testTable;
     }
 }
