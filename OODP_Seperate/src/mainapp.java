@@ -14,8 +14,8 @@ import UI.manageTableUI;
 /**
  * This is the Main Class for the entire application
  * @author Ju Khang, Zaki
- * @version 1.0
- * @since 2021-11-11
+ * @version 1.1
+ * @since 2021-11-13
  */
 public class mainapp implements Serializable {
     public static void main(String[] args) throws Exception {
@@ -98,6 +98,12 @@ public class mainapp implements Serializable {
         System.out.printf("Select a choice: ");
     }
 
+    /**
+     * This function initialize the mainMenu object by reading an existing saved txt file.
+     * If file does not exist, system will create a new txt file upon any successful mainMenu operations.
+     * @param testMenu mainMenu object to be initialized
+     * @return initialized mainMenu object
+     */
     public static mainMenu init(mainMenu testMenu)
     {
         try {
@@ -108,6 +114,12 @@ public class mainapp implements Serializable {
         return testMenu;
     }
 
+    /**
+     * This function initialize the manageStaff object by reading an existing saved txt file
+     * If file does not exist, system will create a new txt file upon any successful manageStaff operations.
+     * @param testStaff manageStaff object to be initialized
+     * @return initialized manageStaff object
+     */
     public static manageStaff init(manageStaff testStaff)
     {
         try {
@@ -118,6 +130,12 @@ public class mainapp implements Serializable {
         return testStaff;
     }
 
+    /**
+     * This function initialize the manageOrder object by reading an existing saved txt file
+     * If file does not exist, system will create a new txt file upon any successful manageOrder operations.
+     * @param testOrder manageOrder object to be initialized
+     * @return initialized manageOrder object
+     */
     public static manageOrder init(manageOrder testOrder)
     {
         try {
@@ -128,6 +146,12 @@ public class mainapp implements Serializable {
         return testOrder;
     }
 
+    /**
+     * This function initialize the manageMember object by reading an existing saved txt file
+     * If file does not exist, system will create a new txt file upon any successful manageMember operations.
+     * @param testMember manageMember object to be initialized
+     * @return initialized manageMember object
+     */
     public static manageMember init(manageMember testMember)
     {
         try {
@@ -138,6 +162,12 @@ public class mainapp implements Serializable {
         return testMember;
     }
 
+    /**
+     * This function initialize the manageReservation object by reading an existing saved txt file
+     * If file does not exist, system will create a new txt file upon any successful manageReservation operations.
+     * @param manageReserv manageReservation object to be initialized
+     * @return initialized manageReservation object
+     */
     public static manageReservation init(manageReservation manageReserv)
     {
         try {
@@ -148,6 +178,12 @@ public class mainapp implements Serializable {
         return manageReserv;
     }
 
+    /**
+     * This function initialize the manageTable object by reading an existing saved txt file
+     * If file does not exist, system will create a new txt file upon any successful manageTable operations.
+     * @param testTable manageTable object to be initialized
+     * @return initialized manageTable object
+     */
     public static manageTable init(manageTable testTable)
     {
         try {
