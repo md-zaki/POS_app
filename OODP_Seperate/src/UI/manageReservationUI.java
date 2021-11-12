@@ -31,7 +31,7 @@ public class manageReservationUI {
             System.out.println("(2) List all Reservation Booking ");
             System.out.println("(3) Remove Reservation Booking ");
             System.out.println("(4) Remove expired reservations ");
-            System.out.println("(6) Exit");
+            System.out.println("(5) Exit");
             System.out.printf("Select a choice: ");
             choice = scan.nextInt();
             scan.nextLine();
@@ -49,12 +49,12 @@ public class manageReservationUI {
             case 4:
                 res.removeExpired();
                 break;
-            case 6:
+            case 5:
                 break;
             default:
                 System.out.println("Please enter a valid option");
             }
 
-        } while (choice != 6);
+        } while (choice != 5);
     }
 }

@@ -24,7 +24,7 @@ public class manageTableUI {
             System.out.println("(1) Create Table");
             System.out.println("(2) Remove Table");
             System.out.println("(3) Display all Tables");
-            System.out.println("(6) Exit");
+            System.out.println("(4) Exit");
             System.out.printf("Select a choice: ");
             choice = scan.nextInt();
             scan.nextLine();
@@ -38,12 +38,12 @@ public class manageTableUI {
                 break;
             case 3:
                 table.printTable();
-            case 6:
+            case 4:
                 break;
             default:
                 System.out.println("Please enter a valid option");
             }
 
-        } while (choice != 6);
+        } while (choice != 4);
     }
 }

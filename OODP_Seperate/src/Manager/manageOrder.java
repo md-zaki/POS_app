@@ -62,6 +62,18 @@ public class manageOrder implements Serializable{
     }
 
     /**
+     * Function to remove any order from the all orders list
+     */
+    public void removeOrder() {
+        Scanner scan = new Scanner(System.in);
+        viewAllOrders();
+        System.out.println("Enter index of order to delete:");
+        int index = scan.nextInt();
+        String dummy = scan.nextLine();
+        allOrders.remove(index-1);
+    }
+
+    /**
      * Function to edit any order in the order list
      * @throws Exception
      */
@@ -165,14 +177,8 @@ public class manageOrder implements Serializable{
             dummy = scan.nextLine();
             toChoose = (Table) tabledb.getTableList().get(pick-1);
         }
-
-        toChoose.setIsAvailable(false);//set table to be unavailable
-        try {
-            tabledb.saveTables();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        tabledb.getTableList().get(pick-1).setIsAvailable(false);
+        tabledb.saveTables();
         return toChoose;
     }
 

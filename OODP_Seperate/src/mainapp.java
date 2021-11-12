@@ -92,6 +92,12 @@ public class mainapp implements Serializable {
                 manageReservationUI.start(testTable, testMember, manageReserv);
                 break;
             case 6:
+            testTable = new manageTable();
+                try {
+                testTable = testTable.readTables();
+                } catch (Exception ex) {
+                ex.printStackTrace();
+                }
                 manageTableUI.start(testTable);
                 break;
             case 7:

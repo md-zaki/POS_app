@@ -108,7 +108,7 @@ public class mainMenu implements Serializable{
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter index of menu item to update:");
         int index = scan.nextInt();
-        //String dummy = scan.nextLine();
+        scan.nextLine();
         index = index -1;
         int i =1;
         if(menuList.get(index).getType()!= menuItems.menuItemType.set)
