@@ -325,5 +325,121 @@ public class manageOrder implements Serializable{
         objectInputStream.close();
         return Testorders;
     }
+
+    /**
+     * Funtion to calculate the number of each product sold in a specific month and year
+     * @param month month of revenue
+     * @param year year of revenue
+     * @return returns an array representing the quantity of each product that is sold
+     * @throws Exception
+     */
+    public int[] NumOfProductSold(int month, int year) throws Exception
+    {   int i;
+        mainMenu testMenu = new mainMenu();
+        try {
+            testMenu = testMenu.readMenu();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        int[] sales = new int[testMenu.getMenuItems().size()];
+        for(i=0;i<testMenu.getMenuItems().size();i++)
+        {
+            sales[i] = 0;
+        }
+        for(order order : allOrders)
+        {
+            if((order.getDate().getMonthValue()==month) && (order.getDate().getYear()==year) && order.getIsPaid() == true)
+            {
+                for(menuItems items: order.getOrderItems())
+                {
+                    i = 0;
+                    for(menuItems id : testMenu.getMenuItems())
+                    {
+                        if(items.getName().equals(id.getName()))
+                        {
+                            System.out.println("ITEM: " + items.getName());
+                            sales[i]++;
+                            break;
+                        }
+                        i++;
+                    }
+                }
+            }
+        }
+        return sales;
+    }
+
+    /**
+     * function to calculate the actual revenue of each product for a specific month and year
+     * @param sales array representing the quantity of each product that is sold
+     * @return array representing the revenue in SGD of each product that is sold
+     * @throws Exception
+     */
+    public double[] revenueOfProductSold(int[] sales) throws Exception
+    {
+        int i;
+        mainMenu testMenu = new mainMenu();
+        try {
+            testMenu = testMenu.readMenu();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        double[] revenue = new double[testMenu.getMenuItems().size()];
+        for(i=0;i<testMenu.getMenuItems().size();i++)
+        {
+            revenue[i] = 0;
+        }
+        for(i=0;i<testMenu.getMenuItems().size();i++)
+        {
+            revenue[i] = sales[i]*(testMenu.getMenuItems().get(i).getPrice());
+        }
+
+        return revenue;
+    }
+
+    /**
+     * Prints the revenue of each item for a specific year and month
+     * Also prints total revenue for that year and month
+     * @throws Exception
+     */
+    public void printRevenueReport() throws Exception
+    {   int i=0;
+        mainMenu testMenu = new mainMenu();
+        try {
+            testMenu = testMenu.readMenu();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Key in month: ");
+        int month = scan.nextInt();
+        scan.nextLine();
+        System.out.println("Key in Year: ");
+        int year = scan.nextInt();
+        scan.nextLine();
+        int[] sales = NumOfProductSold(month, year);
+        double[] revenue = revenueOfProductSold(sales);
+        System.out.println();
+        System.out.println("======== Product Revenue ========");
+        System.out.println("Month: " + month);
+        System.out.println("Year: " + year);
+        for(menuItems item : testMenu.getMenuItems())
+        {
+            System.out.println("Item: " + item.getName() + ", Quantity: " + sales[i] + ", Product Revenue: $" + String.format("%.2f",revenue[i]));
+            i++;
+        }
+
+        double total = 0;
+        for(i=0;i<testMenu.getMenuItems().size();i++)
+        {
+            total = total + revenue[i];
+        }
+
+        System.out.println();
+        System.out.println("Total Revenue: $" + String.format("%.2f",total));
+        System.out.println("======== End Of Revenue ========");
+        
+
+    }
 }
 

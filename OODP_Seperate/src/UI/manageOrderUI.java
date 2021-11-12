@@ -24,7 +24,8 @@ public class manageOrderUI {
             System.out.println("(2) Edit Existing order");
             System.out.println("(3) View all orders");
             System.out.println("(4) Print invoice");
-            System.out.println("(5) Exit");
+            System.out.println("(5) Sale Revenue Report");
+            System.out.println("(6) Exit");
             System.out.printf("Select a choice: ");
             choice = scan.nextInt();
             scan.nextLine();
@@ -42,10 +43,13 @@ public class manageOrderUI {
                     manageOrder.printInvoice();
                     break;
                 case 5:
+                    manageOrder.printRevenueReport();
+                    break;
+                case 6:
                     break;
                 default:
                     System.out.println("Please enter a valid option");
             }
-        } while (choice != 5);
+        } while (choice != 6);
     }
 }
