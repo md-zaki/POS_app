@@ -66,8 +66,16 @@ public class mainMenu implements Serializable{
         String desc = scan.nextLine();
 
         System.out.println("Enter price of menu item:");
+
+        while (!scan.hasNextDouble())
+        {
+            System.out.println("Please enter a valid price.");
+            System.out.printf("Enter price of menu item: ");
+            scan.next();
+        }
+
         double price = scan.nextDouble();
-        String dummy = scan.nextLine();
+        scan.nextLine();
 
         System.out.println("Enter type of menu item:");
         for(menuItems.menuItemType itemType : menuItems.menuItemType.values())
@@ -75,10 +83,17 @@ public class mainMenu implements Serializable{
             System.out.println(i + ": " + itemType);
             i++;
         }
+
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a valid choice.");
+            System.out.printf("Enter type of menu item: ");
+            scan.next();
+        }
         int typenum = scan.nextInt();
 
         menuItems.menuItemType typechoice = menuItems.menuItemType.values()[typenum-1];
-        dummy = scan.nextLine();
+        scan.nextLine();
         menuItems newAdd = new menuItems(name, desc, price, typechoice);
         menuList.add(newAdd);
 
@@ -93,8 +108,16 @@ public class mainMenu implements Serializable{
         Scanner scan = new Scanner(System.in);
         viewMenu();
         System.out.println("Enter index of menu item to delete:");
+
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a valid integer.");
+            System.out.printf("Enter index of menu item to delete: ");
+            scan.next();
+        }
+
         int index = scan.nextInt();
-        String dummy = scan.nextLine();
+        scan.nextLine();
         menuList.remove(index-1);
     }
 
@@ -107,6 +130,14 @@ public class mainMenu implements Serializable{
     {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter index of menu item to update:");
+
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a valid integer.");
+            System.out.printf("Enter index of menu item to update: ");
+            scan.next();
+        }
+
         int index = scan.nextInt();
         scan.nextLine();
         index = index -1;
@@ -124,7 +155,15 @@ public class mainMenu implements Serializable{
             System.out.println("3. Update " + menuList.get(index).getName() + " price");
             System.out.println("4. Update " + menuList.get(index).getName() + " item type");
             System.out.println("5. Exit");
-            System.out.printf("Select choice: ");
+            System.out.printf("Select a choice: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid option.");
+                System.out.printf("Select a choice: ");
+                scan.next();
+            }
+
             int choice = scan.nextInt();
             scan.nextLine();
             while (choice != 5)
@@ -144,8 +183,16 @@ public class mainMenu implements Serializable{
                 else if (choice == 3)
                 {
                     System.out.println("Enter updated price of menu item:");
+
+                    while (!scan.hasNextDouble())
+                    {
+                        System.out.println("Please enter a valid price.");
+                        System.out.printf("Enter updated price of menu item: ");
+                        scan.next();
+                    }
+
                     price = scan.nextDouble();
-                    String dummy = scan.nextLine();
+                    scan.nextLine();
                 }
                 else if (choice == 4)
                 {
@@ -155,10 +202,18 @@ public class mainMenu implements Serializable{
                         System.out.println(i + ": " + itemType);
                         i++;
                     }
+
+                    while (!scan.hasNextInt())
+                    {
+                        System.out.println("Please enter a valid integer.");
+                        System.out.printf("Enter updated type of menu item: ");
+                        scan.next();
+                    }
+
                     int typenum = scan.nextInt();
+                    scan.nextLine();
                     typechoice = menuItems.menuItemType.values()[typenum-1];
-                    //menuItems.menuItemType typechoice = menuItems.menuItemType.values()[typenum-1];
-                    String dummy = scan.nextLine();
+                    
                 }
                 else
                 {
@@ -167,22 +222,22 @@ public class mainMenu implements Serializable{
 
                 menuItems newAdd = new menuItems(name, desc, price, typechoice);
                 menuList.set(index, newAdd);
-                /*
-                FileOutputStream fileOutputStream = new FileOutputStream("testMenuSave.txt");
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-                objectOutputStream.writeObject(menuList);
-                objectOutputStream.flush();
-                objectOutputStream.close();*/
 
-                //String dummy = scan.nextLine();
-
-                System.out.println("Select operations");
+                System.out.println("Please select your operations");
                 System.out.println("1. Update " + menuList.get(index).getName() + " Name");
                 System.out.println("2. Update " + menuList.get(index).getName() + " description");
                 System.out.println("3. Update " + menuList.get(index).getName() + " price");
                 System.out.println("4. Update " + menuList.get(index).getName() + " item type");
                 System.out.println("5. Exit");
-                System.out.printf("Select choice: ");
+                System.out.printf("Select a choice: ");
+
+                while (!scan.hasNextInt())
+                {
+                    System.out.println("Please enter a valid option.");
+                    System.out.printf("Select a choice: ");
+                    scan.next();
+                }
+
                 choice = scan.nextInt();
                 scan.nextLine();
             }
@@ -193,12 +248,19 @@ public class mainMenu implements Serializable{
             System.out.println("Enter updated name of promo:");
             String name = scan.nextLine();
             System.out.println("Enter updated price of promo:");
+
+            while (!scan.hasNextDouble())
+            {
+                System.out.println("Please enter a valid price.");
+                System.out.printf("Enter updated price of promo: ");
+                scan.next();
+            }
+
             double price = scan.nextDouble();
-            //dummy = scan.nextLine();
+            scan.nextLine();
             promotionalPackage promo = new promotionalPackage(name, price, menuItems.menuItemType.set);
             promo.addItem(menuList);
             menuList.set(index,promo);
-
         }
 
 
@@ -216,8 +278,16 @@ public class mainMenu implements Serializable{
         String name = scan.nextLine();
 
         System.out.println("Enter price of promo:");
+
+        while (!scan.hasNextDouble())
+        {
+            System.out.println("Please enter a valid price.");
+            System.out.printf("Enter price of promo: ");
+            scan.next();
+        }
+
         double price = scan.nextDouble();
-        String dummy = scan.nextLine();
+        scan.nextLine();
 
         promotionalPackage promo = new promotionalPackage(name, price, menuItems.menuItemType.set);
         promo.addItem(menuList);

@@ -45,6 +45,14 @@ public class manageTable implements Serializable {
         while (true) {
             Boolean exist = false;
             System.out.println("Key in table no: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid integer.");
+                System.out.printf("Key in table no: ");
+                scan.next();
+            }
+
             tableNo = scan.nextInt();
             for (Table t : tableList) {
                 if (t.getTableNo() == tableNo) {
@@ -60,6 +68,14 @@ public class manageTable implements Serializable {
 
         while (true) {
             System.out.println("Key in table size: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid integer.");
+                System.out.printf("Key in table size: ");
+                scan.next();
+            }
+
             tableSize = scan.nextInt();
             scan.nextLine();
             if (tableSize <= 0 || tableSize % 2 == 1 || tableSize > 10) {
@@ -86,6 +102,14 @@ public class manageTable implements Serializable {
     public void removeTable() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Key in table number to delete: ");
+        
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a valid integer.");
+            System.out.printf("Key in table number to delete: ");
+            scan.next();
+        }
+
         int tableNo = scan.nextInt();
         scan.nextLine();
 

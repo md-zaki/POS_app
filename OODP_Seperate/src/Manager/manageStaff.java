@@ -99,6 +99,14 @@ public class manageStaff implements Serializable{
         Scanner scan = new Scanner(System.in);
         int conflictCheck;
         System.out.printf("Enter Staff ID: ");
+
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a number.");
+            System.out.printf("Enter Staff ID: ");
+            scan.next();
+        }
+
         int staffId = scan.nextInt();
         scan.nextLine();
 
@@ -214,7 +222,7 @@ public class manageStaff implements Serializable{
         do
         {
             staff updateStaff = new staff(staffList.get(staffIndex).getEmployeeId(), staffList.get(staffIndex).getName(), staffList.get(staffIndex).getGender(), staffList.get(staffIndex).getJobTitle());
-            System.out.println("Editing Staff " + staffList.get(staffIndex).getName() + " Information");
+            System.out.println("\nEditing Staff " + staffList.get(staffIndex).getName() + " Information");
             System.out.println("Please select your operations");
             System.out.println("(1) Edit Staff ID");
             System.out.println("(2) Edit Staff Name");
@@ -223,12 +231,28 @@ public class manageStaff implements Serializable{
             System.out.println("(5) View current staff information");
             System.out.println("(6) Exit");
             System.out.printf("Enter a choice: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid option.");
+                System.out.printf("Enter a choice: ");
+                scan.next();
+            }
+
             choice = scan.nextInt();
             scan.nextLine();
             switch(choice)
             {
                 case 1:
                     System.out.printf("Enter updated ID for staff: ");
+
+                    while (!scan.hasNextInt())
+                    {
+                        System.out.println("Please input an integer.");
+                        System.out.printf("Enter updated ID for staff: ");
+                        scan.next();
+                    }
+
                     updatedID = scan.nextInt();
                     scan.nextLine();
                     for(int i = 0 ; i < staffList.size() ; i++)
@@ -294,8 +318,15 @@ public class manageStaff implements Serializable{
     public void removeStaff() throws IOException
     {
         Scanner scan = new Scanner(System.in);
-        int choice;
-        System.out.printf("Enter Staff ID: ");
+        System.out.printf("Enter Staff ID to be removed: ");
+
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please input an integer.");
+            System.out.printf("Enter Staff ID to be removed: ");
+            scan.next();
+        }
+
         int staffIndex = getStaffListIndexById(scan.nextInt());
         String staffName = staffList.get(staffIndex).getName();
 

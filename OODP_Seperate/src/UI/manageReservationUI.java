@@ -33,6 +33,14 @@ public class manageReservationUI {
             System.out.println("(4) Remove expired reservations ");
             System.out.println("(5) Exit");
             System.out.printf("Select a choice: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid option.");
+                System.out.printf("Select a choice: ");
+                scan.next();
+            }
+
             choice = scan.nextInt();
             scan.nextLine();
 

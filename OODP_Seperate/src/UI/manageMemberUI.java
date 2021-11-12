@@ -28,6 +28,14 @@ public class manageMemberUI {
             System.out.println("(5) Remove member");
             System.out.println("(6) Exit");
             System.out.printf("Select a choice: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid option.");
+                System.out.printf("Select a choice: ");
+                scan.next();
+            }
+
             choice = scan.nextInt();
             scan.nextLine();
             switch (choice) {

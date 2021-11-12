@@ -22,6 +22,7 @@ public class manageStaffUI {
         int choice;
         do
         {
+            System.out.println("\nPlease select your operations");
             System.out.println("(1) View All Staffs");
             System.out.println("(2) View Staff by ID");
             System.out.println("(3) Add Staff");
@@ -29,6 +30,14 @@ public class manageStaffUI {
             System.out.println("(5) Remove Staff");
             System.out.println("(6) Exit");
             System.out.printf("Select a choice: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid option.");
+                System.out.printf("Select a choice: ");
+                scan.next();
+            }
+
             choice = scan.nextInt();
             scan.nextLine();
             switch (choice)
@@ -38,6 +47,14 @@ public class manageStaffUI {
                     break;
                 case 2:
                     System.out.printf("Enter Staff ID: ");
+
+                    while (!scan.hasNextInt())
+                    {
+                        System.out.println("Please input an integer.");
+                        System.out.printf("Enter Staff ID: ");
+                        scan.next();
+                    }
+
                     int staffId = scan.nextInt();
                     scan.nextLine();
                     staff.viewStaffById(staffId);
@@ -47,6 +64,14 @@ public class manageStaffUI {
                     break;
                 case 4:
                     System.out.printf("Enter Staff ID: ");
+
+                    while (!scan.hasNextInt())
+                    {
+                        System.out.println("Please input an integer.");
+                        System.out.printf("Enter Staff ID: ");
+                        scan.next();
+                    }
+
                     staffId = scan.nextInt();
                     scan.nextLine();
                     staff.updateStaffInfo(staffId);

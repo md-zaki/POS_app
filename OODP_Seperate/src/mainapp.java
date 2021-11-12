@@ -38,6 +38,14 @@ public class mainapp implements Serializable {
             testTable = (manageTable) testObj.get(5);
             
             mainAppMenu();
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid option.");
+                System.out.printf("Select a choice: ");
+                scan.next();
+            }
+
             choice = scan.nextInt();
             scan.nextLine();
             switch (choice) {

@@ -28,8 +28,16 @@ public class mainMenuUI {
             System.out.println("(5) View Menu");
             System.out.println("(6) Exit");
             System.out.println("Select a choice: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid option.");
+                System.out.printf("Select a choice: ");
+                scan.next();
+            }
+
             choice = scan.nextInt();
-            String dummy = scan.nextLine();
+            scan.nextLine();
 
             switch (choice) {
                 case 1:

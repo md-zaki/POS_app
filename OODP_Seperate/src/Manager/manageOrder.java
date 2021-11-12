@@ -68,8 +68,16 @@ public class manageOrder implements Serializable{
         Scanner scan = new Scanner(System.in);
         viewAllOrders();
         System.out.println("Enter index of order to delete:");
+
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a valid integer.");
+            System.out.printf("Enter index of order to delete: ");
+            scan.next();
+        }
+
         int index = scan.nextInt();
-        String dummy = scan.nextLine();
+        scan.nextLine();
         allOrders.remove(index-1);
     }
 
@@ -82,8 +90,16 @@ public class manageOrder implements Serializable{
         viewAllOrders();
         if (allOrders.size() != 0) {
             System.out.println("Enter order id to edit: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid integer.");
+                System.out.printf("Enter order id to edit: ");
+                scan.next();
+            }
+
             int pick = scan.nextInt();
-            String dummy = scan.nextLine();
+            scan.nextLine();
             order toEdit = allOrders.get(pick - 1);
             if(toEdit.getIsPaid()==true)
             {
@@ -95,8 +111,17 @@ public class manageOrder implements Serializable{
                     System.out.println("(1) Add items into order");
                     System.out.println("(2) Remove items into order");
                     System.out.println("(3) Exit");
+                    System.out.printf("Select a choice: ");
+
+                    while (!scan.hasNextInt())
+                    {
+                        System.out.println("Please enter a valid option.");
+                        System.out.printf("Select a choice: ");
+                        scan.next();
+                    }
+
                     pick = scan.nextInt();
-                    dummy = scan.nextLine();
+                    scan.nextLine();
                     switch (pick) {
                         case 1:
                             toEdit.addOrderItem();
@@ -136,9 +161,17 @@ public class manageOrder implements Serializable{
             System.out.println("(" + i + ") " + staffId.getName());
             i++;
         }
-        System.out.println("Enter Choice: ");
+        System.out.printf("Select a choice: ");
+
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a valid option.");
+            System.out.printf("Select a choice: ");
+            scan.next();
+        }
+
         int pick = scan.nextInt();
-        String dummy = scan.nextLine();
+        scan.nextLine();
         System.out.println("========");
         staff prepby = (staff) staffList.get(pick - 1);
         return prepby;
@@ -166,15 +199,31 @@ public class manageOrder implements Serializable{
             System.out.println("(" + i + ") Table No: " + table.getTableNo() + ", Table Size: " + table.getTableSize());
             i++;
         }
-        System.out.println("Enter Choice: ");
+        System.out.println("Select a choice: ");
+
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a valid option.");
+            System.out.printf("Select a choice: ");
+            scan.next();
+        }
+
         int pick = scan.nextInt();
-        String dummy = scan.nextLine();
+        scan.nextLine();
         Table toChoose = (Table) tabledb.getTableList().get(pick-1);
         while(toChoose.getIsAvailable()==false)
         {
             System.out.println("Table unavailable, choose another table: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid option.");
+                System.out.printf("Select a choice: ");
+                scan.next();
+            }
+
             pick = scan.nextInt();
-            dummy = scan.nextLine();
+            scan.nextLine();
             toChoose = (Table) tabledb.getTableList().get(pick-1);
         }
         tabledb.getTableList().get(pick-1).setIsAvailable(false);
@@ -211,6 +260,12 @@ public class manageOrder implements Serializable{
         Scanner scan = new Scanner(System.in);
         viewAllOrders();
         System.out.println("For which order would you like to print the invoice?: ");
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a valid integer.");
+            System.out.printf("For which order would you like to print the invoice?: ");
+            scan.next();
+        }
         int index = scan.nextInt();
         order toPrint = allOrders.get(index - 1);
         System.out.println("Is the customer a member? (y/n): ");
@@ -218,6 +273,12 @@ public class manageOrder implements Serializable{
         scan.nextLine();
         if (ans == 'y') {
             System.out.println("Key in customer's member ID: ");
+            while (!scan.hasNextLong())
+            {
+                System.out.println("Please enter a valid integer.");
+                System.out.printf("Key in customer's member ID: ");
+                scan.next();
+            }
             long id = scan.nextLong();
             discount = discount(id);
         }
@@ -417,10 +478,22 @@ public class manageOrder implements Serializable{
             ex.printStackTrace();
         }
         Scanner scan = new Scanner(System.in);
-        System.out.println("Key in month: ");
+        System.out.println("Key in month(1-12): ");
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a valid integer.");
+            System.out.printf("Key in month(1-12): ");
+            scan.next();
+        }
         int month = scan.nextInt();
         scan.nextLine();
         System.out.println("Key in Year: ");
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a valid integer.");
+            System.out.printf("Key in Year: ");
+            scan.next();
+        }
         int year = scan.nextInt();
         scan.nextLine();
         int[] sales = NumOfProductSold(month, year);

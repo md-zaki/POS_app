@@ -80,11 +80,27 @@ public class manageMember implements Serializable {
         Scanner scan = new Scanner(System.in);
         int i = 1;
         System.out.printf("Enter customer id: ");
+
+        while (!scan.hasNextLong())
+        {
+            System.out.println("Please enter a valid integer.");
+            System.out.printf("Enter customer id: ");
+            scan.next();
+        }
+
         long memberId = scan.nextLong();
         scan.nextLine();
         System.out.printf("Enter name of customer: ");
         String name = scan.nextLine().toUpperCase();
         System.out.printf("Enter contact number: ");
+
+        while (!scan.hasNextInt())
+        {
+            System.out.println("Please enter a valid integer.");
+            System.out.printf("Enter contact number: ");
+            scan.next();
+        }
+
         long contact = scan.nextLong();
         System.out.println("Enter membership tier");
         for (member.tier tier : member.tier.values()) {
@@ -95,6 +111,14 @@ public class manageMember implements Serializable {
         member.tier tier = null;
         do {
             System.out.printf("Select a tier: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid integer.");
+                System.out.printf("Select a tier: ");
+                scan.next();
+            }
+
             tiernum = scan.nextInt();
             scan.nextLine();
             switch (tiernum) {
@@ -180,6 +204,14 @@ public class manageMember implements Serializable {
         int check = 0;
         do {
             System.out.println("Enter member ID to be deleted: ");
+
+            while (!scan.hasNextInt())
+            {
+                System.out.println("Please enter a valid integer.");
+                System.out.printf("Enter member ID to be deleted: ");
+                scan.next();
+            }
+
             long id = scan.nextLong();
             check = getMemberListIndexById(id);
             if (check == -1) {
@@ -219,6 +251,14 @@ public class manageMember implements Serializable {
                 System.out.println("(5) View Current Member Info");
                 System.out.println("(6) Exit");
                 System.out.printf("Enter a choice: ");
+
+                while (!scan.hasNextInt())
+                {
+                    System.out.println("Please enter a valid integer.");
+                    System.out.printf("Enter a choice: ");
+                    scan.next();
+                }
+
                 choice = scan.nextInt();
                 scan.nextLine();
 
@@ -234,6 +274,12 @@ public class manageMember implements Serializable {
                         break;
                     case 3:
                         System.out.printf("Enter updated member contact: ");
+                        while (!scan.hasNextInt())
+                        {
+                            System.out.println("Please enter a valid integer.");
+                            System.out.printf("Enter updated member contact: ");
+                            scan.next();
+                        }
                         long updateContact = scan.nextLong();
                         scan.nextLine();
                         updateMember = new member(memberList.get(memberIndex).getName(), updateContact,
@@ -251,6 +297,12 @@ public class manageMember implements Serializable {
                         member.tier tier = null;
                         do {
                             System.out.printf("Select a tier: ");
+                            while (!scan.hasNextInt())
+                            {
+                                System.out.println("Please enter a valid integer.");
+                                System.out.printf("Select a tier: ");
+                                scan.next();
+                            }
                             tiernum = scan.nextInt();
                             scan.nextLine();
                             switch (tiernum) {
