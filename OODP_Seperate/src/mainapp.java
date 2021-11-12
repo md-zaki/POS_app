@@ -1,4 +1,7 @@
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import Manager.*;
 import UI.mainMenuUI;
@@ -17,59 +20,24 @@ import UI.manageTableUI;
 public class mainapp implements Serializable {
     public static void main(String[] args) throws Exception {
         mainMenu testMenu = new mainMenu();
-        try {
-            testMenu = testMenu.readMenu();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
         manageStaff testStaff = new manageStaff();
-        try {
-            testStaff = testStaff.readStaff();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
         manageOrder testOrder = new manageOrder();
-        try {
-            testOrder = testOrder.readOrders();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
         manageMember testMember = new manageMember();
-        try {
-            testMember = testMember.readMemberList();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
         manageReservation manageReserv = new manageReservation();
-        try {
-            manageReserv = manageReserv.readReservation();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
         manageTable testTable = new manageTable();
-        try {
-            testTable = testTable.readTables();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        List<Object> testObj = init(testMenu, testStaff, testOrder, testMember, manageReserv, testTable);
+
+        testMenu = (mainMenu) testObj.get(0);
+        testStaff = (manageStaff) testObj.get(1);
+        testOrder = (manageOrder) testObj.get(2);
+        testMember = (manageMember) testObj.get(3);
+        manageReserv = (manageReservation) testObj.get(4);
+        testTable = (manageTable) testObj.get(5);
 
         Scanner scan = new Scanner(System.in);
         int choice;
         do {
-            System.out.println("\nPlease select your operations.");
-            System.out.println("(1) Manage Staff");
-            System.out.println("(2) Manage Menu");
-            System.out.println("(3) Manage Orders");
-            System.out.println("(4) Manage Customer Memberships");
-            System.out.println("(5) Manage Reservations");
-            System.out.println("(6) Manage Tables");
-            System.out.println("(7) Exit");
-            System.out.printf("Select a choice: ");
+            mainAppMenu();
             choice = scan.nextInt();
             scan.nextLine();
             switch (choice) {
@@ -87,18 +55,15 @@ public class mainapp implements Serializable {
                 break;
             case 4:
                 manageMemberUI.start(testMember);
+                testMember.saveMemberList();
                 break;
             case 5:
                 manageReservationUI.start(testTable, testMember, manageReserv);
+                manageReserv.saveReservation();
                 break;
             case 6:
-            testTable = new manageTable();
-                try {
-                testTable = testTable.readTables();
-                } catch (Exception ex) {
-                ex.printStackTrace();
-                }
                 manageTableUI.start(testTable);
+                testTable.saveTables();
                 break;
             case 7:
                 break;
@@ -109,5 +74,73 @@ public class mainapp implements Serializable {
         } while (choice != 7);
 
         System.out.println("Program Terminating...");
+    }
+
+    /**
+     * This function simply prints the Overall Main Menu for the Application
+     */
+    public static void mainAppMenu()
+    {
+        System.out.println("\nPlease select your operations.");
+        System.out.println("(1) Manage Staff");
+        System.out.println("(2) Manage Menu");
+        System.out.println("(3) Manage Orders");
+        System.out.println("(4) Manage Customer Memberships");
+        System.out.println("(5) Manage Reservations");
+        System.out.println("(6) Manage Tables");
+        System.out.println("(7) Exit");
+        System.out.printf("Select a choice: ");
+    }
+
+    /**
+     * This function takes in all existing objects of the system and initialize them by reading the existing saved data text file
+     * @param testMenu mainMenu object to be initialized
+     * @param testStaff manageStaff object to be initialized
+     * @param testOrder manageOrder object to be initialized
+     * @param testMember manageMember object to be initialized
+     * @param manageReserv manageReservation object to be initialized
+     * @param testTable manageTable object to be initialized
+     * @return List of Objects to be return
+     */
+    public static List<Object> init(mainMenu testMenu, manageStaff testStaff, manageOrder testOrder, manageMember testMember, manageReservation manageReserv, manageTable testTable)
+    { 
+        List<Object> objList = new ArrayList<>();
+        try {
+            objList.add(testMenu.readMenu());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            objList.add(testStaff.readStaff());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            objList.add(testOrder.readOrders());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            objList.add(testMember.readMemberList());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            objList.add(manageReserv.readReservation());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            objList.add(testTable.readTables());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return objList;
     }
 }
