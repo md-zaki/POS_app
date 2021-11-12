@@ -53,7 +53,7 @@ public class manageReservation implements Serializable {
         while (iter.hasNext()) {
             reservation r = iter.next();
             reservDT = LocalDateTime.of(r.getDate(), r.getTime());
-            if (reservDT.plusMinutes(120).compareTo(LocalDateTime.now()) < 0) {
+            if (reservDT.plusMinutes(60).compareTo(LocalDateTime.now()) < 0) {
                 iter.remove();
             }
         }
@@ -110,6 +110,7 @@ public class manageReservation implements Serializable {
      * Prints all existing reservations.
      */
     public void checkReservation() {
+        removeExpired();
         System.out.println("================ RESERVATIONS ====================");
         for (reservation r : reservations) {
             System.out.println("Customer name: " + r.getCust().getName());
@@ -192,6 +193,11 @@ public class manageReservation implements Serializable {
                 temp = scan.nextLine();
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
                 date = LocalDate.parse(temp, dtf);
+                /*
+                 * if (date.compareTo(LocalDate.now()) <= 0) {
+                 * System.out.println("Please make reservations one day in advance!"); continue;
+                 * }
+                 */
                 break;
             } catch (Exception e) {
                 System.out.println("Invalid date!");
@@ -227,12 +233,7 @@ public class manageReservation implements Serializable {
         ArrayList<Integer> occupiedTables = new ArrayList<Integer>();
         LocalDateTime reservDateTime1;
         LocalDateTime reservDateTime2;
-        LocalDateTime tempDT = LocalDateTime.of(date, time);
         for (reservation r : reservations) {
-            if (tempDT.compareTo(LocalDateTime.now()) < 0) {
-                System.out.println("Please make reservations in advance!");
-                break;
-            }
             reservDateTime1 = LocalDateTime.of(r.getDate(), r.getTime());
             reservDateTime2 = LocalDateTime.of(date, time);
             if ((reservDateTime1.isBefore(reservDateTime2) && reservDateTime1.plusMinutes(120).isAfter(reservDateTime2))

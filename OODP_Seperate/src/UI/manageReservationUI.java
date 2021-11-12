@@ -30,12 +30,10 @@ public class manageReservationUI {
             System.out.println("(1) Create Reservation Booking ");
             System.out.println("(2) List all Reservation Booking ");
             System.out.println("(3) Remove Reservation Booking ");
-            System.out.println("(4) Remove expired reservations ");
             System.out.println("(5) Exit");
             System.out.printf("Select a choice: ");
 
-            while (!scan.hasNextInt())
-            {
+            while (!scan.hasNextInt()) {
                 System.out.println("Please enter a valid option.");
                 System.out.printf("Select a choice: ");
                 scan.next();
@@ -53,9 +51,6 @@ public class manageReservationUI {
                 break;
             case 3:
                 res.removeReservation();
-                break;
-            case 4:
-                res.removeExpired();
                 break;
             case 5:
                 break;
