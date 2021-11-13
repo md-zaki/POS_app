@@ -28,8 +28,7 @@ public class manageReservationUI {
         int choice;
         do {
             System.out.println("(1) Create Reservation Booking ");
-            System.out.println("(2) List all Reservation Booking ");
-            System.out.println("(3) Remove Reservation Booking ");
+            System.out.println("(2) Check/Remove Reservation Booking ");
             System.out.println("(5) Exit");
             System.out.printf("Select a choice: ");
 
@@ -47,7 +46,20 @@ public class manageReservationUI {
                 res.createReservation(tbManager, memberManager);
                 break;
             case 2:
+                String isDelete;
                 res.checkReservation();
+                while (true) {
+                    System.out.println("Do you want to delete reservation? (Y/N)");
+                    isDelete = scan.nextLine();
+                    if (isDelete.equals("Y") || isDelete.equals("y")) {
+                        res.removeReservation();
+                        break;
+                    } else if (isDelete.equals("N") || isDelete.equals("n")) {
+                        break;
+                    } else {
+                        System.out.println("Please select only (Y/N)");
+                    }
+                }
                 break;
             case 3:
                 res.removeReservation();

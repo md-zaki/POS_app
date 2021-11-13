@@ -64,45 +64,26 @@ public class manageReservation implements Serializable {
      * Remove reservation based on the customer's name, date and time.
      */
     public void removeReservation() {
-        String name;
-        String temp;
-        LocalDate date;
-        LocalTime time;
+        int rID;
         Scanner scan = new Scanner(System.in);
-        System.out.print("Enter name: ");
-        name = scan.nextLine();
 
         while (true) {
             try {
-                System.out.print("Enter Date (dd.MMM.yyyy e.g 12.Dec.2021): ");
-                temp = scan.nextLine();
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
-                date = LocalDate.parse(temp, dtf);
+                System.out.print("Enter reservation ID: ");
+                rID = scan.nextInt();
+                if (rID < 0 || rID >= reservations.size()) {
+                    System.out.println("Invalid reservation ID");
+                    continue;
+                }
                 break;
             } catch (Exception e) {
-                System.out.println("Invalid date!");
+                System.out.println("Invalid input");
+                scan.next();
             }
         }
 
-        while (true) {
-            try {
-                System.out.print("Enter Time(HH.mm): ");
-                temp = scan.nextLine();
-                DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("HH.mm");
-                time = LocalTime.parse(temp, dtf1);
-                break;
-            } catch (Exception e) {
-                System.out.println("Invalid date!");
-            }
-        }
+        reservations.remove(rID);
 
-        for (reservation r : reservations) {
-            if (r.getCust().getName().equals(name) && r.getDate().compareTo(date) == 0
-                    && r.getTime().compareTo(time) == 0) {
-                reservations.remove(r);
-                break;
-            }
-        }
         saveReservation();
     }
 
@@ -112,14 +93,15 @@ public class manageReservation implements Serializable {
     public void checkReservation() {
         removeExpired();
         System.out.println("================ RESERVATIONS ====================");
-        for (reservation r : reservations) {
-            System.out.println("Customer name: " + r.getCust().getName());
-            System.out.println("Customer contact: " + r.getCust().getContact());
-            System.out.println("Table number: " + r.getTable().getTableNo());
-            System.out.println("Table size: " + r.getTable().getTableSize());
-            System.out.println("Number of pax: " + r.getNumOfpax());
-            System.out.println("Date: " + r.getDate());
-            System.out.println("Time: " + r.getTime());
+        for (int i = 0; i < reservations.size(); i++) {
+            System.out.println("Reservation ID: " + i);
+            System.out.println("Customer name: " + reservations.get(i).getCust().getName());
+            System.out.println("Customer contact: " + reservations.get(i).getCust().getContact());
+            System.out.println("Table number: " + reservations.get(i).getTable().getTableNo());
+            System.out.println("Table size: " + reservations.get(i).getTable().getTableSize());
+            System.out.println("Number of pax: " + reservations.get(i).getNumOfpax());
+            System.out.println("Date: " + reservations.get(i).getDate());
+            System.out.println("Time: " + reservations.get(i).getTime());
             System.out.println("--------------------------");
         }
     }
