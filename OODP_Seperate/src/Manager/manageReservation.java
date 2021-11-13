@@ -237,7 +237,8 @@ public class manageReservation implements Serializable {
             reservDateTime2 = LocalDateTime.of(date, time);
             if ((reservDateTime1.isBefore(reservDateTime2) && reservDateTime1.plusMinutes(120).isAfter(reservDateTime2))
                     || (reservDateTime2.isBefore(reservDateTime1)
-                            && reservDateTime2.plusMinutes(120).isAfter(reservDateTime1))) {
+                            && reservDateTime2.plusMinutes(120).isAfter(reservDateTime1))
+                    || reservDateTime1.compareTo(reservDateTime2) == 0) {
 
                 occupiedTables.add(r.getTable().getTableNo());
             }
