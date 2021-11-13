@@ -63,27 +63,8 @@ public class manageReservation implements Serializable {
     /**
      * Remove reservation based on the customer's name, date and time.
      */
-    public void removeReservation() {
-        int rID;
-        Scanner scan = new Scanner(System.in);
-
-        while (true) {
-            try {
-                System.out.print("Enter reservation ID: ");
-                rID = scan.nextInt();
-                if (rID < 0 || rID >= reservations.size()) {
-                    System.out.println("Invalid reservation ID");
-                    continue;
-                }
-                break;
-            } catch (Exception e) {
-                System.out.println("Invalid input");
-                scan.next();
-            }
-        }
-
+    public void removeReservation(int rID) {
         reservations.remove(rID);
-
         saveReservation();
     }
 

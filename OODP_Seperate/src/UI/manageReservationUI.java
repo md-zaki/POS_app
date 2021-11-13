@@ -47,12 +47,27 @@ public class manageReservationUI {
                 break;
             case 2:
                 String isDelete;
+                int rID;
                 res.checkReservation();
                 while (true) {
                     System.out.println("Do you want to delete reservation? (Y/N)");
                     isDelete = scan.nextLine();
                     if (isDelete.equals("Y") || isDelete.equals("y")) {
-                        res.removeReservation();
+                        while (true) {
+                            try {
+                                System.out.print("Enter reservation ID: ");
+                                rID = scan.nextInt();
+                                if (rID < 0 || rID >= res.getReservations().size()) {
+                                    System.out.println("Invalid reservation ID");
+                                    continue;
+                                }
+                                break;
+                            } catch (Exception e) {
+                                System.out.println("Invalid input");
+                                scan.next();
+                            }
+                        }
+                        res.removeReservation(rID);
                         break;
                     } else if (isDelete.equals("N") || isDelete.equals("n")) {
                         break;
@@ -60,9 +75,6 @@ public class manageReservationUI {
                         System.out.println("Please select only (Y/N)");
                     }
                 }
-                break;
-            case 3:
-                res.removeReservation();
                 break;
             case 5:
                 break;
