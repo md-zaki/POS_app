@@ -211,7 +211,7 @@ public class manageStaff implements Serializable{
         Scanner scan = new Scanner(System.in);
         int choice;
         int staffIndex = getStaffListIndexById(staffId);
-        int updatedID = staffList.get(staffIndex).getEmployeeId();
+        
 
 
         if (staffIndex == -1)
@@ -219,6 +219,8 @@ public class manageStaff implements Serializable{
             System.out.println("Staff ID does not exist.");
             return;
         }
+        else
+        {int updatedID = staffList.get(staffIndex).getEmployeeId();
         do
         {
             staff updateStaff = new staff(staffList.get(staffIndex).getEmployeeId(), staffList.get(staffIndex).getName(), staffList.get(staffIndex).getGender(), staffList.get(staffIndex).getJobTitle());
@@ -309,6 +311,7 @@ public class manageStaff implements Serializable{
 
         } while (choice != 6);
     }
+    }
 
     /**
      * Function to remove the staff object.
@@ -326,14 +329,18 @@ public class manageStaff implements Serializable{
             System.out.printf("Enter Staff ID to be removed: ");
             scan.next();
         }
-
+        String staffName;
         int staffIndex = getStaffListIndexById(scan.nextInt());
-        String staffName = staffList.get(staffIndex).getName();
 
         if (staffIndex == -1)
         {
             System.out.println("Staff ID does not exist.");
             return;
+        }
+        else
+        {
+            
+            staffName = staffList.get(staffIndex).getName();
         }
 
         staffList.remove(staffIndex);

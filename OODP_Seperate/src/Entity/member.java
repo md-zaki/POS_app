@@ -29,7 +29,7 @@ public class member extends customer{
     /**
 	 * Creates a new member
 	 * @param name          name of member
-     * @param contact       contant number of member
+     * @param contact       contact number of member
      * @param memberId      unique ID number of member
      * @param memberTier    membership tier of member
 	 */

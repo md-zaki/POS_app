@@ -19,6 +19,8 @@ import UI.manageTableUI;
  */
 public class mainapp implements Serializable {
     public static void main(String[] args) throws Exception {
+        System.out.println("\nRestaurant Reservation and Point of Sale System (RRPSS)");
+        System.out.println("========================================================");
         mainMenu testMenu = new mainMenu();
         manageStaff testStaff = new manageStaff();
         manageOrder testOrder = new manageOrder();
