@@ -424,7 +424,6 @@ public class manageOrder implements Serializable{
                     {
                         if(items.getName().equals(id.getName()))
                         {
-                            System.out.println("ITEM: " + items.getName());
                             sales[i]++;
                             break;
                         }
