@@ -193,11 +193,10 @@ public class manageReservation implements Serializable {
                 temp = scan.nextLine();
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
                 date = LocalDate.parse(temp, dtf);
-                /*
-                 * if (date.compareTo(LocalDate.now()) <= 0) {
-                 * System.out.println("Please make reservations one day in advance!"); continue;
-                 * }
-                 */
+                if (date.compareTo(LocalDate.now()) <= 0) {
+                    System.out.println("Please make reservations one day in advance!");
+                    continue;
+                }
                 break;
             } catch (Exception e) {
                 System.out.println("Invalid date!");
